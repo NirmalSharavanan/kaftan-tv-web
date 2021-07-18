@@ -1,0 +1,32 @@
+<div class="signin-container">
+  <div class="container">
+    <div class="row">
+      <div class="signin-panel">
+        <h2>Access Again?</h2>
+
+        <form [formGroup]="fg" (ngSubmit)="resendEmail()">
+
+          <div *ngIf="isMailSent" class="alert alert-success">
+            Email sent !
+          </div>
+          <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.resendEmailFailed">
+            {{fg.errors.resendEmailFailed}}
+          </div>
+
+          <div class="form-group mandatory">
+            <label for="email">Email</label>
+            <input formControlName="email" id="email" type="email" class="form-control" placeholder="eg. xx@xxxx.com" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+            <div class="form-text error-text">
+              <app-error [fromGroup]="fg" controlName="email" alias="Email"></app-error>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary btn-block btn-lg" [disabled]="loading || fg.invalid">Resend Email</button>
+            <ss-loading *ngIf="loading"></ss-loading>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

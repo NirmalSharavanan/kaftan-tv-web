@@ -1,0 +1,22 @@
+{
+	"/api": {
+		"target": "http://34.254.176.38:8080/",
+		"secure": false
+	},
+	"/signin/facebook": {
+		"target": "http://localhost:8080/",
+		"secure": false
+	},
+	"/signup/facebook": {
+		"target": "http://localhost:8080/",
+		"secure": false
+	},
+	"/signin/google": {
+		"target": "http://localhost:8080/",
+		"secure": false
+	},
+	"/signup/google": {
+		"target": "http://localhost:8080/",
+		"secure": false
+	}
+}

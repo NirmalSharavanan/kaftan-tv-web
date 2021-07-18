@@ -1,0 +1,67 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/user-management/users']">
+  <i class="fa fa-chevron-left"></i> Admin Users</a>
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="{{userId!=null?'Edit Admin User':'Add Admin User'}}">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+
+        <label *ngIf="roles != null && roles.length > 0" class="roles">Note :
+
+          <ul class="list list-icons list-primary mt-xl mb-xlg">
+            <li><i class="fa fa-check"></i>If you select "ADMIN", all menus will be display except add admin users
+              page.</li>
+            <li><i class="fa fa-check"></i>If you select "APP ADMIN", Mobile Apps and Notifications menus will be
+              display.</li>
+            <li><i class="fa fa-check"></i>If you select "CONTENT UPLOADER", Home Page, Meta Data, Media, Blog
+              and Settings(Static Pages) menus will be display.</li>
+            <li><i class="fa fa-check"></i>If you select "SITE MANAGER", Home Page and Settings menus will be
+              display.</li>
+            <li><i class="fa fa-check"></i>If you select "REPORTS", Analytics menu will be
+              display.</li>
+              <li><i class="fa fa-check"></i>If you select "SYSTEM ADMINISTRATOR", KAFTANPAY Dashboard, Wallet Subscribers, Wallet Reports menu will be
+                display.</li>
+            <li><i class="fa fa-check"></i>If you select one or more roles, corresponding roles of that menus will be
+              display.</li>
+          </ul>
+        </label>
+
+        <div class="form-group mandatory">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="User Name" formControlName="name">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="name" alias="User Name"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="mobileNo">Mobile No</label>
+          <input type="number" class="form-control" id="mobileNo" placeholder="Mobile No" formControlName="mobileNo" maxlength="15">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="mobileNo" alias="Mobile number"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" placeholder="User Email" formControlName="email" [attr.disabled]="userId!=null ? 'disabled' : null ">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="email" alias="User Email"></app-error>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="roles != null && roles.length > 0">
+          <div class="col-md-12">
+            <p-listbox [options]="roles" formControlName="selectedrolesAry" multiple="multiple" checkbox="checkbox" filter="filter" optionLabel="name"
+              (onChange)="onValueChange()" [style]="{'width' : 'auto'}">
+              <p-header>Select Role</p-header>
+            </p-listbox>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

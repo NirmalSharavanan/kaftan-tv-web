@@ -1,0 +1,22 @@
+h2{
+    padding-bottom: 15px;
+}
+.premium_button
+{
+    display: grid !important;
+}
+body
+{
+	font-family: 'Segoe UI', sans-serif !important;
+	background-color: #000;
+}
+  .free-plan
+  {
+    background: none !important;
+    color: #000;
+  }
+  .free-plan:hover
+  {
+    background-color: none !important;
+    box-shadow: none !important; 
+  }

@@ -1,0 +1,12 @@
+.sticky {
+    box-shadow: -2px 1px 10px 0px rgba(230,225,225,0.26);
+    position: fixed;
+    background-color: #3c3c3c !important;
+    top: 0;
+    height: 70px;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin:auto !important;
+    z-index: 222;
+}

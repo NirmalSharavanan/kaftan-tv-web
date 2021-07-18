@@ -1,0 +1,61 @@
+<a [class]="pageType==='album' ? 'addto_playlist' : 'addsongto_playlist'" (click)="playListDialog()">
+    <img [src]="pageType==='album' ? 'assets/kaftan/img/playlist.png' : 'assets/kaftan/img/playlist-white.png'">ADD TO PLAYLIST</a>
+
+<ss-invalid-user *ngIf="isInvalidUser" [isAuthenticated]="isAuthenticated"></ss-invalid-user>
+
+<p-dialog [contentStyle]="{'border-top':' 3px solid #00bdff','background-color':'#fbfbfb','color':'#6d6b6b','z-index':'99'}"
+    [(visible)]="showPlayListdialog" width="400" height="auto" [responsive]="true" [showHeader]="false" [closeOnEscape]="true"
+    [dismissableMask]="true" [modal]="true" appendTo="body">
+    <h6 class="dialog_header">My Playlists</h6>
+    <div *ngIf="fg.errors?.playlistaddedSuccess" class="alert alert-success">
+        {{fg.errors.playlistaddedSuccess}}
+    </div>
+    <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.playlistaddedFailed">
+        {{fg.errors.playlistaddedFailed}}
+    </div>
+    <div class="playlist_body" *ngIf="playList && playList.length > 0">
+        <a class="row playlist" *ngFor="let list of playList" (click)="addContentToPlayList(list)">
+            <div class="col-2 playlist_icon">
+                <i class="fa fa-headphones"></i>
+            </div>
+            <div class="col-8 playlist_names">
+                <p class="text-left">{{list.name}}</p>
+            </div>
+            <div class="col-2">
+                <i class="fa fa-angle-right"></i>
+            </div>
+        </a>
+    </div>
+    <div class="loading" *ngIf="loading">
+        <img src="assets/kaftan/img/loader-small.svg" alt="loading..">
+    </div>
+    <div class="btn_footer dialog_footer">
+        <p-footer>
+            <button type="button" pButton icon="fa-plus" (click)="newPlayListDialog()" label="New Playlist"></button>
+            <button type="button" pButton icon="fa-close" (click)="showPlayListdialog=false" label="Cancel"></button>
+        </p-footer>
+    </div>
+</p-dialog>
+
+<p-dialog [contentStyle]="{'border-top':' 3px solid #00bdff','background-color':'#f7f7f7','color':'#6d6b6b'}" [(visible)]="showNewPlayListdialog"
+    width="350" height="auto" [responsive]="true" [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true" [modal]="true"
+    appendTo="body">
+    <h6 class="dialog_header">Create New Playlist</h6>
+    <form class="form" [formGroup]="fg" (ngSubmit)="addPlayList()">
+        <div class="form-group create_playlist mandatory">
+            <input type="text" class="form-control" id="name" placeholder="Playlist Name" formControlName="name">
+            <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="name" alias="Playlist Name"></app-error>
+            </div>
+        </div>
+        <div class="loading" *ngIf="loading">
+            <img src="assets/kaftan/img/loader-small.svg" alt="loading..">
+        </div>
+        <div class="form-group btn_footer dialog_footer">
+            <p-footer>
+                <button type="submit" pButton icon="fa-plus" label="Create Playlist" [disabled]="loading || fg.invalid"></button>
+                <button type="button" pButton icon="fa-close" (click)="showNewPlayListdialog=false" label="Cancel"></button>
+            </p-footer>
+        </div>
+    </form>
+</p-dialog>

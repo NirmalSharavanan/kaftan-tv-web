@@ -1,0 +1,68 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Firebase SDK Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="apiKey">Api Key</label>
+          <input type="text" class="form-control" id="apiKey" placeholder="Api Key" formControlName="apiKey">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="apiKey" alias="Api Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="appId">App Id</label>
+          <input type="text" class="form-control" id="appId" placeholder="App Id" formControlName="appId">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="appId" alias="App Id"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="authDomain">Auth Domain</label>
+          <input type="text" class="form-control" id="authDomain" placeholder="Auth Domain" formControlName="authDomain">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="authDomain" alias="Auth Domain"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="databaseUrl">Database Url</label>
+          <input type="text" class="form-control" id="databaseUrl" placeholder="Database Url"
+            formControlName="databaseUrl">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="databaseUrl" alias="Database Url"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="projectId">Project Id</label>
+          <input type="text" class="form-control" id="projectId" placeholder="Project Id"
+            formControlName="projectId">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="projectId" alias="Project Id"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="storageBucket">Storage Bucket</label>
+          <input type="text" class="form-control" id="storageBucket" placeholder="Storage Bucket"
+            formControlName="storageBucket">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="storageBucket" alias="Storage Bucket"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="messagingSenderId">Messaging Sender Id</label>
+          <input type="text" class="form-control" id="messagingSenderId" placeholder="Messaging Sender Id"
+            formControlName="messagingSenderId">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="messagingSenderId" alias="Messaging Sender Id"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

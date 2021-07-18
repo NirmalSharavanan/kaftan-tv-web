@@ -1,0 +1,51 @@
+<div class="header-btn">
+  <button class="btn btn-primary" [routerLink]="['../add-app-update']">Update app updates</button>
+</div>
+
+<div class="ui-g-12 ui-md-12">
+  <p-dataList [value]="appUpdates" [paginator]="true" [rows]="10">
+    <p-header>
+      <div class="ui-helper-clearfix">
+        <div class="ui-g-10 ui-md-2">
+          <div class="list-title">
+            Device Type
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-2">
+          <div class="list-description">
+            Current Version
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-6">
+          <div class="list-description">
+            Description
+          </div>
+        </div>
+      </div>
+    </p-header>
+    <ng-template let-appupdate pTemplate="item">
+      <div id="{{appupdate.id}}" class="ui-helper-clearfix list-items">
+        <div class="ui-g-10 ui-md-2">
+          <div class="list-title">
+            {{appupdate.deviceType}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-2">
+          <div class="list-description">
+            {{appupdate.currentVersion}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-6">
+          <div class="list-description">
+            {{appupdate.description}}
+          </div>
+        </div>
+        <div class="ui-g-2 ui-md-2">
+          <div class="edit-btn text-right">
+            <a class="fa fa-pencil float-right" aria-hidden="true" [routerLink]="['../edit-app-update', appupdate.id]"></a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataList>
+</div>

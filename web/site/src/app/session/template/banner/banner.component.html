@@ -1,0 +1,53 @@
+<div id="banner1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img *ngIf="bannerImageUrl" class="d-block w-100 sub-banner" [src]="bannerImageUrl">
+
+             <div *ngIf="content">
+                    <ss-play *ngIf=" (content && content.contentUploded) || (content.has_episode && content.content_type === 'audio')" (playClicked)="togglePlayer($event);" class="carousel-caption-banner" [content]="content"></ss-play>
+                    <!-- <div class="sub-banner-container d-lg-block d-none d-hide-lg-none">
+                        <div class="sub-banner-content">
+                            <div *ngIf="content.parentContent">
+                                <a [routerLink]="[content.parentContent.uiPath]">
+                                    <div class="feature-title">
+                                        <i class="fa fa-angle-left"></i> {{content.parentContent.title}}
+                                    </div>
+                                </a>
+                            </div>
+                            <h1 class="sub-banner-title">{{content.title}}
+                                <span *ngIf="content.is_premium" class="premium-content">
+                                    Premium
+                                </span>
+                            </h1>
+                            <div class="play-trailer">
+                                <span *ngIf="content.youtube_TrailerLink">
+                                    <a (click)="playTrailers()">
+                                        <i class="fa fa-play-circle"></i> Play Trailer
+                                    </a>
+                                </span>
+                            </div>
+                            <ss-content-categories [categoryIds]="content.categoryList"></ss-content-categories>
+
+                            <div class="description d-none d-md-block">
+                                {{content.description}}
+                            </div>
+
+                            <ss-social [content]="content"></ss-social>
+
+                        </div>
+                    </div> -->
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<p-dialog *ngIf="content && content.youtube_TrailerLink && playTrailer" width="700" [modal]="true" [responsive]="true" [showHeader]="false"
+    [closeOnEscape]="true" [dismissableMask]="true" (onHide)="cancelPlayTrailers()" appendTo="body" [(visible)]="playTrailer">
+    <!-- <ss-player [videoUrl]="content._links.awsTrailerUrl.href"></ss-player> -->
+    <iframe width="600" height="420" [src]="url">
+    </iframe>
+</p-dialog>
+

@@ -1,0 +1,42 @@
+<div class="header-btn">
+  <button class="btn btn-primary" [routerLink]="['../add-meta-data']">Add Meta Data</button>
+</div>
+
+<p-dataList [value]="metaData" [paginator]="true" [rows]="10">
+  <p-header>Meta Data</p-header>
+  <ng-template let-metadata pTemplate="item">
+    <div id="{{metadata.id}}" class="ui-helper-clearfix list-items">
+      <div class="ui-g-10 ui-md-2">
+        <div class="list-title">
+          {{metadata.page_type}}
+        </div>
+      </div>
+      <div class="ui-g-10 ui-md-2">
+        <div class="list-description">
+          {{metadata.page_name}}
+        </div>
+      </div>
+      <div class="ui-g-10 ui-md-2">
+        <div class="list-description">
+          {{metadata.title}}
+        </div>
+      </div>
+      <div class="ui-g-10 ui-md-2">
+        <div class="list-description">
+          {{metadata.description}}
+        </div>
+      </div>
+      <div class="ui-g-10 ui-md-2">
+        <div class="list-description">
+          {{metadata.keywords}}
+        </div>
+      </div>
+      <div class="ui-g-2 ui-md-2">
+        <div class="edit-btn text-right">
+          <a class="fa fa-pencil float-right" aria-hidden="true" ></a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataList>
+

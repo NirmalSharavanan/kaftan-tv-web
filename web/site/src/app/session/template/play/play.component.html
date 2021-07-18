@@ -1,0 +1,28 @@
+<div class="carousel-caption">
+    <button *ngIf="!isAuthenticated || (!playVideo && price <= 0)" (click)="play()" class="btn btn-clear play-btn PPV-content">
+        <div *ngIf="price > 0" class="ppv">
+            <img src="assets/kaftan/img/play-button.png" class="playBtn_img" />
+            <div class="price-area">
+                Buy $ {{price}}
+            </div>
+        </div>
+        <div *ngIf="price == 0">
+            <img src="assets/kaftan/img/play-button.png" class="playBtn_img" />
+        </div>
+    </button>
+
+    <!-- <div *ngIf="isAuthenticated && !playVideo && price > 0" class="btn btn-clear play-btn PPV-content">
+        <div>
+            <ss-razorpay [amount]="price" (paymentStatus)="onPaymentStatusChange($event)" [contentId]="content.id"></ss-razorpay>
+        </div>
+    </div> -->
+
+    <button *ngIf="isAuthenticated && !playVideo && price > 0" class="btn btn-clear play-btn PPV-content">
+        <ss-razorpay [amount]="price" (paymentStatus)="onPaymentStatusChange($event)" [contentId]="content.id"></ss-razorpay>
+    </button>
+
+    <div *ngIf="playVideo" class="loginWrapper">
+        <ss-invalid-user (stopPlay)="cancel()" *ngIf="getIsInvalidUser()" [isAuthenticated]="isAuthenticated" [is_premium_content]="content.is_premium"
+            [hasPremiumAccess]="has_access_to_preminum" [premium_message]="premium_message"></ss-invalid-user>
+    </div>
+</div>

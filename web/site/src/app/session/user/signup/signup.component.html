@@ -1,0 +1,117 @@
+<div class="signin-container">
+
+  <div class="container">
+    <div class="row">
+
+      <div class="signin-panel">
+        <h2>Sign Up</h2>
+        <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.createUserFaild">
+          {{fg.errors.createUserFaild}}
+        </div>
+        <form class="form" [formGroup]="fg" (ngSubmit)="onSubmit()">
+
+          <fieldset>
+            <div class="form-group">
+              <div class="link">
+                <form style="display: inline-block" ngNoForm action="/signin/facebook" method="POST">
+                  <input type="hidden" name="scope" value="public_profile,email" />
+                  <button class="btn btn-facebook btn-block">
+                    <i class="fa fa-facebook-f"></i> Signup with Facebook
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="link">
+                <form style="display: inline-block" ngNoForm action="/signin/google" method="POST">
+                  <input type="hidden" name="scope" value="profile email" />
+                  <button class="btn btn-google btn-block">
+                    <i class="fa fa-google-plus"></i> Signup with Google
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="form-group text-center">
+              Or
+            </div>
+
+            <div class="form-group mandatory">
+              <label>Name</label>
+              <input formControlName="name" id="name" type="text" class="form-control" placeholder="name">
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="name" alias="Name"></app-error>
+              </div>
+            </div>
+            <div class="form-group mandatory">
+              <label>Email</label>
+              <input formControlName="email" id="email" type="email" class="form-control" placeholder="e.g. xx@xxxx.com"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="email" alias="Email"></app-error>
+              </div>
+            </div>
+            <div class="form-group mandatory">
+              <label for="password">Password</label>
+              <input formControlName="password" id="password" type="password" class="form-control"
+                placeholder="********">
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="password" alias="Password"></app-error>
+              </div>
+            </div>
+            <div class="form-group mandatory">
+              <label for="mobileNo">Mobile No.</label>
+              <!-- <input type="number" formControlName="mobileNo" id="mobileNo" class="form-control" placeholder="mobile no. with country code" maxlength="15"> -->
+              <international-phone-number formControlName="mobileNo" id="mobileNo" placeholder="+91 9999999999"
+                [maxlength]="20" [defaultCountry]="'ng'" name="mobileNo"></international-phone-number>
+
+              <div class="form-text error-text" *ngIf="!mobileNo.valid" style="margin-bottom:13px">Mobile number
+                is required and should be
+                valid</div>
+
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="mobileNo" alias="Mobile number"></app-error>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" [disabled]="fg.invalid" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+              <div class="text-center">
+                <img *ngIf="loading" src="assets/kaftan/img/loader.svg" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="link">
+                Have a Account?
+                <a [routerLink]="['/session/login']">Sign In</a>
+              </div>
+            </div>
+
+
+            <div style="display: none" class="form-group">
+              <div class="link">
+                <form style="display: inline-block" ngNoForm action="/signin/google" method="POST">
+                  <input type="hidden" name="scope" value="public_profile,email" />
+                  <button class="btn btn-google btn-block">
+                    <i class="fa fa-google-plus"></i> Login with Google
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+
+
+      <!--<div class="col-lg-4 col-md-2 col-sm-12 col-xs-12">-->
+
+      <!--</div>-->
+      <!--<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">-->
+      <!---->
+      <!--</div>-->
+      <!--<div class="col-lg-4 col-md-2 col-sm-12 col-xs-12"></div>-->
+
+    </div>
+  </div>
+
+</div>

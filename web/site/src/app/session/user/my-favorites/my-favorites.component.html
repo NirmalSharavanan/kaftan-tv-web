@@ -1,0 +1,71 @@
+<div class="container favourites">
+    <div class="feature-title">
+      My Favorites
+    </div>
+    <section>
+      <ss-loading *ngIf="loading"></ss-loading>
+      <div *ngIf="contentList && contentList.length > 0">
+        <p-dataGrid [value]="contentList">
+          <ng-template let-content pTemplate="item">
+
+            <div class="my-favorites">
+              <div class="d-md-block d-none">
+                <div class="media episode-item">
+                  <ss-content-thumbnail [content]="content"></ss-content-thumbnail>
+                  <div class="media-body">
+                    <div class="feature-title">
+                      <a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>   <a class="my-favorites-remove" (click)="removeFromFavorite(content)">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                    </div>
+
+                    <div class="description d-md-block">
+                      {{content.description}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+
+                <div class="episode-item">
+                  <ss-content-thumbnail [content]="content"></ss-content-thumbnail>
+
+                  <div class="media-body">
+                    <div class="feature-title">
+                      <a [routerLink]="[content._links.UIHref.href]">{{content.title}}</a>
+                      <a class="my-favorites-remove" (click)="removeFromFavorite(content)">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                    </div>
+
+                    <div class="description d-md-block">
+                      {{content.description}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="episode-separator" />
+            </div>
+
+              <!--<ss-content-thumbnail [content]="content"></ss-content-thumbnail>-->
+              <!--<div class="text-right">-->
+                <!--<a class="feature-title" (click)="removeFromFavorite(content)">-->
+                  <!--<i class="fa fa-trash"></i> Remove-->
+                <!--</a>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;<div class="feature-title my-favorites-title">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+
+
+          </ng-template>
+        </p-dataGrid>
+      </div>
+      <div class="nofavourites" *ngIf="contentList && contentList.length == 0">
+        No contents added yet in favorites
+      </div>
+    </section>
+</div>

@@ -1,0 +1,50 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="AWS Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="aws_access_key">Access Key</label>
+          <input type="text" class="form-control" id="aws_access_key" placeholder="Access Key" formControlName="aws_access_key">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="aws_access_key" alias="Access Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="aws_secret_access_key">Secret Key</label>
+          <input type="text" class="form-control" id="aws_secret_access_key" placeholder="Secret Key" formControlName="aws_secret_access_key">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="aws_secret_access_key" alias="Secret Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="aws_region">Region</label>
+          <input type="text" class="form-control" id="aws_region" placeholder="Region" formControlName="aws_region">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="aws_region" alias="Region"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="aws_bucket">Bucket</label>
+          <input type="text" class="form-control" id="aws_bucket" placeholder="Bucket" formControlName="aws_bucket">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="aws_bucket" alias="Bucket"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="aws_identityPoolId">IdentityPoolId</label>
+          <input type="text" class="form-control" id="aws_identityPoolId" placeholder="IdentityPoolId" formControlName="aws_identityPoolId">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="aws_identityPoolId" alias="IdentityPoolId"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

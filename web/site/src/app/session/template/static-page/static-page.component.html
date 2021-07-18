@@ -1,0 +1,9 @@
+<ss-loading *ngIf="loading"></ss-loading>
+<div class="container static_page" *ngIf="staticPage">
+
+  <div class="feature-title">{{staticPage.pageName}}</div>
+  <section class="privacy">
+    <div [innerHTML]="this.sanitized.bypassSecurityTrustHtml(staticPage.content)"></div>
+  </section>
+
+</div>

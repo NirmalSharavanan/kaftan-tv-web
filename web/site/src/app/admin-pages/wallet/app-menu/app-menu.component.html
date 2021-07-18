@@ -1,0 +1,34 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-1">
+  </div>
+  <div class="ui-g-12 ui-md-10">
+    <h6 class="header">App Menu / Service Management</h6>
+    <ng-container *ngFor="let service of walletServices">
+      <p-panel header="{{service.serviceType==0 ? 'Services' : service.name}}">
+        <form>
+          <div class="form-group">
+            <div class="col-lg-12 services" style="padding:0">
+              <ng-container *ngFor="let wop of walletOperators">
+                <div class="child col-lg-3" *ngIf="wop.serviceType==service.serviceType">
+                  <div class="col-lg-6" style="display: inline-block;padding:0">
+                    <b>{{wop.serviceType==0? wop.name: wop.operatorName}}</b>
+                  </div>
+                  <div class="col-lg-4" style="display: inline;">
+                    <label class="switch">
+                      <input type="checkbox" (click)="onChangeOperator($event,wop)"
+                        [checked]="wop.active ? true : false">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </form>
+      </p-panel>
+    </ng-container>
+
+  </div>
+  <div class="ui-g-12 ui-md-1">
+  </div>
+</div>

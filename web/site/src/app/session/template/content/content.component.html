@@ -1,0 +1,88 @@
+<div *ngIf="content">
+    <ss-banner *ngIf="content._links.awsBannerUrl && !showPlayer" (showPlayer)="togglePlayer($event)" [bannerImageUrl]="content._links.awsBannerUrl.href"
+        [content]="content"></ss-banner>
+    <ss-banner *ngIf="!content._links.awsBannerUrl && !showPlayer"></ss-banner>
+    <div *ngIf="showPlayer">
+        <ss-play-home *ngIf="showPlayer"></ss-play-home>
+        <!-- <router-outlet></router-outlet> -->
+    </div>
+    <div class="master-container-inner">
+    <div class="">
+        <div class="feature-container">
+            <div class="d-md-block d-sm-block d-xs-block d-lg-block">
+                <h3 class="main-title">
+                    {{content.title}}
+                    <span *ngIf="content.is_premium" class="premium-content">
+                        Premium
+                    </span>
+                    <span *ngIf="content.payperviewCategoryId" class="ppv-content">
+                        Exclusive
+                    </span>
+                    <ss-add-to-playlist *ngIf="content.content_type==='audio' && childContents && childContents.length > 0"
+                        [content]="content" [pageType]="this.pageType"></ss-add-to-playlist>
+                </h3>
+                <div style="margin-bottom: 10px; font-size: 12px;">
+                    {{content.year}}
+                </div>
+                <div class="play-trailer-container">
+                    <span *ngIf="content.youtube_TrailerLink">
+                        <a (click)="playTrailers()">
+                            <i class="fa fa-play-circle play_trailer_icon"></i> <span class="play_trailer_text"> Play Trailer</span>
+                        </a>
+                    </span>
+                </div>
+                <ss-content-categories [categoryIds]="content.categoryList"></ss-content-categories>
+                <div class="description">
+                    {{content.description}}
+                </div>
+                <div *ngIf="content.content" class="description">
+                    {{content.content}}
+                </div>
+                <ss-social [content]="content"></ss-social>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="master-container-inner">
+    <div class="">
+        <div class="feature-container">
+            <div *ngIf="content.has_episode">
+                <div class="feature-title">
+                    {{content.content_type === 'audio'? "Album songs" : "Episodes"}}
+                </div>
+                <div *ngIf="childContents">
+                    <ss-content-list [contentList]="childContents"></ss-content-list>
+                </div>
+            </div>
+            <div>
+                <div class="related-title" *ngIf="categories && categories.length > 0">
+                    You may also like
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <p-dataList [value]="categories" emptyMessage="">
+        <ng-template styleClass="apptheme" let-category pTemplate="item">
+        <div class="master-container-inner">
+            <div class="container">
+                <div class="feature-container">
+                    <div class="feature-title">
+                        <a class="link" [routerLink]="[category._links.UIHref.href]">{{category.name}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tile_container">
+                <ss-end-user-category-content [contentId]="content.id" [categoryId]="category.id" [asList]="false"></ss-end-user-category-content>
+            </div>
+        </div>
+        </ng-template>
+    </p-dataList>
+</div>
+
+<p-dialog *ngIf="content && content.youtube_TrailerLink && playTrailer" [modal]="true" [responsive]="true" [showHeader]="false"
+    [closeOnEscape]="true" [dismissableMask]="true" (onHide)="cancelPlayTrailers()" appendTo="body" [(visible)]="playTrailer">
+    <!-- <ss-player [videoUrl]="content._links.awsTrailerUrl.href"></ss-player> -->
+    <iframe height="420" [src]="url" class="play_trailer">
+    </iframe>
+</p-dialog>

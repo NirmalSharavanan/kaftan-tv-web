@@ -1,0 +1,39 @@
+<div class="header-btn">
+  <button class="btn btn-primary" [routerLink]="['../add-device']">Add Device</button>
+</div>
+
+<p-orderList [value]="devices" [listStyle]="{'height':'100%'}" [responsive]="true" (onReorder)="enableSave()" header="Devices"
+  filter="filter" filterBy="deviceName" filterPlaceholder="Filter by name" dragdrop="true" dragdropScope="device">
+  <ng-template let-device pTemplate="item">
+    <div id="{{device.id}}" class="ui-helper-clearfix">
+      <div class="list-items">
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-thumbnail">
+            <img src="{{device._links.awsIconUrl.href}}">
+          </div>
+        </div>
+
+        <div class="ui-g-10 ui-md-4">
+          {{device.deviceName}}
+        </div>
+
+        <div class="ui-g-10 ui-md-3">
+          {{device.active ? "Yes" : "No"}}
+        </div>
+
+        <div class="ui-g-2 ui-md-2">
+          <div class="edit-btn text-right">
+            <a class="fa fa-pencil" aria-hidden="true" [routerLink]="['../edit-device', device.id]"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ng-template>
+</p-orderList>
+<div class="footer-btn">
+  <button type="button" class="btn btn-primary save-btn" [class.disabled]="!isSaveEnabled" (click)="onReorder()">Save</button>
+</div>
+<div class="no_records" *ngIf="devices?.length===0">
+  No records found
+</div>

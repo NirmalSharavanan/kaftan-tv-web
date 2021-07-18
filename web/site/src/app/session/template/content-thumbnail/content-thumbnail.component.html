@@ -1,0 +1,65 @@
+<div *ngIf="asVerticalList;then forVerticalList else forHorizontalList"></div>
+
+<ng-template #forHorizontalList>
+    <i class="fa fa-music audio_icon" *ngIf="content.content_type ==='audio'"></i>
+     <div *ngIf="content.is_premium" class="premium-thumbnail">
+                Premium
+            </div>
+    <div [class]="content.content_type ==='audio' ? 'thumb-slide audio' : 'thumb-slide'">
+        <a [routerLink]="[content._links.UIHref.href]"  [queryParams]="{title: content.title}">
+        <div class="over_container">
+            <img [class]="content.content_type ==='audio' ? 'tile_img audio_img' : 'tile_img'" [src]="content._links.awsThumbnailUrl?.href"
+                alt="" />
+                <div class="tile_details">
+                        <div class="tile_title">
+                                {{(content.title .length > 70)? (content.title | slice:0:70)+'..':(content.title ) }}
+                        </div>
+                      </div>
+                    </div> 
+            <!-- <div class="buttons">
+            <a (click)="play()" class="fa fa-play"></a>
+        </div> -->
+           
+
+            <div *ngIf="price > 0" class="premium-price">
+                <!--{{price}}-->Exclusive
+            </div>
+            <div [class]="content.content_type ==='audio' ? 'content-area text-center' : 'content-area'">
+                <div class="title">
+                    {{(content.title .length > 16)? (content.title | slice:0:16)+'..':(content.title ) }}
+                </div>
+                <span class="genre-year" *ngIf="this.categories && this.categories.length > 0">
+                    <span *ngFor="let category of categories"> {{category.name}}</span>
+                </span>
+                <span class="genre-year" *ngIf="showYear">{{content.year}}</span>
+            </div>
+        </a>
+    </div>
+</ng-template>
+
+<ng-template #forVerticalList>
+    <div class="vertical-thumb-slide">
+        <a [routerLink]="[content._links.UIHref.href]" [queryParams]="{title: content.title}">
+            <div class="over_container">
+              <img alt="" class="vertical-tile-img" [src]="content._links.awsThumbnailUrl?.href">
+              <div class="tile_details">
+                    <div class="tile_title">
+                            {{(content.title .length > 70)? (content.title | slice:0:70)+'..':(content.title ) }}
+                    </div>
+              </div>
+            </div>
+            <div *ngIf="content.is_premium" class="premium-thumbnail">
+                Premium
+            </div>
+            <div *ngIf="price > 0" class="premium-price">
+                Exclusive
+            </div>
+            <div class="content-area">
+                <div class="title">
+                    {{(content.title .length > 16)? (content.title | slice:0:16)+'..':(content.title ) }}
+                </div>
+                <p>{{content.title}}</p>
+            </div>
+        </a>
+    </div>
+</ng-template>

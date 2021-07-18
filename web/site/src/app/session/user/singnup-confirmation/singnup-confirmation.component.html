@@ -1,0 +1,26 @@
+<div class="signin-container">
+
+  <div class="container">
+    <div class="row">
+
+        <div class="signin-panel text-center">
+
+            <form #fg="ngForm">
+                <fieldset>
+                    <h2>Account creation is successful !</h2>
+                    <label>Please check your E-mail for the activation link.</label>
+                    <div>
+                        <label>If you have not received the mail please click resend.</label>
+                    </div>
+                    <div class="form-group" style="padding-bottom: 30px; margin-top: 20px;">
+                        <button class="btn btn-primary btn-lg" [routerLink]="['/session/resend-email']">Resend E-mail</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+
+    </div>
+  </div>
+
+</div>

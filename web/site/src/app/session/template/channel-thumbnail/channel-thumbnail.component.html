@@ -1,0 +1,41 @@
+<div *ngIf="asVerticalList;then forVerticalList else forHorizontalList"></div>
+
+<ng-template #forHorizontalList>
+  <div class="thumb-slide">
+    <a [routerLink]="[channel._links.UIHref.href]" [queryParams]="{title: channel.name}">
+    <div class="over_container">
+      <img class="tile_img" [src]="channel._links.awsThumbnailUrl?.href" alt="" />
+        <div class="tile_details">
+          <div class="tile_title">
+              {{(channel.name .length > 50)? (channel.name | slice:0:50)+'..':(channel.name ) }}
+          </div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="title">
+          {{(channel.name .length > 16)? (channel.name | slice:0:16)+'..':(channel.name ) }}
+        </div>
+      </div>
+    </a>
+  </div>
+</ng-template>
+
+<ng-template #forVerticalList>
+  <div class="vertical-thumb-slide"> 
+    <a [routerLink]="[channel._links.UIHref.href]" [queryParams]="{title: channel.name}">
+      <div class="over_container">
+        <img class="vertical-tile-img" [src]="channel._links.awsThumbnailUrl?.href" alt="" />
+      <div class="tile_details">
+        <div class="tile_title">
+          {{(channel.name .length > 50)? (channel.name | slice:0:50)+'..':(channel.name ) }}
+        </div>
+      </div>
+  </div>
+  <div class="content-area">
+    <div class="title">
+      {{(channel.name .length > 16)? (channel.name | slice:0:16)+'..':(channel.name ) }}
+    </div>
+  </div>
+  </a>
+  </div>
+</ng-template>

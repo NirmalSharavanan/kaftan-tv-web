@@ -1,0 +1,58 @@
+<div *ngIf="!isLoaded && !asList">
+    <!-- <div class="loading">
+        <img src="assets/kaftan/img/tile-loading.svg" style="width: 30px" alt="loading..">
+    </div> -->
+    <ss-thumbnail-loader></ss-thumbnail-loader>
+</div>
+<div class="container" *ngIf="!isLoaded && asList">
+    <ul class="row">
+        <li class="thumbnails_container" *ngFor="let img of loading_imgs">
+            <div class="vertical-thumb-slide">
+                <img src="assets/kaftan/img/thumbnailloader.jpg" alt="loading.." class="vertical-tile-img vertical_loading_img" />
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="asList;then forList else forSlick"></div>
+<ng-template #forSlick>
+    <div in-viewport (inViewportAction)="initData($event)" [inViewportOptions]="{partial: false}">
+        <div>
+            <div *ngIf="contentList && contentList.length > 0">
+                <owl-carousel [options]="owlOptions" [items]="contentList" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                    <div class="item" *ngFor="let content of contentList">
+                        <ss-content-thumbnail [content]="content" [parentCatergory]="parentCatergory"></ss-content-thumbnail>
+                    </div>
+                </owl-carousel>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</ng-template>
+
+<ng-template #forList>
+    <div *ngIf="contentList && contentList.length > 0">
+        <!--<ngx-slick class="carousel" [config]="slideConfig">-->
+        <!--<div ngxSlickItem *ngFor="let content of contentList" class="stin-slider">-->
+        <!--<ss-content-thumbnail [content]="content"></ss-content-thumbnail>-->
+        <!--</div>-->
+        <!--</ngx-slick>-->
+
+        <!-- <owl-carousel [options]="owlOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+            <div class="item" *ngFor="let content of contentList">
+                <ss-content-thumbnail [content]="content" [parentCatergory]="parentCatergory"></ss-content-thumbnail>
+            </div>
+        </owl-carousel> -->
+        <div class="container">
+            <ul class="row">
+                <li class="thumbnails_container" *ngFor="let content of contentList">
+                    <ss-content-thumbnail [content]="content" [asVerticalList]="true"></ss-content-thumbnail>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</ng-template>

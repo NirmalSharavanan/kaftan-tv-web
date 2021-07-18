@@ -1,0 +1,43 @@
+<div class="header-btn">
+  <button class="btn btn-primary" [routerLink]="['/admin/content/add-celebrityType']">Add Celebrity Type</button>
+</div>
+<!-- <p-orderList [value]="celebrityTypes" [listStyle]="{'height':'100%'}" [responsive]="true" (onReorder)="enableSave()" header="Celebrity Type"
+  filter="filter" filterBy="name" filterPlaceholder="Filter by name" dragdrop="true" dragdropScope="category">
+  <ng-template let-celebrityType pTemplate="item">
+    <div class="ui-helper-clearfix">
+      <div class="list-items">
+        <div class="ui-g-10 ui-md-7">
+          {{celebrityType.name}}
+        </div>
+        <div class="ui-g-2 ui-md-2">
+          <div class="edit-btn text-right">
+            <a class="fa fa-pencil" aria-hidden="true"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-orderList>
+<div class="footer-btn">
+  <button type="button" class="btn btn-primary save-btn" [class.disabled]="!isSaveEnabled" (click)="onReorder()">Save</button>
+</div> -->
+
+<p-dataList [value]="celebrityTypes" [paginator]="true" [rows]="10">
+  <p-header>
+    Celebrity Type
+  </p-header>
+  <ng-template let-celebrityType pTemplate="item">
+    <div id="{{celebrityType.id}}" class="ui-helper-clearfix list-items">
+      <div class="ui-g-10 ui-md-7">
+        <div class="list-title">
+          {{celebrityType.name}}
+        </div>
+      </div>
+      <div class="ui-g-2 ui-md-2">
+        <div class="edit-btn text-right">
+          <a class="fa fa-pencil" aria-hidden="true" [routerLink]="['../edit-celebrityType', celebrityType.id]"></a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-dataList>

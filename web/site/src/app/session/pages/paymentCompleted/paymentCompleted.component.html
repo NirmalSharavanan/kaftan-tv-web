@@ -1,0 +1,75 @@
+<section class="bg-invoice">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="p-4 bg-white package-section" *ngIf="subscriptionDetails">
+          <div class="invoice-top pb-4">
+            <div class="row">
+              <div class="col-md-12 mt-4 mt-sm-0">
+                <!-- <i class="fa fa-check-circle" aria-hidden="true"></i> -->
+                <div class="success">
+                  <!-- <i class="fa fa-check" aria-hidden="true"></i> -->
+                  <img src="assets/kaftan/img/success.png" *ngIf="subscriptionDetails.paymentStatus" />
+                  <img src="assets/kaftan/img/failure.png" *ngIf="!subscriptionDetails.paymentStatus" />
+                  <h5 class="package-title text-center">
+                    {{ subscriptionDetails.paymentStatus ? 'Transaction Successful' : 'Transaction Failed' }}</h5>
+                </div>
+                <div *ngIf="subscriptionDetails.paymentStatus">
+                  <h5 class="package-title">Your Premium Membership is now active!</h5>
+                </div>
+                <div *ngIf="!subscriptionDetails.paymentStatus">
+                  <h5 class="package-title">Your subscription payment failed!</h5>
+                </div>
+                <div *ngIf="!subscriptionDetails.paymentStatus">
+                  <ul class="membership-access">
+                    <li>
+                      We encounter an error while processing your card. Please try again!
+                    </li>
+                    <li>
+                      Subscribe to activate your premium membership.
+                    </li>
+                  </ul>
+                </div>
+                <div *ngIf="subscriptionDetails.paymentStatus">
+                  <ul class="membership-access">
+                    <li>
+                      Thank you for subscribe with us.
+                    </li>
+                    <li>
+                      You can access your premium membership until the due date.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="invoice-middle">
+            <h5 class="package-title pack-details">Payment Summary :</h5>
+            <div class="row mb-0">
+              <div class="col-md-12 order-2 order-md-1">
+                <dl class="row package-details">
+                  <dt class="col-md-4 col-5 font-weight-normal">Subscription Plan :</dt>
+                  <dd class="col-md-8 col-7 text-muted">{{ subscriptionDetails.subscriptionInfo.paymentPlan}}</dd>
+
+                  <dt class="col-md-4 col-5 font-weight-normal">Plan Duration :</dt>
+                  <dd class="col-md-8 col-7 text-muted">{{ starteDate + ' - ' + endDate }}</dd>
+
+                  <dt class="col-md-4 col-5 font-weight-normal">Transaction Id :</dt>
+                  <dd class="col-md-8 col-7 text-muted">{{ subscriptionDetails.transactionId }}</dd>
+
+                  <dt class="col-md-4 col-5 font-weight-normal">Reference Number :</dt>
+                  <dd class="col-md-8 col-7 text-muted">{{ subscriptionDetails.referenceNumber }}</dd>
+
+                  <dt class="col-md-4 col-5 font-weight-normal">Payment Amount (Incl of Tax) :</dt>
+                  <dd class="col-md-8 col-7 text-muted">NGN {{ subscriptionDetails.subscriptionInfo.amount }}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <a href="/session/home"><button type="submit"
+              class="btn btn-primary save-btn text-center">Continue</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,116 @@
+<div class="navbar navbar-expand-lg navbar-top"  id="navbar">
+    <div class="container">
+        <a [routerLink]="['/session/home']" class="navbar-logo">
+            <img src="assets/kaftan/img/logo.png" alt="KAFTAN" />
+        </a>
+        <div class="navbar-toggler2" data-toggle="collapse">
+            <div class="m-search-panel" [hidden]="!visiblityToggle">
+                <ss-search-input inputClass="m-search" [(query)]="query" (onClose)="visiblityToggle=false">
+                        <ss-content-list [videoContentList]="videoContents" [audioContentList]="audioContents" 
+                            [radioCategoryList]="radioCategories" [blogList]="blogs" 
+                            [channelCategoryList]="channelCategories" ></ss-content-list>
+                </ss-search-input>
+            </div>
+
+            <ul id="m-menu" [hidden]="visiblityToggle">
+                <li>
+                    <a (click)="visiblityToggle=true;" class="search-link">Search</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Browse
+                    </a>
+                    <div class="dropdown-menu header-dd" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" [routerLink]="['/session/my-profile']">Welcome {{userName}}!</a>
+                        <div class="dropdown-divider"></div>
+                        <ss-category-in-header class="header-menu"></ss-category-in-header>
+                        <div class="dropdown-divider"></div>
+                        <!-- <a *ngIf="!isPremiumUser" class="dropdown-item" [routerLink]="['/session/premium']"> Upgrade to Premium</a> -->
+                        <a class="dropdown-item" [routerLink]="['/session/my-profile']">Profile</a>
+                        <a class="dropdown-item" [routerLink]="['/session/my-favorites']">My Favorites</a>
+                        <a class="dropdown-item" [routerLink]="['/session/change-password']">Change Password</a>
+                        <a class="dropdown-item" [routerLink]="['/session/logout']">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ss-category-in-header class="header-menu"></ss-category-in-header>
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item" *ngIf="!isPremiumUser">
+                <!-- <button class="nav-link btn btn-primary btn-premium" [routerLink]="['/session/premium']"> Upgrade to Premium</button> -->
+                </li>
+                <li class="nav-item">
+                    <ss-search-input inputClass="search" [(query)]="query">
+                            <ss-content-list [videoContentList]="videoContents" [audioContentList]="audioContents" 
+                                [radioCategoryList]="radioCategories" [blogList]="blogs" 
+                                [channelCategoryList]="channelCategories" ></ss-content-list>
+                    </ss-search-input>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+
+                        <a class="dropdown-item" [routerLink]="['/session/my-profile']">Welcome {{userName}}!</a>
+                        <div class="dropdown-divider"></div>
+                        <!-- <a class="dropdown-item" [routerLink]="['/session/premium']">Upgrade to Premium</a> -->
+                        <a class="dropdown-item" [routerLink]="['/session/my-profile']">Profile</a>
+                        <a class="dropdown-item" [routerLink]="['/session/my-favorites']">My Favorites</a>
+                        <a class="dropdown-item" [routerLink]="['/session/change-password']">Change Password</a>
+                        <a class="dropdown-item" [routerLink]="['/session/logout']">Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<!--&lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<nav class="navbar navbar-expand-lg fixed-top top-bar" color-on-scroll="400">-->
+<!--<div class="container">-->
+<!--<div class="navbar-translate">-->
+
+<!--<a class="navbar-brand" href="index.html">-->
+<!--<img class="logo" src="./assets/kaftan/img/logo.png"  [routerLink]="['/secure/home']" alt="">-->
+<!--</a>-->
+
+<!--<button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--<span class="navbar-toggler-bar bar1"></span>-->
+<!--<span class="navbar-toggler-bar bar2"></span>-->
+<!--<span class="navbar-toggler-bar bar3"></span>-->
+<!--</button>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div class="collapse navbar-collapse" id="navigation2">&ndash;&gt;-->
+<!--&lt;!&ndash;<ul class="navbar-nav">&ndash;&gt;-->
+<!--&lt;!&ndash;</ul>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="collapse navbar-collapse justify-content-end" id="navigation">-->
+<!--<ul class="navbar-nav">-->
+<!--<ss-category-in-header class="header-menu"></ss-category-in-header>-->
+
+<!--<li class="nav-item">-->
+<!--<div class="input-group search">-->
+<!--<input type="text" class="form-control" placeholder="Search">-->
+<!--<span class="input-group-addon">-->
+<!--<i class="now-ui-icons ui-1_zoom-bold"></i>-->
+<!--</span>-->
+<!--</div>-->
+<!--</li>-->
+<!--<li class="nav-item">-->
+<!--<a class="nav-link" [routerLink]="['/session/logout']">-->
+<!--<i class="fa fa-user-circle"></i>-->
+<!--Logout-->
+<!--</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+<!--</nav>-->
+<!--&lt;!&ndash; End Navbar &ndash;&gt;-->

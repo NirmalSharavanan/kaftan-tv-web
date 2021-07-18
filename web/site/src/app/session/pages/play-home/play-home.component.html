@@ -1,0 +1,31 @@
+<div *ngIf="videoPlayWrapper" class="play-wrapper">
+        <div style="width: 1em; height: 1em; visibility: hidden; font-size: 1em;"></div>
+        <div class="PlayerInner">
+            <!--<div class="control">-->
+                <!--<button (click)="navigateBack()" class="btn btn-clear back-btn">-->
+                    <!--<img src="assets/kaftan/img/left-arrow.png" />-->
+                <!--</button>-->
+            <!--</div>-->
+            <div class="VideoContainer">
+                <ss-video-player [videoConfig]="videoConfig" [contentId]="contentId"></ss-video-player>
+            </div>
+            <div class="controlbottom">
+    
+            </div>
+    
+        </div>
+        <div style="width: 1em; height: 20px; visibility: hidden; font-size: 1em;"></div>
+    </div>
+    <div *ngIf="backgroundUrl && !videoPlayWrapper" class="play-wrapper">
+        <div class="PlayerInner">
+            <div class="bg" [ngStyle]="{'background-image': backgroundUrl }">
+                <div *ngIf="!invalidUser" class="loading">
+                    <ss-loading></ss-loading>
+                </div>
+                <div *ngIf="!isAuthenticated || invalidUser" class="invalid-user">
+                    <ss-invalid-user [isAuthenticated]="isAuthenticated" [is_premium_content]="content?.is_premium" [hasPremiumAccess]="has_access_to_preminum"
+                        [premium_message]="premium_message"></ss-invalid-user>
+                </div>
+            </div>
+        </div>
+    </div>

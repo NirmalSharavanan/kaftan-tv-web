@@ -1,0 +1,100 @@
+<div style="display:inline-block">
+  <a class="link" [routerLink]="['/admin/wallet/search-subscriber']">
+    <p-card [style]="{width: '240px',height:'auto',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">people</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{totalSubscribers}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Total Registered Subscribers</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div style="display:inline-block">
+  <div style="display:inline-block">
+    <a class="link" [routerLink]="['/admin/wallet/search-subscriber']">
+      <p-card [style]="{width: '240px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+        <div class="row">
+          <div class="col-md-5 icon-col">
+            <md-icon class="mdIcon">person_outline</md-icon>
+          </div>
+          <div class="col-md-7 text-center">
+            <span>
+              <h3 class="count">
+                {{totalactiveSubscribers}}
+              </h3>
+            </span>
+            <label style="font-size: 15px">Total Active Subscribers</label>
+          </div>
+        </div>
+      </p-card>
+    </a>
+  </div>
+</div>
+
+<div style="display:inline-block">
+  <div style="display:inline-block">
+    <a class="link" [routerLink]="['/admin/wallet/transaction-summary']">
+      <p-card [style]="{width: '240px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+        <div class="row">
+          <div class="col-md-5 icon-col">
+            <md-icon class="mdIcon">money</md-icon>
+          </div>
+          <div class="col-md-7 text-center">
+            <span>
+              <h3 class="count">
+                {{totalTransactionAmount}}
+              </h3>
+            </span>
+            <label style="font-size: 15px">Total Transaction Amount</label>
+          </div>
+        </div>
+      </p-card>
+    </a>
+  </div>
+</div>
+
+<div style="display:inline-block">
+  <a class="link" [routerLink]="['/admin/wallet/transaction-report']">
+    <p-card [style]="{width: '240px',height:'auto',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">menu_book</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{totalTransactionHistory}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Total Transaction Count</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div class="row" matchHeight="card" style="padding-left: 10px; padding-top: 20px;">
+  <div class="col-xl-6 col-lg-6">
+    <div class="card" style="padding: 20px;border:0px;">
+      <div class="card-body">
+        <div id="PayServiceChartContainer"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6 col-lg-6">
+    <div class="card" style="padding: 20px;border:0px;">
+      <div class="card-body">
+        <div id="RegisteredSubscriberChartContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>

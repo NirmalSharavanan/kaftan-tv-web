@@ -1,0 +1,121 @@
+<div *ngIf="category">
+    <ss-banner *ngIf="category.category_type!=4 &amp;&amp; category.category_type!=6 && category.category_type!=7"
+        [bannerImageUrl]="category._links.awsBannerUrl.href">
+    </ss-banner>
+
+    <ss-channel-player *ngIf="category.category_type==6 || category.category_type==7" [category]="category"></ss-channel-player>
+
+    <!-- Channels -->
+    <div *ngIf="category.showChannels" class="master-container-inner">
+        <div *ngIf="channels && channels.length > 0">
+            <div class="container">
+                <div class="feature-container">
+                    <div class="feature-title master-container-inner">
+                        <a class="link">Channels</a>
+                        [routerLink]="[channel._links.UIHref.href]"
+                    </div>
+                </div>
+            </div>
+            <owl-carousel [options]="owlOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                <div class="item" *ngFor="let channel of channels">
+                    <ss-channel-thumbnail [channel]="channel"></ss-channel-thumbnail>
+                </div>
+            </owl-carousel>
+        </div>
+    </div>
+
+    <!-- Radio -->
+    <div *ngIf="category.showRadio" class="master-container-inner">
+        <div *ngIf="radios && radios.length > 0">
+            <div class="container">
+                <div class="feature-container">
+                    <div class="feature-title master-container-inner">
+                        <a class="link">Radio</a>
+                        <!-- [routerLink]="[channel._links.UIHref.href]"-->
+                    </div>
+                </div>
+            </div>
+            <owl-carousel [options]="owlOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+                <div class="item" *ngFor="let radio of radios">
+                    <ss-channel-thumbnail [channel]="radio"></ss-channel-thumbnail>
+                </div>
+            </owl-carousel>
+        </div>
+    </div>
+</div>
+
+<!-- Featured categories content from parent category  -->
+<p-dataList [value]="categories" emptyMessage="" *ngIf="categories && categories.length > 0">
+    <ng-template styleClass="apptheme" let-category pTemplate="item">
+        <div class="container">
+
+            <div class="feature-container">
+                <div class="feature-title master-container-inner">
+                    <a class="link" [routerLink]="[category._links.UIHref.href]">{{category.name}}</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="tile_container master-container-inner">
+            <ss-end-user-category-content [categoryId]="category.id" [asList]="false" [parentCatergory]="parentCategory"></ss-end-user-category-content>
+        </div>
+
+    </ng-template>
+</p-dataList>
+
+<!-- Display specific cagetory contents -->
+<div *ngIf="category">
+    <div class="feature-container master-container-inner" *ngIf="category.category_type!=1 && category.category_type!=6 && category.category_type!=7">
+        <div class="container">
+            <div class="feature-title master-container-inner">
+                {{category.name}}
+            </div>
+        </div>
+        <div class="tile_container master-container-inner">
+            <ss-end-user-category-content [categoryId]="category_id" [asList]="true" [parentCatergory]="parentCategory"></ss-end-user-category-content>
+        </div>
+    </div>
+</div>
+
+<!-- My Play List -->
+<div *ngIf="category" class="master-container-inner">
+    <div *ngIf="isAuthenticated && category.showMyPlayList">
+        <ss-my-playlist></ss-my-playlist>
+    </div>
+</div>
+
+<!-- Channels -->
+<div *ngIf="category_id ==='channels' &&  channels && channels.length > 0" class="master-container-inner">
+    <div class="feature-container">
+        <div class="feature-title master-container-inner">
+            Channels
+        </div>
+    </div>
+    <div class="tile_container master-container-inner">
+        <div class="container">
+            <ul class="row">
+                <li class="thumbnails_container" *ngFor="let channel of channels">
+                    <ss-channel-thumbnail [channel]="channel" [asVerticalList]="true"></ss-channel-thumbnail>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Radio -->
+<div *ngIf="category_id ==='radio' && radios && radios.length > 0" class="master-container-inner">
+    <div class="feature-container">
+        <div class="feature-title master-container-inner">
+            Radio
+        </div>
+    </div>
+    <div class="tile_container master-container-inner">
+        <div class="container">
+            <ul class="row">
+                <li class="thumbnails_container" *ngFor="let radio of radios">
+                    <ss-channel-thumbnail [channel]="radio" [asVerticalList]="true"></ss-channel-thumbnail>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+.nav-tabs {
+    border-top: 1px solid #8a8a8a;
+    border-bottom: 1px solid #8a8a8a;
+    width: 99% !important;
+    padding-top: 8px !important;
+}
+
+
+.boxmodel{
+    max-width:210px;
+    margin-right:20px;
+    p{color:#8a8a8a;font-size: 0.85em;padding:5px;}
+}
+.single_content{
+    max-height:620px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.zoomImg{
+    text-align:center;
+    p{text-align:left;margin:5%}
+    img,video{max-width: 95%;}
+    img:hover{cursor:pointer;max-width:100%;transition: 200ms;}
+    video:hover{cursor:pointer;max-width:100%;transition: 200ms;}
+}
+
+.content_title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+}
+
+.nav > li > a {
+    position: relative !important;
+    display: block !important;
+    padding: 5px 0px !important;
+    margin: 0 15px;
+}
+.nav-tabs > li.active > a {
+    background-color: transparent !important; 
+    color: #ff1953  !important;
+    border-bottom: 2px solid #ff1953 !important;
+    border-radius: 0px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    top: 1px;
+}
+.nav-tabs > li > a {
+    color:#fff !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+}
+.nav-tabs > li:hover, .nav-tabs > li > a:hover{
+    background: none !important;
+}
+.nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    background-color: none !important;
+}
+.nav-tabs > li > a {
+    border: none !important;
+}
+.nav-tabs > li:first-of-type > a
+{
+    margin: 0 15px 0px 0px !important;
+}
+ul {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.fa-angle-right{
+    margin-top: 20vh !important;
+    position: absolute;
+    top: calc(50% - 20vh);
+    right: 5%;
+    font-size: 38px !important;
+    color: #a9a9a9;
+}
+@media (min-width: 1024px){
+    .nav > li > a {
+        padding: 5px 15px !important;
+    }
+ }
+@media (max-width: 1023px) and (min-width: 768px) {
+.nav-tabs{
+    width: 95% !important;
+}
+.fa-angle-right{
+    right: 6% !important;
+  }
+}
+@media (max-width: 1600px) and (min-width: 1200px) {
+    .fa-angle-right{
+        right: 2% !important;
+        font-size: 50px !important;
+    }
+}
+@media (max-width: 1100px) and (min-width: 1024px) {
+    .fa-angle-right {
+        right: 6% !important;
+      }
+    }

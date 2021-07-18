@@ -1,0 +1,70 @@
+.play_all
+{
+    float:right;
+    cursor:pointer;
+    font-size: 16px !important;
+    font-weight: 400;
+}
+.play_all i{
+    font-size: 24px;
+    vertical-align: middle;
+}
+.dialog_header
+{
+    text-align: center;
+    font-weight: 600;
+    color: #7b7878;
+}
+.dialog_footer
+{
+   text-align: center;
+   margin: 20px 0px 0px 0px;
+}
+.ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
+    border: 1px solid #00bdff !important;
+    color: #FFFFFF;
+    background: #00bdff !important;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.ui-dialog .ui-dialog-content {
+    height: auto !important;
+    overflow: scroll !important;
+}
+.create_playlist
+{
+    margin: 10% 0px 0% 10px;
+}
+input{
+    height: 45px;
+    padding: 12px 18px;
+    font-size: 16px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #ffffff;
+    display: -ms-flexbox;
+    -ms-flex-pack: end;
+    -ms-flex-direction: column;
+    border-bottom: 1px solid #00bdff;
+    width: 283px;
+}
+
+.play
+{
+    text-transform: uppercase!important;
+    cursor: pointer!important;
+    text-align: left;
+    // width: 83px;
+    line-height: 21px;
+    background: #00bdff;
+    padding: 4px;
+    color: #fff !important;
+    margin-right: 5px;
+}
+.play i{
+    margin-left : 6px !important;
+    padding-right: 5px !important;
+}
+.description {
+    margin-bottom: 10px !important;
+}

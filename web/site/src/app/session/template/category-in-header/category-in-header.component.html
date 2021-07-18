@@ -1,0 +1,15 @@
+<ul class="nav navbar-nav ml-auto main-menu">
+
+  <li *ngFor="let category of categories" class="nav-item">
+    <a class="nav-link" [routerLink]="[category._links.UIHref.href]" [queryParams]="{title: category.name}"> {{category.name}}</a>
+  </li>
+
+  <li><a href="http://3.108.218.230/" class="nav-link">Blog</a></li>
+
+  <!-- <li *ngFor="let page of staticPages" class="nav-item">
+    <a class="nav-link" *ngIf="page.is_externalLink" href="{{page.externalLink}}">{{page.pageName}}</a>
+    <a class="nav-link" *ngIf="!page.is_externalLink" [routerLink]="[page.pageName.toLowerCase() == 'blog' || page.pageName.toLowerCase() == 'blogs' ?
+                             '/session/blog' :  page._links.UIHref.href]">{{page.pageName}}</a>
+  </li> -->
+
+</ul>

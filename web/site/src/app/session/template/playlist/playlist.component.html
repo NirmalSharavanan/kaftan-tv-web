@@ -1,0 +1,136 @@
+<div class="container favourites">
+  <div class="feature-title" *ngIf="playList">
+    {{playList.name}}
+    <a class="my-favorites-remove" style="padding-left: 30px" (click)="showdeletePlayListdialog=true">
+      <i class="fa fa-trash"></i>
+    </a>
+    <a class="my-favorites-remove" (click)="editPlayList(content)">
+      <i class="fa fa-edit"></i>
+    </a>
+    <a class="play_all" *ngIf="contentList && contentList.length > 0" (click)="playAll()">
+      <i class="fa fa-play-circle"></i> PLAY ALL</a>
+  </div>
+  <div *ngIf="showPlayer">
+    <ss-play-home *ngIf="showPlayer" [playerInfo]="playListForPlayer"></ss-play-home>
+    <!-- <router-outlet></router-outlet> -->
+  </div>
+  <section>
+    <div class="loading" *ngIf="loading">
+      <img src="assets/kaftan/img/loader-small.svg" alt="loading..">
+    </div>
+    <div *ngIf="contentList && contentList.length > 0">
+      <p-dataGrid [value]="contentList">
+        <ng-template let-content pTemplate="item">
+
+          <div class="my-favorites">
+            <div class="d-md-block d-none">
+              <div class="media episode-item">
+                <!-- <ss-content-thumbnail [content]="content"></ss-content-thumbnail> -->
+                <div class="media-body">
+                  <div class="feature-title">
+                    <a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>
+                  </div>
+
+                  <div class="description d-md-block">
+                    {{content.description}}
+                  </div>
+                </div>
+                  <a *ngIf="content.is_premium" class="play" (click)="premiumPlay(content)">
+                    <i class="fa fa-play"></i>
+                    <span style="margin-right: 5px;">Play</span>
+                  </a>
+                  <a *ngIf="!content.is_premium" class="play" [routerLink]="[content._links.UIHref.href]">
+                    <i class="fa fa-play"></i>
+                    <span style="margin-right: 5px;">Play</span>
+                  </a>
+                <a class="play" (click)="removeFromPlayList(content)">
+                  <i class="fa fa-trash"></i>
+                  <span style="margin-right: 5px;">Delete</span>
+                </a>
+                <div *ngIf="isPremium">
+                    <ss-invalid-user [isAuthenticated]="true" [is_premium_content]="content?.is_premium" [hasPremiumAccess]="false"
+                    [premium_message]="'Premium Content'"></ss-invalid-user>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+
+              <div class="episode-item">
+                <!-- <ss-content-thumbnail [content]="content"></ss-content-thumbnail> -->
+
+                <div class="media-body">
+                  <div class="feature-title">
+                    <a [routerLink]="[content._links.UIHref.href]">{{content.title}}</a>
+                  </div>
+
+                  <div class="description d-md-block">
+                    {{content.description}}
+                  </div>
+                </div>
+                <a class="play" [routerLink]="[content._links.UIHref.href]">
+                  <i class="fa fa-play"></i>
+                  <span>Play</span>
+                </a>
+                <a class="play" (click)="removeFromPlayList(content)">
+                  <i class="fa fa-trash"></i>
+                  <span>Delete</span>
+                </a>
+              </div>
+            </div>
+
+            <hr class="episode-separator" />
+          </div>
+        </ng-template>
+      </p-dataGrid>
+    </div>
+    <div class="nofavourites" *ngIf="contentList && contentList.length == 0">
+      No contents added yet in this playlist
+    </div>
+  </section>
+</div>
+
+
+<p-dialog [contentStyle]="{'border-top':' 3px solid #00bdff','background-color':'#f7f7f7','color':'#6d6b6b'}" [(visible)]="showNewPlayListdialog"
+  width="350" height="auto" [responsive]="true" [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true" [modal]="true"
+  appendTo="body">
+  <h6 class="dialog_header">Edit Playlist</h6>
+  <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.playlistaddedFailed">
+    {{fg.errors.playlistaddedFailed}}
+  </div>
+
+  <form class="form" [formGroup]="fg" (ngSubmit)="updatePlayList()">
+    <div class="form-group create_playlist mandatory">
+      <input type="text" class="form-control" id="name" placeholder="Playlist Name" formControlName="name">
+      <div class="form-text error-text">
+        <app-error [fromGroup]="fg" controlName="name" alias="Playlist Name"></app-error>
+      </div>
+    </div>
+    <div class="loading" *ngIf="updateLoading">
+      <img src="assets/kaftan/img/loader-small.svg" alt="loading..">
+    </div>
+    <div class="form-group btn_footer dialog_footer">
+      <p-footer>
+        <button type="submit" pButton icon="fa-edit" label="Update" [disabled]="updateLoading || fg.invalid"></button>
+        <button type="button" pButton icon="fa-close" (click)="showNewPlayListdialog=false" label="Cancel"></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog [contentStyle]="{'border-top':' 3px solid #00bdff','background-color':'#f7f7f7','color':'#6d6b6b'}" [(visible)]="showdeletePlayListdialog"
+  width="350" height="auto" [responsive]="true" [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true" [modal]="true"
+  appendTo="body" *ngIf="playList">
+  <h6 class="dialog_header">Delete Playlist</h6>
+  <p class="text-center" style="padding-top: 10px;">Do you want to delete "{{playList.name}}"?</p>
+  <div class="loading" *ngIf="updateLoading">
+    <img src="assets/kaftan/img/loader-small.svg" alt="loading..">
+  </div>
+  <div class="btn_footer dialog_footer">
+    <p-footer>
+      <button type="button" pButton icon="fa-trash" label="Ok" (click)="deletePlayList()"></button>
+      <button type="button" pButton icon="fa-close" (click)="showdeletePlayListdialog=false" label="Cancel"></button>
+    </p-footer>
+  </div>
+
+</p-dialog>

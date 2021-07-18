@@ -1,0 +1,108 @@
+.addto_playlist
+{
+    float:right;
+    cursor:pointer;
+    font-size: 16px;
+    // font-weight: 600;
+}
+.addto_playlist>img
+{
+    margin-right:3px;
+    padding-right: 5px;
+    width: 27px;
+    height: 23px;
+}
+
+.addsongto_playlist
+{
+    text-transform: uppercase!important;
+    cursor: pointer!important;
+    text-align: left;
+    // width: 83px;
+    line-height: 21px;
+    background: #00bdff;
+    padding: 4px;
+    color: #fff;
+}
+.addsongto_playlist>img
+{
+    margin-right:5px;
+    padding-right: 0px;
+    width: 20px;
+    height: 19px;
+}
+
+// ::-webkit-scrollbar {
+//     display:none !important;
+// }
+.fa-plus-square-o:before {
+    padding-right: 6px;
+    cursor:pointer;
+}
+.playlist_body
+{
+   max-height: 350px !important;
+   overflow-y: auto;
+}
+.dialog_header
+{
+    text-align: center;
+    font-weight: 600;
+    color: #7b7878;
+}
+.playlist
+{
+    padding: 10px 0px 10px 0px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+    margin: 15px 0px 0px 0px;
+    cursor:pointer;
+}
+.playlist_icon>.fa-headphones:before, .fa-plus:before{
+    background: #00bdff;
+    padding: 6px;
+    border-radius: 50%;
+    color: #fff;
+}
+.playlist_names
+{
+    padding:0px;
+}
+.dialog_footer
+{
+   text-align: center;
+   margin: 20px 0px 0px 0px;
+}
+.ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
+    border: 1px solid #00bdff !important;
+    color: #FFFFFF;
+    background: #00bdff !important;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.ui-dialog .ui-dialog-content {
+    height: auto !important;
+    overflow: scroll !important;
+}
+.playlist_names>p{
+    margin-bottom: 0px !important;
+    text-align: left;
+}
+.create_playlist
+{
+    margin: 10% 0px 0% 10px;
+}
+input{
+    height: 45px;
+    padding: 12px 18px;
+    font-size: 16px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #ffffff;
+    display: -ms-flexbox;
+    -ms-flex-pack: end;
+    -ms-flex-direction: column;
+    border-bottom: 1px solid #00bdff;
+    width: 283px;
+}

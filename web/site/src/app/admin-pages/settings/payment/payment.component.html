@@ -1,0 +1,73 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Payment Gateway Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="payment_gateway">Payment Gateway</label>
+          <select class="form-control" id="payment_gateway" formControlName="payment_gateway"
+            (change)="onChange($event.target.value)">
+            <!-- <option class='option' value="1" selected>Razor Pay</option>
+            <option class='option' value="2">Stripe</option> -->
+            <option class='option' value="3" selected>EBS</option>
+          </select>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="payment_gateway" alias="Payment Gateway"></app-error>
+          </div>
+        </div>
+        <!-- <div class="form-group mandatory">
+          <label for="key_id">Key Id</label>
+          <input type="text" class="form-control" id="key_id" placeholder="Key Id" formControlName="key_id">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="key_id" alias="Key Id"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="key_secret">Secret Key</label>
+          <input type="text" class="form-control" id="key_secret" placeholder="Secret Key" formControlName="key_secret">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="key_secret" alias="Secret Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="premium_plan_id">Premium PlanId</label>
+          <input type="text" class="form-control" id="premium_plan_id" placeholder="Premium PlanId"
+            formControlName="premium_plan_id">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="premium_plan_id" alias="Premium PlanId"></app-error>
+          </div>
+        </div> -->
+        <div class="form-group mandatory">
+          <label for="accountId">Account Id</label>
+          <input type="text" class="form-control" id="accountId" placeholder="Account Id" formControlName="accountId">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="accountId" alias="Account Id"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="secureKey">Secure Key</label>
+          <input type="text" class="form-control" id="secureKey" placeholder="Secure Key" formControlName="secureKey">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="secureKey" alias="Secure Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="mode">Payment Mode</label>
+          <select class="form-control" id="mode" formControlName="mode">
+            <option class='option' value="TEST" selected>TEST</option>
+            <option class='option' value="LIVE">LIVE</option>
+          </select>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="mode" alias="Payment Mode"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

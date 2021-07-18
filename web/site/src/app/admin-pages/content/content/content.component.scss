@@ -1,0 +1,36 @@
+.ui-dialog-mask {
+    position: relative;
+}
+
+.ui-widget-overlay {
+    position: relative;
+}
+
+.search-panel{
+    background-color:transparent;
+    margin-bottom: 10px;
+}
+
+label{
+    margin-top: 5px;
+}
+
+.search-btn{
+    margin-top: 5px; 
+}
+@media (max-width: 600px) {
+    .searchbtn {
+     text-align:center;
+ }
+}
+
+.fa-check-circle:before {
+    font-size: 18px;
+    color: #28a745;
+    padding-right: 2px;
+}
+.fa-times-circle:before {
+    font-size: 18px;
+    color: #e53935;
+    padding-right: 2px;
+}

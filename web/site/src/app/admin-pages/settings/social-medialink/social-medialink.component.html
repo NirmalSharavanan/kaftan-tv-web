@@ -1,0 +1,50 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Social Media Links">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="facebook_link">
+            <i class="fa fa-facebook" aria-hidden="true"></i> Facebook</label>
+          <input type="text" class="form-control" id="facebook_link" placeholder="Facebook" formControlName="facebook_link">
+        </div>
+        <div class="form-group">
+          <label for="twitter_link">
+            <i class="fa fa-twitter" aria-hidden="true"></i> Twitter</label>
+          <input type="text" class="form-control" id="twitter_link" placeholder="Twitter" formControlName="twitter_link">
+        </div>
+        <div class="form-group">
+          <label for="googleplus_link">
+            <i class="fa fa-google-plus" aria-hidden="true"></i> Google Plus</label>
+          <input type="text" class="form-control" id="googleplus_link" placeholder="Google Plus" formControlName="googleplus_link">
+        </div>
+        <div class="form-group">
+          <label for="instagram_link">
+            <i class="fa fa-instagram" aria-hidden="true"></i> Instagram</label>
+          <input type="text" class="form-control" id="instagram_link" placeholder="Instagram" formControlName="instagram_link">
+        </div>
+        <div class="form-group">
+          <label for="youtube_link">
+            <i class="fa fa-youtube" aria-hidden="true"></i> YouTube</label>
+          <input type="text" class="form-control" id="youtube_link" placeholder="YouTube" formControlName="youtube_link">
+        </div>
+        <div class="form-group">
+          <label for="ios_link">
+            <i class="fa fa-apple" aria-hidden="true"></i> iOS</label>
+          <input type="text" class="form-control" id="ios_link" placeholder="iOS" formControlName="ios_link">
+        </div>
+        <div class="form-group">
+          <label for="android_link">
+            <i class="fa fa-android" aria-hidden="true"></i> Android</label>
+          <input type="text" class="form-control" id="android_link" placeholder="Android" formControlName="android_link">
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

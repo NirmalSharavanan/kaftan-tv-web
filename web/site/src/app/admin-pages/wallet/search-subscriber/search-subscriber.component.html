@@ -1,0 +1,151 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-1">
+  </div>
+  <div class="ui-g-12 ui-md-10">
+    <p-panel header="Search Subscriber">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="col-sm-12 ">
+          <div class="form-group mandatory row">
+            <div class="col-md-3">
+              <span>Search By :</span>
+            </div>
+            <div class="col-md-4">
+              <label>
+                <input type="radio" id="mobileNumberRadio" formControlName="isEmailRadio" value="false"
+                  class="font-weight-bold" (change)="onMobileNumberChange($event)"
+                  [checked]="isMobileNumber? 'checked' : null ">
+                <span>Mobile Number</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label>
+                <input type="radio" id="emailRadio" formControlName="isEmailRadio" value="true" class="font-weight-bold"
+                  (change)="onEmailChange($event)" [checked]="isEmail? 'checked' : null ">
+                <span>Email</span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6" *ngIf="isMobileNumber">
+              <label for="mobileNo">Mobile No.</label>
+              <international-phone-number formControlName="mobileNo" id="mobileNo" placeholder="+91 9999999999"
+                [maxlength]="20" [defaultCountry]="'ng'" name="mobileNo"></international-phone-number>
+              <div class="form-text error-text" style="color: red;">
+                <app-error [fromGroup]="fg" controlName="mobileNo" alias="Mobile number"></app-error>
+              </div>
+            </div>
+            <div class="form-group col-md-6" *ngIf="isEmail">
+              <label for="email">Email :</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="e.g. xx@xxxx.com"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+              <div class="form-text error-text" style="color: red;">
+                <app-error [fromGroup]="fg" controlName="email" alias="Email"></app-error>
+              </div>
+            </div>
+            <div *ngIf="isMobileNumber || isEmail" class="form-group col-md-3"
+              style="text-align: center; padding-top: 2em;">
+              <button type="submit" class="btn btn-primary" [disabled]="fg.invalid ">Submit</button>
+            </div>
+          </div>
+          <div class="subscriber">
+            <span class="col-md-4 labelText">Download All Subscriber Details </span>
+            <p-table #dt [columns]="cols" [value]="subscriberList" selectionMode="multiple" [metaKeySelection]="false"
+              exportFilename="SubscriberReport">
+              <ng-template pTemplate="caption">
+                <button type="button" pButton icon="fa-file-o" iconPos="left" label="EXCEL" (click)="dt.exportCSV()"
+                  style="float:left;margin-left: 15px;"
+                  [attr.disabled]="subscriberList && subscriberList.length==0? 'disabled' : null "></button>
+                <button type="button" pButton icon="fa fa-file-pdf-o" iconPos="left" label="PDF" (click)="exportPdf()"
+                  style="float:left;margin-left: 15px;" class="ui-button-warning"></button>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr [ngStyle]="{'display': 'none'}">
+                  <th style="width: 20%;">Subscriber Name</th>
+                  <th style="width: 20%;">Mobile Number</th>
+                  <th style="width: 20%;">Date Of Registration</th>
+                  <th style="width: 20%;">Account Type</th>
+                  <th style="width: 30%;">Email</th>
+                  <th style="width: 20%;">Wallet Balance</th>
+                  <th style="width: 20%;">Last Login</th>
+                  <th style="width: 20%;">Last Txn. Date</th>
+                  <th style="width: 20%;">Last Wallet Top-up</th>
+                  <th style="width: 20%;">Account Status</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-user>
+                <tr [pSelectableRow]="user" [ngStyle]="{'display': 'none'}">
+                  <td>{{ user.name}}</td>
+                  <td>{{ user.mobileNo}}</td>
+                  <td>{{ user.created_at}}</td>
+                  <td>{{ user.accountType}}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{user.balance}}</td>
+                  <td>{{user.lastLogin_at}}</td>
+                  <td>{{user.txnDate}}</td>
+                  <td>{{user.lastWalletTopUp}}</td>
+                  <td>{{user.accountStatus}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div><br>
+          <div *ngIf="subscriber != null">
+            <div class="row" style="padding-left: 1em;">
+              <div class="col-md-2"><b>Subscriber Name :</b> </div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? subscriber[0].name : subscriber.name}}
+              </div>
+              <div class="col-md-2"><b>Wallet Balance :</b> </div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? subscriber[0].walletInfo.balance : '0'}}
+              </div>
+            </div><br>
+            <div class="row" style="padding-left: 1em;">
+              <div class="col-md-2"><b>Subscriber Mobile Number :</b> </div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? subscriber[0].mobileNo : subscriber.mobileNo}}
+              </div>
+              <div class="col-md-2"><b>Last Login :</b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? (subscriber[0].lastLoginAt | date:'dd/MMM/yyyy h:mm a') : subscriber.lastLogin_at| date:'dd/MMM/yyyy h:mm a'}}
+              </div>
+            </div><br>
+            <div class="row" style="padding-left: 1em;">
+              <div class="col-md-2"><b>Date Of Registration :</b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? (subscriber[0].walletInfo.created_at | date:'dd/MMM/yyyy h:mm a') : '-'}}
+              </div>
+              <div class="col-md-2"><b>Last Txn. Date : </b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 && subscriber[0].walletTransactionHistoryInfo !=null ? (subscriber[0].walletTransactionHistoryInfo.created_at | date:'dd/MMM/yyyy h:mm a') : '-' }}
+              </div>
+            </div><br>
+            <div class="row" style="padding-left: 1em;">
+              <div class="col-md-2"><b>Account Type :</b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? subscriber[0].role == "ROLE_ADMIN" ? "Admin" : "Customer": subscriber.role == "ROLE_ADMIN" ? "Admin" : "Customer"}}
+              </div>
+              <div class="col-md-2"><b>Last Wallet Top-up :</b></div>
+              <div class="col-md-4">
+                {{lastWalletTopup? (lastWalletTopup | date:'dd/MMM/yyyy h:mm a') : '-'}}
+              </div>
+            </div><br>
+            <div class="row" style="padding-left: 1em; padding-bottom: 2em;">
+              <div class="col-md-2"><b>Email :</b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 ? subscriber[0].email : subscriber.email}}
+              </div>
+              <div class="col-md-2"><b>Account Status :</b></div>
+              <div class="col-md-4">
+                {{subscriber.length > 0 && accountStatus == "Active"?  'Active' : 'Inactive'}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="subscriber == null">
+            <p style="text-align:center;"> No records found! </p>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+</div>

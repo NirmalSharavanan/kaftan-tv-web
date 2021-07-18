@@ -1,0 +1,25 @@
+<ss-loading *ngIf="loading"></ss-loading>
+
+<div *ngIf="playList && playList.length > 0">
+  <div class="container">
+    <div class="feature-container">
+      <div class="feature-title master-container-inner">
+        <a class="link">My PlayList</a>
+      </div>
+    </div>
+  </div>
+  <owl-carousel [options]="owlOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+    <div class="item" *ngFor="let list of playList">
+      <div class="thumb-slide">
+        <a [routerLink]="['/session/playlist', list.id]">
+          <img class="tile_img" src="assets/kaftan/img/thumbnailplaylist.jpg" alt="" />
+          <div class="content-area">
+            <div class="title">
+              {{(list.name .length > 16) ? (list.name | slice:0:16) +'..' : (list.name ) }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </owl-carousel>
+</div>

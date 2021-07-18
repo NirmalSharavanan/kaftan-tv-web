@@ -1,0 +1,43 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/mobile-apps/app-update']">
+  <i class="fa fa-chevron-left"></i> App Updates</a>
+
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="{{appUpdateId!=null?'Edit App Update Details':'Add App Update Details'}}">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="deviceType">Device Type</label>
+          <select class="form-control" id="deviceType" formControlName="deviceType">
+            <option value="" selected>Select Device Type</option>
+            <option value="ios">iOS</option>
+            <option value="android">Android</option>
+          </select>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="deviceType" alias="Device Type"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="currentVersion">Current Version</label>
+          <input type="text" class="form-control" id="currentVersion" placeholder="Current Version" formControlName="currentVersion">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="currentVersion" alias="Current Version"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="description">Description</label>
+          <textarea [rows]="3" [cols]="30" class="form-control" id="description" placeholder="Description" formControlName="description"></textarea>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="description" alias="Description"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

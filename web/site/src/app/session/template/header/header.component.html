@@ -1,0 +1,56 @@
+<!-- Navbar -->
+<div class="animated fadeInDown navbar navbar-expand-lg navbar-top" id="navbar">
+    <div class="container" (scroll)="onWindowScroll($event);">
+        <a [routerLink]="['/session/home']" class="navbar-logo">
+            <!--<img src="{{this.logoImageUrl ? this.logoImageUrl : 'assets/kaftan/img/logo.png'}}" alt="Kaftan" />-->
+            <img src="assets/kaftan/img/logo.png" alt="KAFTAN" />
+        </a>
+        <div class="navbar-toggler2" data-toggle="collapse">
+            <div class="m-search-panel" [hidden]="!visiblityToggle">
+                <ss-search-input inputClass="m-search" [(query)]="query" (onClose)="visiblityToggle=false">
+                        <ss-content-list [videoContentList]="videoContents" [audioContentList]="audioContents" 
+                            [radioCategoryList]="radioCategories" [blogList]="blogs" 
+                            [channelCategoryList]="channelCategories" ></ss-content-list>
+                </ss-search-input>
+            </div>
+
+            <ul id="m-menu" [hidden]="visiblityToggle">
+                <li>
+                    <a (click)="visiblityToggle=true;" class="search-link">Search</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Browse
+                    </a>
+                    <div class="dropdown-menu header-dd" aria-labelledby="navbarDropdown">
+                        <ss-category-in-header class="header-menu"></ss-category-in-header>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/session/login']">Sign In</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/session/signup']">Sign Up</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse">
+
+            <ss-category-in-header class="header-menu"></ss-category-in-header>
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                    <ss-search-input inputClass="search" [(query)]="query">
+                        <ss-content-list [videoContentList]="videoContents" [audioContentList]="audioContents" 
+                            [radioCategoryList]="radioCategories" [blogList]="blogs" 
+                            [channelCategoryList]="channelCategories" ></ss-content-list>
+                    </ss-search-input>
+                </li>
+                <li class="nav-item signin">
+                    <a class="nav-link" [routerLink]="['/session/login']">Sign In</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<!-- End Navbar -->

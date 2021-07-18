@@ -1,0 +1,25 @@
+<div class="back-link">
+    <a class="navbar-link" [routerLink]="['/admin/content/celebrityType']">
+        <i class="fa fa-chevron-left"></i> Celebrity Type</a>
+</div>
+<div class="form-container">
+    <div class="ui-g-12 ui-md-3">
+    </div>
+    <div class="ui-g-12 ui-md-6">
+        <p-panel header="{{celebrityTypeId !=null ? 'Edit Celebrity Type' : 'Add Celebrity Type'}}">
+            <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+                <div class="form-group mandatory">
+                    <label for="celebrityTypeName">Name</label>
+                    <input type="text" class="form-control" id="celebrityTypeName" placeholder="Celebrity Type" formControlName="name">
+                    <div class="mandatory_text">
+                        <app-error [fromGroup]="fg" controlName="name" alias="Celebrity Type"></app-error>
+                    </div>
+                </div>
+
+                <div class="footer-btn">
+                    <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+                </div>
+            </form>
+        </p-panel>
+    </div>
+</div>

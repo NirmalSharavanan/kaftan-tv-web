@@ -1,0 +1,33 @@
+.content_tab
+{
+margin-top: 15px;
+}
+.nav-tabs .nav-link.active
+ {
+    color: #000;
+    background-color: #fff;
+    border-top: 3px solid #00bdff;
+    border-radius: 0px;
+}
+.form-container
+{
+    margin-top: 30px;
+}
+.featured{
+ul{
+    list-style-type: none;
+    line-height:20px;
+    margin-left: -9px;
+    color: #afadad;
+    padding-right: 15px;
+}
+.fa-check:before {
+    color: #00bdff;
+    padding-right: 5px;
+    margin-left: -20px;
+}
+ul li
+{
+    margin-bottom: 5px;
+}
+}

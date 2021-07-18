@@ -1,0 +1,40 @@
+@media only screen and (min-width: 1025px) and (max-width: 1280px)
+{
+    .main-menu
+    {
+        width: 550px;
+    }
+    .nav-link
+    {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;  
+    }
+}
+// @media only screen and (min-width: 1281px) and (max-width: 1365px)
+// {
+//     .main-menu
+//     {
+//         width: 555px;
+//     }
+// }
+@media only screen and (min-width: 1281px) and (max-width: 1450px)
+{
+    .main-menu
+    {
+     width: 420 !important;
+   }
+}
+@media only screen and (min-width: 1451px) and (max-width: 1600px){
+    .main-menu
+    {
+        width: 420px;
+    }
+}
+@media only screen and (min-width: 1281px) and (max-width: 1600px)
+{
+    .nav-link
+    {
+        padding-top: 3px !important;
+        padding-bottom: 0px !important;  
+    }
+}

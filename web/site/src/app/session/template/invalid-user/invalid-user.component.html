@@ -1,0 +1,29 @@
+<p-dialog [modal]="true" [responsive]="true" [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true" [(visible)]="showDialog"
+    (onHide)="cancel()" appendTo="body" [width]=" 640">
+    <div *ngIf="!isAuthenticated" class="play-valid-area">
+        <div class="play-valid-btn text-center">
+            <div class="play-valid-text">Existing User? Login to Continue</div>
+            <button [routerLink]="['/session/login']" [queryParams]="{navigate:router.url}" class="btn btn-primary">Login</button>
+        </div>
+        <div class="play-valid-btn text-center">
+            <div class="play-valid-text">New User? Sign up to Continue</div>
+            <button [routerLink]="['/session/signup']" [queryParams]="{navigate:router.url}" class="btn btn-success">Sign up</button>
+        </div>
+
+        <div class="play-valid-btn text-center">
+            <button (click)="cancel()" class="btn btn-light"> Cancel</button>
+        </div>
+    </div>
+
+    <div class="play-valid-area" *ngIf="isAuthenticated && is_premium_content && !hasPremiumAccess">
+
+        <div class="play-valid-btn text-center">
+            <div class="play-valid-text">{{premium_message}}</div>
+            <button [routerLink]="['/session/premium']" [queryParams]="{navigate:router.url}" class="btn btn-success">Go Premium</button>
+        </div>
+
+        <div class="play-valid-btn text-center">
+            <button (click)="cancel()" class="btn btn-light"> Cancel</button>
+        </div>
+    </div>
+</p-dialog>

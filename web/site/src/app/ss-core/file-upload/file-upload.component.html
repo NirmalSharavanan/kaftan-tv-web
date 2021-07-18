@@ -1,0 +1,15 @@
+<div class="form-group">
+  <p-fileUpload mode="basic" customUpload="true" (uploadHandler)="upload($event, uploader)" auto=true [accept]="contentType"
+    #uploader [chooseLabel]="label">
+  </p-fileUpload>
+  <ul class="list-group" *ngIf="content || contentUrl">
+    <li class="list-group-item">
+      <div class="ui-g-10 ui-md-3">
+        <div class="list-thumbnail" *ngIf="contentUrl">
+          <img [src]="contentUrl">
+        </div>
+      </div>
+      {{content?.name}}
+    </li>
+  </ul>
+</div>

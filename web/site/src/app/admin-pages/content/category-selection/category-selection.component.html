@@ -1,0 +1,8 @@
+<form [formGroup]="fg">
+  <p-listbox [options]="categories" [style]="{'width':'auto', 'background' : 'linear-gradient(to bottom, #fff 1%, #f9f9f9 98%) repeat scroll 0 0 #f5f5f5', 'border-bottom' : '1px solid #dfdfdf', 'border-left' : '1px solid #ececec', 'border-right' : '1px solid #ececec', 'border-radius' : '0px', 
+    'box-shadow' : '0 1px 1px 0 rgba(0, 0, 0, 0.04)', 'margin-bottom' : '20px', 'border-top' : '2px solid #00bdff', 'padding' : '15px 10px 10px 10px', 'max-height' : '240px', 'overflow-y' : 'auto'}"
+    formControlName="selectedCategoriesAry{{categoryType}}" multiple="multiple" checkbox="checkbox" filter="filter" optionLabel="name"
+    (onChange)="onValueChange()">
+    <p-header>{{categoryTypeName}}</p-header>
+  </p-listbox>
+</form>

@@ -1,0 +1,22 @@
+<vg-player style="text-align: center">
+  <vg-overlay-play></vg-overlay-play>
+
+    <vg-buffering></vg-buffering>
+    <vg-controls>
+        <div *ngIf="movieName" id="movieName">{{movieName}}</div>
+
+        <vg-play-pause></vg-play-pause>
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        </vg-scrub-bar>
+        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+
+
+  <video #media [vgMedia]="media" id="singleVideo" poster='https://s3.ap-south-1.amazonaws.com/aws-stinsoft-test/629bc299-a11a-45eb-804a-90922b83509c.jpg' style="height: 95%" preload="auto" autoplay>
+      <source [src]="videoUrl" type="video/mp4">
+  </video>
+</vg-player>

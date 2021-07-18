@@ -1,0 +1,19 @@
+.proceed_payment {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 10px 15px;
+    margin: 15px auto 0px auto;
+    text-align: center;
+    border-width: 0;
+    font-weight: 600;
+    background: #563d7c;
+    color: #fff;
+    width: 100% !important;
+    cursor: pointer;
+  }
+
+  .disableBtn{ 
+    //  background-color: #00ace7 !important; 
+     cursor:default; 
+     }

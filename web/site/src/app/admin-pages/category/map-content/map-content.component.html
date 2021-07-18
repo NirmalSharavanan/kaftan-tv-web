@@ -1,0 +1,19 @@
+<div class="form-group map_content">
+  <p-pickList [source]="unAssigned" [target]="assigned" sourceHeader="UnAssigned" targetHeader="Assigned" [responsive]="true"
+    filterBy="title" dragdrop="true" dragdropScope="content" sourceFilterPlaceholder="Search by title" targetFilterPlaceholder="Search by title"
+    [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}" [showSourceControls]="false" [showTargetControls]="false"
+    (onMoveToTarget)="onMoveToTarget($event)" (onMoveToSource)="onMoveToSource($event)">
+    <ng-template let-content pTemplate="item">
+      <div class="ui-helper-clearfix">
+        <div style="font-size:14px;margin:10px 5px">
+            <div class="ui-g-10 ui-md-2">
+                <img width="75px" [src]="content._links.awsThumbnailUrl?.href">
+            </div>
+            <div class="ui-g-10 ui-md-10">
+                {{content.title}}
+            </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-pickList>
+</div>

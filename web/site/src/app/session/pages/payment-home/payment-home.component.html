@@ -1,0 +1,93 @@
+<div id="section-tab-one" class="table-section table-section--one">
+    
+  <div class="table-one" *ngIf="subscriptionPlan && subscriptionLength > 0">
+    <div class="table-one__header">
+      <div class="table-one__header-part">Choose your plan</div>
+      <div class="table-one__header-part" style="padding: 7px 85px 0px 0px">Features</div>
+      <div class="table-one__header-part">Prices</div>
+    </div>
+    <div class="table-one__body" *ngIf="subscriptionPlan && subscriptionLength > 0">
+      <ng-container *ngFor="let subscriber of subscriptionPlan">
+        <div *ngIf="activePlan && activePlan.subscriptionId==subscriber.id" class="selected">
+      <div  class="table-one__cell table-one__cell--green" >
+        <!-- <div *ngIf="subscriber"> -->
+          <div class="table-one__cell-header table-one__cell-header--green">
+            <div class="table-one__cell-title">{{subscriber.paymentPlan}}</div>
+          </div>
+          <div class="table-one__cell-body table-one__cell-body--grey-bg"
+            *ngIf="subscriber.paymentPlan == 'Flex' || subscriber.paymentPlan == 'Monthly' || subscriber.paymentPlan == 'Quarterly' || subscriber.paymentPlan == 'Yearly'">
+            <div class="table-one__cell-list">
+              <div class="table-one__cell-list-item table-one__cell-list-item--green" style="padding-right: 50px;">
+                All features
+              </div>
+            </div>
+          </div>
+          <div class="table-one__cell-body table-one__cell-body--grey-bg"
+            *ngIf="subscriber.paymentPlan == 'Silver' || subscriber.paymentPlan == 'Gold' || subscriber.paymentPlan == 'Platinum'">
+            <div class="table-one__cell-list">
+              <div class="table-one__cell-list-item table-one__cell-list-item--green"
+                *ngFor="let feature of subscriber.features">
+                <td style="word-wrap: break-word;" class="doNotPrint">
+                  <span>{{feature}}</span><br>
+                </td>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
+        <div class="table-one__cell-footer active-footer table-one__cell-footer--green" *ngIf ="subscriber.paymentPlan == 'Flex'">
+          <div class="table-one__cell-price active-price" style="margin-right: 5px;">Free</div>
+          <!-- <div style="color:#000;">1 Month</div> -->
+          <button class="table-one__cell-button free-plan">One Month</button>
+        </div>
+        <div class="table-one__cell-footer active-footer table-one__cell-footer--green" *ngIf ="subscriber.paymentPlan != 'Flex'">
+          <div class="table-one__cell-price active-price">NGN {{subscriber.amount}}</div>
+          <ss-ebsPayment-home [subscriptionPlanDetail] = "subscriber" [activePlan]="activePlan"
+          [buttonText]="activePlan.subscriptionId==subscriber.id ?'Active':'Select Plan' "></ss-ebsPayment-home>
+        </div>
+      </div>
+    </div>
+
+      <div *ngIf=" activePlan.subscriptionId!=subscriber.id" class="table-one__cell table-one__cell--green" >
+          <!-- <div *ngIf="subscriber"> -->
+            <div class="table-one__cell-header table-one__cell-header--green">
+              <div class="table-one__cell-title">{{subscriber.paymentPlan}}</div>
+            </div>
+            <div class="table-one__cell-body table-one__cell-body--grey-bg"
+              *ngIf="subscriber.paymentPlan == 'Flex' || subscriber.paymentPlan == 'Monthly' || subscriber.paymentPlan == 'Quarterly' || subscriber.paymentPlan == 'Yearly'">
+              <div class="table-one__cell-list">
+                <div class="table-one__cell-list-item table-one__cell-list-item--green" style="padding-right: 50px;">
+                  All features
+                </div>
+              </div>
+            </div>
+            <div class="table-one__cell-body table-one__cell-body--grey-bg"
+              *ngIf="subscriber.paymentPlan == 'Silver' || subscriber.paymentPlan == 'Gold' || subscriber.paymentPlan == 'Platinum'">
+              <div class="table-one__cell-list">
+                <div class="table-one__cell-list-item table-one__cell-list-item--green"
+                  *ngFor="let feature of subscriber.features">
+                  <td style="word-wrap: break-word;" class="doNotPrint">
+                    <span>{{feature}}</span><br>
+                  </td>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+          <div class="table-one__cell-footer table-one__cell-footer--green" *ngIf ="subscriber.paymentPlan == 'Flex'">
+            <div class="table-one__cell-price" style="margin-right: 5px;">Free</div>
+            <!-- <div style="color:#000;">1 Month</div> -->
+            <button class="table-one__cell-button free-plan">One Month</button>
+          </div>
+          <div class="table-one__cell-footer table-one__cell-footer--green" *ngIf ="subscriber.paymentPlan != 'Flex'">
+            <div class="table-one__cell-price">NGN {{subscriber.amount}}</div>
+            <ss-ebsPayment-home [subscriptionPlanDetail] = "subscriber" [activePlan]="activePlan"
+            [buttonText]="activePlan.subscriptionId==subscriber.id ?'Active':'Select Plan' "></ss-ebsPayment-home>
+          </div>
+        </div>
+    </ng-container>
+    </div>
+    
+  </div>
+  <div class="no_records" style="text-align: center;" *ngIf="subscriptionLength <= 0">
+    No records found
+  </div>
+</div>

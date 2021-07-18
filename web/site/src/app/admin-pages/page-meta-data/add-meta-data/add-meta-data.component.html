@@ -1,0 +1,61 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/page-meta-data/meta-data']">
+  <i class="fa fa-chevron-left"></i> Meta Data</a>
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="{{metaDataId!=null?'Edit Meta Data':'Add Meta Data'}}">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Page Type</label>
+          <!-- <p-dropdown [options]="cars" [(ngModel)]="selectedCar2" [style]="{'width':'150px'}" filter="true">
+            <ng-template let-item pTemplate="selectedItem">
+              <img src="assets/showcase/images/demo/car/{{item.label}}.png" style="width:16px;vertical-align:middle" />
+              <span style="vertical-align:middle">{{item.label}}</span>
+            </ng-template>
+            <ng-template let-car pTemplate="item">
+              <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                <img src="assets/showcase/images/demo/car/{{car.label}}.png" style="width:24px;position:absolute;top:1px;left:5px" />
+                <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown> -->
+        </div>
+        
+        <div class="form-group">
+          <label for="page_name">Page Name</label>
+          <input type="text" class="form-control" id="page_name" placeholder="Page Name" formControlName="page_name">
+        </div>
+        <!-- <div>
+          <app-error [fromGroup]="fg" controlName="page_name" alias="Page Name"></app-error>
+        </div> -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Title" formControlName="title">
+        </div>
+        <!-- <div>
+          <app-error [fromGroup]="fg" controlName="title" alias="Title"></app-error>
+        </div> -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" placeholder="Description" formControlName="description">
+        </div>
+        <!-- <div>
+          <app-error [fromGroup]="fg" controlName="description" alias="Description"></app-error>
+        </div> -->
+        <div class="form-group">
+          <label for="keywords">Keywords</label>
+          <input type="text" class="form-control" id="keywords" placeholder="Keywords" formControlName="keywords">
+        </div>
+        <!-- <div>
+          <app-error [fromGroup]="fg" controlName="keywords" alias="Keywords"></app-error>
+        </div> -->
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

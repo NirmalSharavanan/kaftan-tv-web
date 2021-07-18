@@ -1,0 +1,96 @@
+<ss-loading *ngIf="loading"></ss-loading>
+<div class=" main-container" *ngIf="blog">
+  <div
+    class="container-fluid"
+    style="background-color: #dedede; padding-bottom: 10px !important;"
+  >
+    <div class="container blog_page">
+      <div class="feature-title blog-title">{{ blog.title }}</div>
+
+      <p style="font-size:14px;">
+        <i class="fa fa-user"></i>
+        {{ blog.userInfo.name }}
+        <span style="padding-left: 15px;">
+          <i class="fa fa-calendar"></i>
+        </span>
+        {{ blog.updated_at | date: "dd MMMM yyyy" }}
+      </p>
+
+      <div class="social">
+        <ss-social [blog]="blog"></ss-social>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 blog-text embed-responsive">
+          <div [innerHTML]="blog.content | safehtml"></div>
+
+          <div *ngIf="isAuthenticated">
+            <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+              <div class="comment form-group mandatory">
+                <label for="">Enter Your Comments</label>
+                <textarea
+                  class="form-control"
+                  name="addcomment"
+                  id="addcomment"
+                  placeholder="Enter Your Comments"
+                  formControlName="commentName"
+                ></textarea>
+              </div>
+              <div class="footer-btn">
+                <button
+                  type="submit"
+                  class="btn btn-primary save-btn"
+                  onclick="var e=this;setTimeout(function(){e.disabled=true;},0);return true;"
+                  [disabled]="fg.invalid"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4 blog-text embed-responsive">
+          <div
+            class="recommended_blogs"
+            *ngIf="recommended_blogs && recommended_blogs.length > 0"
+          >
+            <div
+              class="feature-title recommended_title"
+              style="font-size:18px !important;"
+            >
+              Recommended Blogs:
+            </div>
+            <div
+              class="recommended_blog_title"
+              *ngFor="let blog of recommended_blogs"
+            >
+              <a [routerLink]="['/session/blog/' + blog.id]">
+                {{ blog.title }}</a
+              >
+            </div>
+          </div>
+
+          <div class="blog_comments" *ngIf="comments && comments.length > 0">
+            <div class="blog-title comment_title">
+              Recent Comments :
+            </div>
+            <div class="blog_comment" *ngFor="let comment of comments">
+              <p class="comment_desc">
+                {{ comment.userInfo.name }} Commented on this blog as:
+                <i>"{{ comment.comment }}"</i>
+              </p>
+            </div>
+          </div>
+          <div class="no_blog_comments" *ngIf="!comments">
+            <div class="blog-title comment_title">
+              No Comments Yet
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nofavourites" *ngIf="!blog && !loading">
+      No blogs added yet
+    </div>
+  </div>
+</div>

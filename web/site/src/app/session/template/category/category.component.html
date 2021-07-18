@@ -1,0 +1,54 @@
+<div *ngIf="loading">
+    <ss-loading></ss-loading>
+</div>
+
+<div *ngIf="watchHistoryList && watchHistoryList.length > 0">
+    <div class="container">
+        <div class="feature-container">
+            <div class="feature-title"> <a class="link">Continue Watching</a></div>
+        </div>
+    </div>
+    <owl-carousel [options]="owlOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+        <div class="item" *ngFor="let watchHistory of watchHistoryList">
+            <ss-content-thumbnail [content]="watchHistory.content"></ss-content-thumbnail>
+        </div>
+    </owl-carousel>
+</div>
+
+<ul class="categories_container" *ngIf="homecategories && homecategories.length > 0">
+    <li *ngFor="let category of homecategories">
+        <!-- <div class="blogs_container" *ngIf="category.showImageOnly">
+            <a href="{{category.link}}">
+                <img alt="" class="blog_img" [src]="category._links.awsBannerUrl?.href">
+            </a>
+        </div> -->
+        <div class="tiles_container feature-container master-container-inner" *ngIf="!category.showImageOnly">
+            <div class="feature-title main-title">{{category.name}}</div>
+            <div class="row">
+                <!-- <div class="col-md-3 left_col">
+                    <img alt="" [src]="category._links.awsBannerUrl?.href">
+                </div> -->
+                <div class="col-md-12 right_col">
+                    <ss-home-featured [category]="category"></ss-home-featured>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<!-- <p-dataList [value]="categories" emptyMessage="">
+            <ng-template styleClass="apptheme" let-category pTemplate="item">
+        <div class="container">
+
+            <div class="feature-container">
+                <div class="feature-title"> <a class="link" [routerLink]="[category._links.UIHref.href]">{{category.name}}</a></div>
+            </div>
+
+        </div>
+        <div class="tile_container">
+            <ss-end-user-category-content [categoryId]="category.id" [asList]="false"></ss-end-user-category-content>
+        </div>
+
+    </ng-template>
+</p-dataList> -->

@@ -1,0 +1,9 @@
+<div *ngIf="formControl.invalid && formControl.touched">
+  <div *ngIf="formControl.errors?.required"> {{ alias }} is required</div>
+  <div *ngIf="!formControl.errors?.required">
+    <div *ngIf="formControl.errors?.minlength">{{ alias }} minimum length required {{formControl.errors?.minlength.requiredLength}} characters</div>
+    <div *ngIf="formControl.errors?.pattern">{{ alias }} is not valid !</div>
+    <div *ngIf="formControl.errors?.email">{{ alias }} is not valid !</div>
+    <ng-content></ng-content>
+  </div>
+</div>

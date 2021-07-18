@@ -1,0 +1,39 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Social Signup Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="social_signup">Social Signup</label>
+          <select class="form-control" id="social_signup" formControlName="social_signup" (change)="onChange($event.target.value)">
+            <option class='option' value="1" selected>Facebook</option>
+            <option class='option' value="2">Google</option>
+          </select>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="social_signup" alias="Social Signup"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="facebook_app_id">App Id</label>
+          <input type="text" class="form-control" id="app_id" placeholder="App Id" formControlName="app_id">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="app_id" alias="App Id"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="facebook_app_secret">Secret Key</label>
+          <input type="text" class="form-control" id="app_secret" placeholder="Secret Key" formControlName="app_secret">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="app_secret" alias="Secret Key"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

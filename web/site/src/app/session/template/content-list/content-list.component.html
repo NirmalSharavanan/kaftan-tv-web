@@ -1,0 +1,296 @@
+<!--<div *ngIf="contentList">-->
+<!--<p-dataGrid [value]="contentList">-->
+<!--<ng-template let-content pTemplate="item" >-->
+<!--<div class="stin-slider">-->
+<!--<ss-content-thumbnail [content]="content"></ss-content-thumbnail> -->
+<!--</div>-->
+<!--</ng-template>-->
+<!--</p-dataGrid>-->
+<!--</div>-->
+
+<section *ngIf="contentList" class="episode-list">
+    <p-dataGrid [value]="contentList">
+        <ng-template let-content pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <!--<img class="align-self-start mr-3" [src]="content._links.awsThumbnailUrl?.href" alt="">-->
+                    <!--<a [routerLink]="[content._links.UIHref?.href]">-->
+                    <!--<img src="assets/kaftan/img/play-button.png" />-->
+                    <!--</a>-->
+
+                    <ss-content-thumbnail [content]="content" *ngIf="content.content_type != 'audio'"></ss-content-thumbnail>
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                    <a class="play" [routerLink]="[content._links.UIHref.href]" *ngIf="content.content_type === 'audio'">
+                        <i class="fa fa-play"></i>
+                        <span style="margin-right: 5px;">Play</span>
+                    </a>
+                    <ss-add-to-playlist class="play" *ngIf="content.content_type==='audio'" [content]="content"
+                        [pageType]="this.pageType"></ss-add-to-playlist>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+
+
+                <div class="episode-item">
+                    <ss-content-thumbnail [content]="content" *ngIf="content.content_type != 'audio'"></ss-content-thumbnail>
+                    <!--<div class="episode-play">-->
+
+                    <!--<img [src]="content._links.awsThumbnailUrl?.href" alt="">-->
+                    <!--<a [routerLink]="[content._links.UIHref.href]">-->
+                    <!--<img src="assets/kaftan/img/play-button.png" />-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                    <a class="play" [routerLink]="[content._links.UIHref.href]" *ngIf="content.content_type === 'audio'">
+                        <i class="fa fa-play"></i>
+                        <span style="margin-right: 5px;">Play</span>
+                    </a>
+                    <ss-add-to-playlist class="play" *ngIf="content.content_type==='audio'" [content]="content"
+                        [pageType]="this.pageType"></ss-add-to-playlist>
+                </div>
+
+            </div>
+
+            <hr class="episode-separator" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display search results for VOD contents -->
+<section *ngIf="videoContentList != null && videoContentList.length > 0" class="episode-list">
+    <div class="category-title">Video On Demand</div>
+    <p-dataGrid [value]="videoContentList">
+        <ng-template let-content pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <!--<img class="align-self-start mr-3" [src]="content._links.awsThumbnailUrl?.href" alt="">-->
+                    <!--<a [routerLink]="[content._links.UIHref?.href]">-->
+                    <!--<img src="assets/kaftan/img/play-button.png" />-->
+                    <!--</a>-->
+
+                    <ss-content-thumbnail [content]="content" *ngIf="content.content_type != 'audio'"></ss-content-thumbnail>
+                    <div class="media-body" *ngIf="content.content_type != 'audio'">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+                <div class="episode-item">
+                    <ss-content-thumbnail [content]="content" *ngIf="content.content_type != 'audio'"></ss-content-thumbnail>
+                    <!--<div class="episode-play">-->
+
+                    <!--<img [src]="content._links.awsThumbnailUrl?.href" alt="">-->
+                    <!--<a [routerLink]="[content._links.UIHref.href]">-->
+                    <!--<img src="assets/kaftan/img/play-button.png" />-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <div class="media-body" *ngIf="content.content_type != 'audio'">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="episode-separator" *ngIf="content.content_type != 'audio'" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display search results for AOD contents -->
+<section *ngIf="audioContentList != null && audioContentList.length > 0" class="episode-list">
+    <div class="category-title">Audio On Demand</div>
+    <p-dataGrid [value]="audioContentList">
+        <ng-template let-content pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <div class="media-body" *ngIf="content.content_type == 'audio'">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref?.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                    <a class="play" [routerLink]="[content._links.UIHref.href]" *ngIf="content.content_type === 'audio'">
+                        <i class="fa fa-play"></i>
+                        <span style="margin-right: 5px;">Play</span>
+                    </a>
+                    <ss-add-to-playlist class="play" *ngIf="content.content_type==='audio'" [content]="content"
+                        [pageType]="this.pageType"></ss-add-to-playlist>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+                <div class="episode-item">
+                    <ss-content-thumbnail [content]="content" *ngIf="content.content_type == 'audio'"></ss-content-thumbnail>
+                    <div class="media-body" *ngIf="content.content_type == 'audio'">
+                        <div class="feature-title">
+                            <a [routerLink]="[content._links.UIHref.href]">{{content.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            {{content.description}}
+                        </div>
+                    </div>
+                    <a class="play" [routerLink]="[content._links.UIHref.href]" *ngIf="content.content_type === 'audio'">
+                        <i class="fa fa-play"></i>
+                        <span style="margin-right: 5px;">Play</span>
+                    </a>
+                    <ss-add-to-playlist class="play" *ngIf="content.content_type==='audio'" [content]="content"
+                        [pageType]="this.pageType"></ss-add-to-playlist>
+                </div>
+
+            </div>
+
+            <hr class="episode-separator" *ngIf="content.content_type == 'audio'" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display search results for ROD contents -->
+<section *ngIf="radioCategoryList != null && radioCategoryList.length > 0" class="episode-list">
+    <div class="category-title">Radio On Demand</div>
+    <p-dataGrid [value]="radioCategoryList">
+        <ng-template let-category pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <ss-channel-thumbnail [channel]="category"></ss-channel-thumbnail>
+                    <div class="media-body">
+                        <div class="feature-title search_channels">
+                            <a [routerLink]="[category._links.UIHref?.href]">{{category.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+                <div class="episode-item">
+                    <ss-channel-thumbnail [channel]="category"></ss-channel-thumbnail>
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="[category._links.UIHref.href]">{{category.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="episode-separator" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display search results for Blog contents -->
+<section *ngIf="blogList != null && blogList.length > 0" class="episode-list">
+    <div class="category-title">Blog</div>
+    <p-dataGrid [value]="blogList">
+        <ng-template let-blog pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="['/session/blog/' + blog.id]">{{blog.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            <p style="font-size:14px;">
+                                <span style="padding-left: 0px;">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                {{ blog.updated_at | date: "dd MMMM yyyy" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+
+                <div class="episode-item">
+
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="['/session/blog/' + blog.id]">{{blog.title}}</a>
+                        </div>
+                        <div class="description d-md-block">
+                            <p style="font-size:14px;">
+                                <span style="padding-left: 0px;">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                {{ blog.updated_at | date: "dd MMMM yyyy" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="episode-separator" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display search results for Channel/TV contents -->
+<section *ngIf="channelCategoryList != null && channelCategoryList.length > 0" class="episode-list">
+    <div class="category-title">Channel</div>
+    <p-dataGrid [value]="channelCategoryList">
+        <ng-template let-category pTemplate="item">
+            <div class="d-md-block d-none col-md-12">
+                <div class="media episode-item">
+                    <ss-channel-thumbnail [channel]="category"></ss-channel-thumbnail>
+                    <div class="media-body">
+                        <div class="feature-title search_channels">
+                            <a [routerLink]="[category._links.UIHref?.href]">{{category.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-md-none d-sm-block d-xs-block mobile-episode">
+                <div class="episode-item">
+                    <ss-channel-thumbnail [channel]="category"></ss-channel-thumbnail>
+                    <div class="media-body">
+                        <div class="feature-title">
+                            <a [routerLink]="[category._links.UIHref.href]">{{category.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="episode-separator" />
+        </ng-template>
+    </p-dataGrid>
+</section>
+
+<!-- To display no records found if search results is null -->
+<section *ngIf="videoContentList != null && videoContentList.length == 0 && 
+                audioContentList != null && audioContentList.length == 0 && 
+                radioCategoryList != null && radioCategoryList.length == 0 &&
+                blogList != null && blogList.length == 0 &&
+                channelCategoryList != null && channelCategoryList.length == 0" class="episode-list">
+    
+    <div class="description">
+        <p style="text-align:center;"> No records found </p>
+    </div>
+    
+</section>

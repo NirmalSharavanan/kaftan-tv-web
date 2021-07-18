@@ -1,0 +1,24 @@
+@import  "../../../assets/scss/style.scss";
+@import  "../../../assets/fonts/data-table/icons.css";
+@import  "../../../assets/linea/styles.css";
+@import  "../../../assets/glyphicons/glyphicons.css";
+@import  "../../../assets/climacon/climacon-font/styles.css";
+@import  "../../../assets/climacon/climacon.css";
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.logo-img
+{
+  height: 40px;
+  max-width: 100%;
+  vertical-align: middle;
+  margin: 5px 0px 5px 15px;
+}
+
+.child-menu {
+  height: 50px !important;
+}

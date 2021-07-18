@@ -1,0 +1,92 @@
+<a class="navbar-link back-link" (click)="naviagteBack()">
+    <i class="fa fa-chevron-left"></i>
+    <span class="back_icon">{{contentType =='audio'?'Album':'Content'}}</span>
+</a>
+<span class="transcode_inprogress pull-right" *ngIf="content">
+    <span *ngIf="content.transcodeInProgress">
+        <i class="fa fa-upload" aria-hidden="true"></i> Transcode Inprogress</span>
+</span>
+<span class="content_title pull-right" *ngIf="content">{{content.title}}</span>
+
+<ul class="nav nav-tabs content_tab">
+    <li class="nav-item content_tab_title">
+        <a class="nav-link" (click)="mode=1" [class.active]="mode==1">{{contentType =='audio'?'Album':'Content'}}</a>
+    </li>
+    <li class="nav-item content_tab_title" *ngIf="content && !has_episode && !is_youtubeVideoLink">
+        <a class="nav-link" (click)="mode=2" [class.active]="mode==2">Upload {{contentType =='audio'?'Audio':'Video'}}</a>
+    </li>
+    <li class="nav-item content_tab_title" *ngIf="content && has_episode">
+        <a class="nav-link" (click)="mode=3" [class.active]="mode==3">{{contentType =='audio'?'Songs':'Episode'}} </a>
+    </li>
+</ul>
+
+<div>
+    <div *ngIf="mode == 1">
+        <ss-add-edit-content [content]="content" (updateComplete)="updateComplete($event)"></ss-add-edit-content>
+    </div>
+    <div *ngIf="mode == 2">
+        <ss-upload-audio-video [content]="content"></ss-upload-audio-video>
+    </div>
+    <div *ngIf="mode == 3">
+        <div *ngIf="content && has_episode">
+            <ul class="nav nav-tabs content_child_tab">
+                <li class="nav-item content_tab_title">
+                    <a class="nav-link" (click)="episodeMode=1" [class.active]="episodeMode==1">Add/Edit {{contentType =='audio'?'Song':'Episode'}}</a>
+                </li>
+                <li class="nav-item content_tab_title" *ngIf="episode && !is_episodeyoutubeVideoLink">
+                    <a class="nav-link" (click)="episodeMode=2" [class.active]="episodeMode==2">Upload {{contentType =='audio'?'Audio Song':'Episode Video'}}</a>
+                </li>
+                <li class="nav-item content_tab_title">
+                    <a class="nav-link" (click)="episodeMode=3" [class.active]="episodeMode==3">{{contentType =='audio'?'Songs':'Episodes'}}</a>
+                </li>
+            </ul>
+            <div *ngIf="episodeMode == 1">
+                <ss-add-edit-content [content]="content" [episode]="episode" [isEpisode]="true" *ngIf="content" (updateComplete)="updateComplete($event)"></ss-add-edit-content>
+            </div>
+            <div *ngIf="episodeMode == 2">
+                <ss-upload-audio-video [content]="episode" (uploadComplete)="uploadComplete($event)"></ss-upload-audio-video>
+            </div>
+            <div *ngIf="episodeMode == 3">
+                <div class="header-btn">
+                    <button class="btn btn-primary" (click)="navigateToAddEpisode()">Add {{contentType =='audio'?'Song':'Episode'}}</button>
+                </div>
+                <p-orderList [value]="episodes" [listStyle]="{'height':'100%'}" [responsive]="true" (onReorder)="enableSave()" [header]="contentType =='audio'?'Songs':'Episodes'"
+                    filter="filter" filterBy="title" filterPlaceholder="Filter by title" dragdrop="true" dragdropScope="episode">
+                    <ng-template let-episode pTemplate="item">
+                        <div id="{{episode.id}}" class="ui-helper-clearfix">
+                            <div class="list-items">
+                                <div class="ui-g-8 ui-md-10">
+                                    {{episode.title}}
+                                </div>
+                            </div>
+                            <div class="ui-g-2 ui-md-1">
+                                <div class="edit-btn text-right">
+                                    <a class="fa fa-pencil" aria-hidden="true" (click)="navigateToEditEpisode(episode)"></a>
+                                </div>
+                            </div>
+                            <div class="ui-g-2 ui-md-1">
+                                <div class="delete-btn">
+                                    <a class="fa fa-minus" aria-hidden="true" (click)="showDeleteDialog(episode.id)"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-orderList>
+                <div class="footer-btn">
+                    <button type="button" class="btn btn-primary save-btn" [class.disabled]="!isSaveEnabled" (click)="onReorder()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-dialog [contentStyle]="{'border-top':' 3px solid #00bdff'}" [(visible)]="displaydialog" width="300" [responsive]="true"
+    [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true" [modal]="true" appendTo="body">
+    <h6 class="content_dialog_msg">Delete Confirmation</h6>
+    <p class="content_dialog_msg">Do you want to delete this {{contentType =='audio'?'song':'episode'}}?</p>
+    <div class="btn_footer">
+        <p-footer>
+            <button type="button" pButton icon="fa-check" (click)="deleteEpisode(episodeId)" label="Yes" class="delete_confirmation"></button>
+            <button type="button" pButton icon="fa-close" (click)="displaydialog=false" label="No" class="delete_confirmation"></button>
+        </p-footer>
+    </div>
+</p-dialog>

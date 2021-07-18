@@ -1,0 +1,22 @@
+<div id="wrapper">
+    <div id="header">
+        <app-header *ngIf="!isAuthenticated"></app-header>
+        <app-secure-header *ngIf="isAuthenticated"></app-secure-header>
+    </div>
+    <!-- #header -->
+    <div id="content">
+
+        <div #searchToggle class="main-container">
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+    <!-- #content -->
+
+    <div id="footer">
+        <app-footer></app-footer>
+    </div>
+<!-- #footer -->
+</div>
+
+<ss-dialog></ss-dialog>

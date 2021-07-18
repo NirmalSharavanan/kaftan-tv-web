@@ -1,0 +1,60 @@
+<footer id="footer">
+    <div style="border-top: 0.5px solid rgba(122,122,122);padding: 15px;" class="master-container-inner">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="footer-navigation">
+                    <ul>
+                        <li *ngFor="let page of staticPages">
+                            <a *ngIf="page.is_externalLink" href="{{page.externalLink}}">{{page.pageName}}</a>
+                            <a *ngIf="!page.is_externalLink" [routerLink]="[page.pageName.toLowerCase() == 'blog' || page.pageName.toLowerCase() == 'blogs' ?
+                             '/session/blog/' :  page._links.UIHref.href]">{{page.pageName}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-copyright">
+                    &copy;{{year}}, KAFTAN.TV. All Rights Reserved
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <ul class="social-links text-right" *ngIf="customer">
+                    <li class="facebook" *ngIf="customer.facebook_link">
+                        <a href="{{customer.facebook_link}}">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="twitter" *ngIf="customer.twitter_link">
+                        <a href="{{customer.twitter_link}}">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="google-plus" *ngIf="customer.googleplus_link">
+                        <a href="{{customer.googleplus_link}}">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </li>
+                    <li class="instagram" *ngIf="customer.instagram_link">
+                        <a href="{{customer.instagram_link}}">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="youtube" *ngIf="customer.youtube_link">
+                        <a href="{{customer.youtube_link}}">
+                            <i class="fa fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li class="apple" *ngIf="customer.ios_link">
+                        <a href="{{customer.ios_link}}">
+                            <i class="fa fa-apple"></i>
+                        </a>
+                    </li>
+                    <li class="android" *ngIf="customer.android_link">
+                        <a href="{{customer.android_link}}">
+                            <i class="fa fa-android"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,29 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Video Calling Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="apiKey">Api Key</label>
+          <input type="text" class="form-control" id="apiKey" placeholder="Api Key" formControlName="apiKey">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="apiKey" alias="Api Key"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="apiSecret">Api Secret</label>
+          <input type="text" class="form-control" id="apiSecret" placeholder="Api Secret" formControlName="apiSecret">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="apiSecret" alias="Api Secret"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

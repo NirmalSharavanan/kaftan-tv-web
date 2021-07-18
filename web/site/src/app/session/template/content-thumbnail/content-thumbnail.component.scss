@@ -1,0 +1,103 @@
+
+
+.thumb-slide{
+    background: #fff;
+    // border-radius: 5px;
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,.3);
+    -webkit-transition: all .3s ease 0s;
+    -moz-transition: all .3s ease 0s;
+    -ms-transition: all .3s ease 0s;
+    -o-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+    margin-bottom: 2px;
+    margin-right: 10px;
+}
+
+.thumb-slide:hover{
+    -webkit-box-shadow: 0 1px 3px 0px rgba(0,0,0,.3);
+    -moz-box-shadow: 0 1px 3px 0px rgba(0,0,0,.3);
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,.3);
+    -webkit-transition: all .3s ease 0s;
+    -moz-transition: all .3s ease 0s;
+    -ms-transition: all .3s ease 0s;
+    -o-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+}
+
+.thumb-slide a:hover{
+    color: #000000 !important;
+}
+
+.content-area{
+    padding: 5px 10px;
+}
+
+.title{
+    font-size: 16px;
+    color: #000000;
+}
+
+.genre-year{
+    font-size: 14px;
+    color: #626262;
+}
+.audio_img{
+    width: 120% !important;
+}
+.audio{
+    width: 180px;
+    height: 180px;
+    border-radius: 50% !important;
+    overflow:hidden !important;
+}
+.audio_icon{
+    position: absolute;
+    right: 40px;
+    font-size: 35px;
+    color: #fff;
+    z-index: 99 !important;
+}
+@media only screen and (max-width: 500px){
+    .content-area{
+        display: none;
+    }
+    
+    .audio{
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 411px) {
+    .audio_icon {
+        right: -2% !important;
+        font-size: 30px !important;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 500px){
+    .audio {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    .audio_icon {
+        right: 8% !important;
+    }
+    }
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+    .audio {
+        width: 260px !important;
+        height: 260px !important;
+    }
+    .audio_icon {
+        right: 30% !important;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1279px){
+    .audio {
+        width: 280px !important;
+        height: 280px !important;
+    }
+}

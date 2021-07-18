@@ -1,0 +1,24 @@
+<div class="signin-container">
+
+  <div class="container">
+    <div class="row">
+
+      <div class="signin-panel text-center">
+
+        <form [formGroup]="fg">
+          <h2>User Activation !</h2>
+
+          <div *ngIf="message.length > 0" class="alert alert-success">
+            {{message}}
+          </div>
+          <div class="alert alert-danger" *ngIf="fg.invalid && fg.errors?.userActivationFailed">
+            {{fg.errors.userActivationFailed}}
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

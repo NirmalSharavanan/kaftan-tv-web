@@ -1,0 +1,84 @@
+<p-dialog width="600" [modal]="true" [responsive]="true" [showHeader]="false" [closeOnEscape]="true" [dismissableMask]="true"
+    [(visible)]="preview" appendTo="body" header="Preview">
+    <ss-player-admin *ngIf="preview" [videoUrl]="videoUrl"></ss-player-admin>
+</p-dialog>
+
+<div class="header-btn">
+    <button class="btn btn-primary" [routerLink]="['content-management']">Add Content</button>
+    <!-- [routerLink]="['add-content']" -->
+</div>
+
+<div class="ui-g-12 ui-md-12 ui-fluid search-panel">
+    <form [formGroup]="fg" (ngSubmit)="onSearch()">
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-g-4 ui-md-3">
+                <label for="title">Title</label>
+            </div>
+            <div class="ui-g-8 ui-md-9">
+                <input type="text" class="form-control" id="title" placeholder="Title (or) Description" formControlName="title">
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4">
+            <div class="ui-g-4 ui-md-4">
+                <label for="uploaded">Uploaded in</label>
+            </div>
+            <div class="ui-g-8 ui-md-8">
+                <p-dropdown [options]="uploadedDate" [(ngModel)]="selectedDate" placeholder="Uploaded in" id="uploaded" formControlName="date"
+                    optionLabel="name" [autoWidth]="false">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 searchbtn">
+            <button type="submit" class="btn btn-primary save-btn search-btn">Search</button>
+        </div>
+    </form>
+</div>
+<div class="clearfix"></div>
+<p-dataList [value]="contents" [paginator]="true" [rows]="15"> <!-- [lazy]="true" (onLazyLoad)="loadData($event)"-->
+    <p-header>
+        Contents
+    </p-header>
+    <ng-template let-content pTemplate="item">
+        <div id="{{content.id}}" class="ui-helper-clearfix list-items">
+            <div class="ui-g-10 ui-md-3">
+                <div class="list-thumbnail">
+                    <img [src]="content._links.awsThumbnailUrl?.href">
+                </div>
+                <div class="list-title">
+                    {{content.title}}
+                </div>
+            </div>
+            <div class="ui-g-10 ui-md-4">
+                <div class="list-description">
+                    {{content.description}}
+                </div>
+            </div>
+            <div class="ui-g-10 ui-md-2">
+                <div class="list-title">
+                    <div>
+                        <i [class]="content.is_premium ? 'fa fa-check-circle' : 'fa fa-times-circle'" aria-hidden="true"></i> Is Premium </div>
+                    <!-- <input type="checkbox" [checked]="content.is_premium" [disabled]="true" /> Is Premium </div> -->
+                    <div>
+                        <i [class]="content.has_episode ? 'fa fa-check-circle' : 'fa fa-times-circle'" aria-hidden="true"></i> Has {{contentType =='audio'?'Songs':'Episodes'}} </div>
+                    <!-- <input type="checkbox" [checked]="content.has_episode" [disabled]="true" /> Has Episodes </div> -->
+
+                    <div *ngIf="content._links.awsContentUrl">
+                        <button (click)="playPreview(content._links.awsContentUrl.href)" class="btn btn-neutral btn-lg">{{contentType=='audio'?'Preview Audio':'Preview Video'}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-10 ui-md-2">
+                <span *ngIf="content.transcodeInProgress">
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+                    Transcode Inprogress
+                </span>
+            </div>
+            <div class="ui-g-2 ui-md-1">
+                <div class="edit-btn text-right">
+                    <a class="fa fa-pencil float-right" aria-hidden="true" [routerLink]="['content-management',content.id]"></a>
+                    <!-- [routerLink]="['edit-content',content.id]" -->
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataList>

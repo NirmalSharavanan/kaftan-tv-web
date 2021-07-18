@@ -1,0 +1,83 @@
+<div class="signin-container">
+    <div class="container">
+
+        <div class="row">
+            <div class="signin-panel">
+                <h2>Sign In</h2>
+                <form class="form" [formGroup]="fg" (ngSubmit)="login()">
+                    <fieldset>
+                        <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.loginFailed">
+                            {{fg.errors.loginFailed}}
+                        </div>
+                        <div class="form-group">
+                            <div class="link">
+                                <form style="display: inline-block" ngNoForm action="/signin/facebook" method="POST">
+                                    <input type="hidden" name="scope" value="public_profile,email" />
+                                    <button class="btn btn-facebook btn-block">
+                                        <i class="fa fa-facebook-f"></i> Login with Facebook
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="link">
+                                <form style="display: inline-block" ngNoForm action="/signin/google" method="POST">
+                                    <input type="hidden" name="scope" value="profile email" />
+                                    <button class="btn btn-google  btn-block">
+                                        <i class="fa fa-google-plus"></i> Login with Google
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            Or
+                        </div>
+                        <div class="form-group mandatory">
+                            <label for="email">Email</label>
+                            <input formControlName="email" id="email" type="email" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                placeholder="eg. xx@xxxx.com">
+                            <div class="form-text error-text">
+                                <app-error [fromGroup]="fg" controlName="email" alias="Email"></app-error>
+                            </div>
+                        </div>
+                        <div class="form-group mandatory">
+                            <label for="password">Password</label>
+                            <input formControlName="password" id="password" type="password" class="form-control" placeholder="********">
+                            <div class="form-text error-text">
+                                <app-error [fromGroup]="fg" controlName="password" alias="Password"></app-error>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="link">
+                                <a [routerLink]="['/session/forgot-password']" target="_self">Forgotten your password?</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" [disabled]="loading || fg.invalid" class="btn btn-primary btn-block btn-lg">Sign In</button>
+                            <div class="text-center">
+                                <img *ngIf="loading" src="assets/kaftan/img/loader.svg" />
+                            </div>
+                            <!--<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">-->
+                        </div>
+                        <div class="form-group">
+                            <div class="link">
+                                New User?
+                                <a [routerLink]="['/session/signup']"> Sign Up.</a>
+                            </div>
+                        </div>
+                      
+                        <div style="display: none" class="form-group">
+                            <div class="link">
+                                <form style="display: inline-block" ngNoForm action="/signin/google" method="POST">
+                                    <input type="hidden" name="scope" value="public_profile,email" />
+                                    <button class="btn btn-google  btn-block">
+                                        <i class="fa fa-google-plus"></i> Login with Google
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                   
+                    </fieldset>
+                </form>
+            </div>

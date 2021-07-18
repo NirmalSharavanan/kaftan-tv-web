@@ -1,0 +1,40 @@
+<div #ebs>
+    <ss-loading *ngIf="loading"></ss-loading>
+
+  <div class="active-footer">
+    <button *ngIf="activePlan && subscriptionPlanDetail.id==activePlan.subscriptionId" type="submit" [class]="activePlan !=null && isDisabled? 'table-one__cell-button disableBtn' :'table-one__cell-button  table-one__cell-button--green'"
+    [attr.disabled]="activePlan !=null && isDisabled? 'disabled' : null" (click)="getPaymentInfo(subscriptionPlanDetail)" >{{buttonText}}
+    </button>
+    <button *ngIf="!loading && activePlan && subscriptionPlanDetail.id!=activePlan.subscriptionId" type="submit" [class]="activePlan !=null && isDisabled? 'table-one__cell-button table-one__cell-button--green disableBtn' :'table-one__cell-button  table-one__cell-button--green'"
+    [attr.disabled]="activePlan !=null && isDisabled? 'disabled' : null" (click)="getPaymentInfo(subscriptionPlanDetail)" >{{buttonText}}
+    </button>
+  </div>
+ 
+  <form #form ngNoForm method="post" action="https://secure.ebs.in/pg/ma/payment/request" name="frmTransaction" *ngIf="paymentDetails"
+    id="frmTransaction">
+    <input type="hidden" name="account_id" value="{{paymentDetails.accountId}}">
+    <input type="hidden" name="address" value="{{paymentDetails.address}}">
+    <input type="hidden" name="amount" value="{{paymentDetails.amount}}">
+    <input type="hidden" name="channel" value="{{paymentDetails.channel}}">
+    <input type="hidden" name="city" value="{{paymentDetails.city}}">
+    <input type="hidden" name="country" value="{{paymentDetails.country}}">
+    <input type="hidden" name="currency" value="{{paymentDetails.currency}}">
+    <input type="hidden" name="description" value="{{paymentDetails.description}}">
+    <input type="hidden" name="email" value="{{paymentDetails.user.email}}">
+    <input type="hidden" name="mode" value="{{paymentDetails.mode}}">
+    <input type="hidden" name="name" value="{{paymentDetails.user.name}}">
+    <input type="hidden" name="phone" value="{{paymentDetails.user.mobileNo}}">
+    <input type="hidden" name="postal_code" value="{{paymentDetails.postalCode}}">
+    <input type="hidden" name="reference_no" value="{{paymentDetails.referenceNo}}">
+    <input type="hidden" name="return_url" value="{{paymentDetails.redirect_url}}">
+    <input type="hidden" name="secure_hash" value="{{paymentDetails.secure_hash}}">
+    <input type="hidden" name="state" value="{{paymentDetails.state}}">
+  </form>
+
+  <div class="PlayerInner">
+    <div *ngIf="!isAuthenticated && isInvalidUser" class="invalid-user">
+      <ss-invalid-user [isAuthenticated]="isAuthenticated" ></ss-invalid-user>
+    </div>
+  </div>
+
+</div>

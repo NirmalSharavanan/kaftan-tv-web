@@ -1,0 +1,25 @@
+<div class="form-container">
+
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Add Logo">
+      <form [formGroup]="fg" (ngSubmit)="onLogoSubmit()">
+        <h5>Upload a transparent image(.png) of size 103 x 33</h5>
+        <ss-file-upload [(content)]="logoImage" label="Upload Logo" [contentUrl]="logoImageUrl"></ss-file-upload>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn">Save</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Add Favicon">
+      <form [formGroup]="fg" (ngSubmit)="onFaviconSubmit()">
+        <h5>Upload a transparent image(.png) of size 16 x 16</h5>
+        <ss-file-upload [(content)]="faviconImage" label="Upload Logo" [contentUrl]="faviconImageUrl"></ss-file-upload>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn">Save</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+</div>

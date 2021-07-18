@@ -1,0 +1,126 @@
+<div class="ui-g-12 ui-md-1">
+</div>
+<div class="ui-g-12 ui-md-10">
+  <p-dataList [value]="walletCharges" [paginator]="true" [rows]="5">
+    <p-header>
+      <div class="ui-helper-clearfix list-items"
+        style="font-weight: bold; border-bottom: 1px #000000 dotted; text-align: left">
+        <div class="ui-g-10 ui-md-1">
+          <div class="list-description">
+            S.No
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-title" style="text-align-last: left;">
+            Operator / Biller Name
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-description">
+            Percentage / Fixed
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-description">
+            Assigned Value
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-2">
+          <div class="list-description">
+            Modify
+          </div>
+        </div>
+      </div>
+    </p-header>
+    <ng-template let-charge pTemplate="item" let-rowIndex="index">
+      <div id="{{charge.id}}" class="ui-helper-clearfix list-items">
+        <div class="ui-g-10 ui-md-1">
+          <div class="list-title">
+            {{rowIndex + 1}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-description">
+            {{charge.operatorInfo.operatorName}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-description">
+            {{charge.hasPercentage ? 'Percentage' : 'Fixed'}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-3">
+          <div class="list-description">
+            {{charge.chargeValue}}
+          </div>
+        </div>
+        <div class="ui-g-10 ui-md-2">
+          <div class="edit-btn">
+            <a class="fa fa-pencil" aria-hidden="true" (click)="getChargeConfig(charge)"></a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" *ngIf="walletCharges && walletCharges.length==0">
+      <tr>
+        <td [attr.colspan]="5" class="text-center">
+          No records found
+        </td>
+      </tr>
+    </ng-template>
+  </p-dataList>
+</div>
+<div class="ui-g-12 ui-md-1">
+</div>
+<div class="clearfix "></div>
+
+<div class="ui-g-12 ui-md-1">
+</div>
+<div class="ui-g-10 ui-md-10 ui-fluid search-panel">
+  <p-panel header="Add / Edit Charges">
+    <form [formGroup]="fg">
+      <div class="ui-g-12 ui-md-3">
+        <label for="operatorId">Select Operator</label>
+        <select class='form-control' id="operatorId" formControlName="operatorId"
+          [attr.disabled]="chargeConfigId !='' ? 'disabled' : null">
+          <option class='option' value="" selected>Select Operator</option>
+          <option class='option' *ngFor='let operator of walletOperators' [value]="operator.id">
+            {{operator.operatorName}}</option>
+        </select>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <label for="hasPercentage">Select Type</label>
+        <select class='form-control' id="hasPercentage" formControlName="hasPercentage">
+          <option class='option' value="" selected>Select Type</option>
+          <option class='option' *ngFor='let d of discountTypes' [value]="d.id">{{d.type}}</option>
+        </select>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <label for="chargeValue">Charge Value</label>
+        <input type="number" class="form-control" id="chargeValue" placeholder="Charge Value"
+          formControlName="chargeValue">
+      </div>
+      <div class="ui-g-12 ui-md-3 searchbtn">
+        <button type="submit" class="btn btn-primary search-btn" (click)="addCharge()" style="padding: 8px 25px"
+          [disabled]="fg.invalid">Save</button>
+        <button type="submit" class="btn btn-danger search-btn" style="margin-left: 10px"
+          (click)="cancel()">Cancel</button>
+      </div>
+
+      <div class="row ui-g-12 ui-md-12">
+        <div class="col-sm-3 mandatory_text">
+          <app-error [fromGroup]="fg" controlName="operatorId" alias="Operator / Biller Name"></app-error>
+        </div>
+        <div class="col-sm-3 mandatory_text">
+          <app-error [fromGroup]="fg" controlName="hasPercentage" alias="Type"></app-error>
+        </div>
+        <div class="col-sm-3 mandatory_text">
+          <app-error [fromGroup]="fg" controlName="chargeValue" alias="Charge Value"></app-error>
+        </div>
+      </div>
+    </form>
+  </p-panel>
+</div>
+<div class="ui-g-12 ui-md-1">
+</div>

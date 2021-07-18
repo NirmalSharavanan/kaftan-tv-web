@@ -1,0 +1,43 @@
+//.content-area {
+//    padding: 20px;
+//}
+//
+//.episode-item{
+//    max-width: 234px;
+//}
+//
+//@media screen and (max-width: 728px)
+//{
+//    .episode-item{
+//        max-width: 180px;
+//    }
+//}
+.play
+{
+    text-transform: uppercase!important;
+    cursor: pointer!important;
+    text-align: left;
+    // width: 83px;
+    line-height: 21px;
+    background: #00bdff;
+    padding: 4px;
+    color: #fff;
+    margin-right:5px;
+}
+.play i{
+    margin-left : 6px !important;
+    padding-right: 5px !important;
+}
+.description {
+    margin-bottom: 10px !important;
+}
+.category-title{
+    padding: 10px 15px;
+    text-align: center;
+}
+.search_channels
+{
+    margin-top: 16vh!important;
+    position: absolute;
+    top: calc(50% - 20vh);
+}

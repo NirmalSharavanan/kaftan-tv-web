@@ -1,0 +1,108 @@
+dd 
+{
+   margin-bottom: 16px !important;
+}
+dl
+{
+    margin-bottom: 0px !important;
+    font-size: 15px;
+}
+.package-details
+{
+   margin-top: 20px;
+}
+.package-details dt
+{
+    color: #6c757d !important
+}
+span {
+    display: block;
+    overflow: hidden;
+    padding: 0 4px 0 6px;
+    width: 375px;
+    float: left;
+}
+.package-section
+{
+  width: 100%;
+  box-shadow: 0 15px 15px 0 rgba(0,0,0,0.3), 0 9px 4px 0 rgba(0,0,0,0.23);
+  -moz-box-shadow: 0 15px 15px 0 rgba(0,0,0,0.3),0 6px 3px 0 rgba(0,0,0,0.23) !important;
+  border-top: 3px solid #00bdff;
+}
+.invoice-middle
+{
+    margin-top: 20px;
+    padding: 0px 10px;
+    border-bottom: 1px solid #eee;
+}
+.code-wrapper, .package-section
+{
+   background: #fff !important;
+   border-radius: 0px !important;
+}
+.pay-btn
+{
+    padding: 8px 80px;
+	border-radius: 0px !important;
+}
+.bg-invoice {
+    padding: 50px 0 !important;
+}
+.justify-content-center {
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+}
+.p-4 {
+    padding: 1.5rem!important;
+}
+.bg-white {
+    background-color: #fff!important;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.15) !important;
+}
+.pack-details
+{
+   text-align:left;
+   font-size: 20px !important;
+}
+.fa-check
+{
+    color: #72c472;
+    font-size: 55px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.package-title {
+    color: #000 !important;
+    font-weight: 700 !important;
+    font-size: 23px;
+    margin-top: 10px;
+}
+.membership-access
+{
+    color: #5f666c;
+    text-align: left;
+    margin: 20px 10px;
+    font-size: 15px;
+}
+.invoice-top{
+    padding: 15px 0px 0px 15px !important;
+    border-bottom: 1px solid #eee;
+}
+.package-section ul li
+{
+    margin-bottom: 8px;
+}
+.success
+{
+    text-align: center !important;
+    margin-bottom: 18px !important;
+}
+.success img
+{
+    height: 55px;
+}
+.save-btn
+{
+    display: block;
+    margin: 20px auto 0px auto;
+}

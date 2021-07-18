@@ -1,0 +1,67 @@
+
+.play-valid-area{
+  // width: 600px; /*can be in percentage also.*/
+  height: 100%;
+  // margin: 0 auto !important;
+  padding: 10px;
+  position: relative;
+  background: #000;
+  opacity: .9;
+}
+.play-valid-btn{
+  margin: 15px 0px;
+}
+
+.play-valid-text{
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.play-valid-btn button{
+  width: 150px;
+}
+
+@media screen and (max-width: 740px){
+  // .play-valid-area{
+  //   margin: 0px 0px 0px 30px !important;
+  //   width: 100% !important;
+  // }
+
+  .play-valid-text{
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }  
+ 
+  .btn-clear{
+    font-size: 40px;
+  }
+} 
+// @media screen and (min-width: 768px){
+//   .play-valid-area{
+//     width: 600px !important;
+//     margin: 10px 0px 0px -55% !important;
+//   }
+// }
+.ui-dialog .ui-dialog-content
+{
+  overflow: unset !important;
+}
+.btn-clear{
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 90px;
+  border: none;
+  background-color: transparent;
+  background: none;
+}
+@media screen and (max-width: 580px) {
+  .btn-clear{
+    font-size: 40px;
+  }
+  .play-valid-area{
+    // margin: 0px 0px 0px 2%!important;
+    width: 300px  !important;
+  }
+}

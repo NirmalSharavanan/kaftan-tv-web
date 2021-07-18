@@ -1,0 +1,288 @@
+@import 'stinsoft.scss';
+
+body{
+  color: $textColor;
+  background-color: $backgroundColor;
+}
+
+a {
+  color: $linkColor;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:hover{
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+::placeholder{
+  color: $placeholderColor !important;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $placeholderColor;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $placeholderColor;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $placeholderColor;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $placeholderColor;
+}
+
+.dark-theme{
+
+
+  .btn-primary{
+    background-color: $primaryColor;
+    color: $buttonTextColor;
+    border-color: $primaryBorder;
+  }
+  .btn-primary:hover{
+    background-color: $primaryHover;
+    color: $buttonTextHoverColor;
+    border-color: $primaryBorder;
+  }
+
+  .btn-primary:focus, .btn-primary.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem $primaryHover;
+    box-shadow: 0 0 0 0.2rem $primaryHover;
+  }
+
+  .btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: $primaryHover;
+    border-color: $primaryHover;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+  .show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: $primaryHover;
+    border-color: $primaryHover;
+  }
+
+  .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-primary.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem $primaryDisabled;
+    box-shadow: 0 0 0 0.2rem $primaryDisabled;
+  }
+
+  .btn-primary:focus {
+    -webkit-box-shadow: 0 0 5px $primaryHover;
+    box-shadow: 0 0 5px $primaryHover;
+  }
+  .facebook{
+    color: $facebookColor;
+  }
+
+  .google{
+    color: $googlePlusColor;
+  }
+
+  .btn-facebook{
+    background-color: $facebookColor;
+    color: $buttonTextColor;
+    border-color: $facebookColor;
+    //line-height: 35px;
+  }
+
+  .btn-google{
+    background-color: $googlePlusColor;
+    color: $buttonTextColor;
+    border-color: $googlePlusColor;
+  }
+
+  /* Navbar Custom CSS */
+
+  .navbar-top {
+    color: $textColor;
+    background-color: #000000;
+    height: 100px;
+    margin:auto;
+  }
+
+  .navbar-top .navbar-nav li a, .navbar-toggler2 ul li a{
+    color: $menuColor;
+  }
+
+  .navbar-top .navbar-nav li a:hover, .navbar-toggler2 ul li a:hover{
+    color: $menuHoverColor;
+    background-color: transparent;
+  }
+
+  .dropdown-menu {
+    color: $textColor;
+    background-image: -webkit-linear-gradient(top,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    background-image: -o-linear-gradient(top,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    background-image: linear-gradient(to bottom,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF222222', endColorstr='#D9222222', GradientType=0);
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -ms-backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .dropdown-menu a:hover{
+    background: $secondaryColor;
+  }
+
+  .search, .m-search{
+    color: $menuColor;
+    border: 1px solid $borderColor;
+  }
+
+  .signin a{
+    color: $menuColor !important;
+  }
+
+  /* Page Titles */
+
+  .banner-title, .banner-description {
+    color: $menuColor;
+  }
+
+  .feature-title, .category-title{
+    color: $alertnateTextColor;
+  }
+
+  .feature-title a, .category-title a{
+    color: $alertnateTextColor;
+  }
+
+  /* Sign in Page Css */
+
+  .signin-panel{
+    color: $alertnateTextColor;
+    background-color: $signUpPanelBG;
+
+    //background-image: -webkit-linear-gradient(top,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    //background-image: -o-linear-gradient(top,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    //background-image: linear-gradient(to bottom,$secondaryBackgroundColor 0,$bannerGradientColor 100%);
+    //background-repeat: repeat-x;
+    //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF222222', endColorstr='#D9222222', GradientType=0);
+    -webkit-backdrop-filter: blur(5px);
+    -moz-backdrop-filter: blur(5px);
+    -ms-backdrop-filter: blur(5px);
+    -o-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .signin-panel .error-text{
+    color: $errorColor !important;
+  }
+
+  .signin-panel .social-link, .signin-panel .link .btn{
+    color: $buttonTextColor;
+  }
+
+    .misc-panel {
+      color: $alertnateTextColor;
+      background-color: $signUpPanelBG;
+      -webkit-backdrop-filter: blur(5px);
+      -moz-backdrop-filter: blur(5px);
+      -ms-backdrop-filter: blur(5px);
+      -o-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+
+    .payment-success-panel {
+      color: $alertnateTextColor;
+      background-color: $signUpPanelBG;
+      -webkit-backdrop-filter: blur(5px);
+      -moz-backdrop-filter: blur(5px);
+      -ms-backdrop-filter: blur(5px);
+      -o-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+  /* Banner */
+
+  .banner-content{
+    color: $textColor;
+    // background: -webkit-gradient(linear,left top,left bottom,from($mainBannerGradient),to($backgroundColor));
+    // background: linear-gradient(180deg,$mainBannerGradient,$backgroundColor);
+  }
+
+  .sub-banner-container{
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,rgba(0,0,0,0)),color-stop(60%,rgb(17, 17, 18)));
+    background: -webkit-linear-gradient(180deg,rgba(0,0,0,0) 0,rgb(17, 17, 18) 60%);
+    background: linear-gradient(-90deg,rgba(0,0,0,0) 0,rgb(17, 17, 18) 60%);
+  }
+
+  .sub-banner-content h1{
+    color: $alertnateTextColor;
+  }
+
+  .sub-banner-container .play-trailer a{
+    color: $alertnateTextColor;
+  }
+
+  .genre-list>a{
+    color: $alertnateTextColor;
+    background-color: $darkbgColor;
+    border: $darkbgColor 1px solid;
+  }
+
+  .genre-list > a:hover {
+    background-color: $darkbgColor;
+    border: $secondaryBackgroundColor 1px solid;
+  }
+
+  .social>a {
+    color: $textColor;
+  }
+
+  .social>a:hover {
+    color: $primaryColor;
+  }
+
+  .social>a.facebook:hover {
+    color: $facebookColor;
+  }
+
+  .social>a.twitter:hover {
+    color: $twitterColor;
+  }
+
+  .social>a.gplus:hover {
+    color: $googlePlusColor;
+  }
+
+
+  //Social Share Buttons
+  ul.sharebox-buttons li a {
+    color: $textColor;
+  }
+  li.share-facebook a:hover{
+    color: $facebookColor;
+  }
+  li.share-twitter a:hover{
+    color: $twitterColor;
+  }
+  li.share-google-plus a:hover{
+    color: $googlePlusColor;
+  }  
+
+  /* Footer Css */
+
+  #footer{
+  // border-top: 1px solid #7b7b7b !important;
+  // background-color: $secondaryBackgroundColor;
+  // color: $menuHoverColor;
+  }
+
+  .footer-navigation ul li a{
+    color: $textColor;
+  }
+
+  .footer-navigation ul li a:hover{
+    color: $menuHoverColor;
+  }
+
+}

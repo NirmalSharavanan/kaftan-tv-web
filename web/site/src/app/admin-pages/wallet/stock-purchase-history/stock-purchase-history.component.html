@@ -1,0 +1,73 @@
+<div class="ui-g-12 ui-md-12 ui-fluid search-panel">
+  <p-panel header="Operator / Biller Stock Purchase Report">
+    <form [formGroup]="fg" (ngSubmit)="onSearch()">
+      <div class="ui-g-12 ui-md-3">
+        <label for="operatorId">Select Operator</label>
+        <select class='form-control' id="operatorId" formControlName="operatorId">
+          <option class='option' value="All" selected>All Operators</option>
+          <option class='option' *ngFor='let operator of walletOperators' [value]="operator.id">
+            {{operator.operatorName}}</option>
+        </select>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <label for="fromdate">From Date</label>
+        <p-calendar id="From_date" placeholder="From Date" formControlName="from_date" dateFormat="dd/mm/yy"
+          readonlyInput="true" [showTime]="false" [showSeconds]="false" [showIcon]="true"
+          [inputStyle]="{'height': '36px'}"></p-calendar>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+        <label for="todate">To Date</label>
+        <p-calendar id="to_date" placeholder="To Date" formControlName="to_date" dateFormat="dd/mm/yy"
+          readonlyInput="true" [showIcon]="true" [showTime]="false" [showSeconds]="false" [showIcon]="true"
+          [inputStyle]="{'height': '36px'}"></p-calendar>
+      </div>
+      <div class="ui-g-12 ui-md-3 searchbtn">
+        <button type="submit" class="btn btn-primary save-btn search-btn">Submit</button>
+      </div>
+    </form>
+  </p-panel>
+</div>
+
+<div class="clearfix"></div>
+
+<p-table #dt [columns]="cols" [value]="walletStocks" selectionMode="multiple" [metaKeySelection]="false"
+  exportFilename="Operator_Biller_StockPurchaseReport" [paginator]="true" [rows]="10">
+
+  <ng-template pTemplate="caption">
+    <div class="ui-helper-clearfix">
+      <button type="button" pButton icon="fa-file-o" iconPos="left" label="Excel" (click)="dt.exportCSV()"
+        style="float:left" [attr.disabled]="walletStocks && walletStocks.length==0? 'disabled' : null "></button>
+      <button type="button" pButton icon="fa fa-file-pdf-o" iconPos="left" label="PDF" (click)="exportPdf()"
+        style="float:left" class="ui-button-warning"
+        [attr.disabled]="walletStocks && walletStocks.length==0? 'disabled' : null "></button>
+      <button type="button" pButton icon="fa-file" iconPos="left" label="Selection Only"
+        (click)="dt.exportCSV({selectionOnly:true})"
+        [attr.disabled]="walletStocks && walletStocks.length==0? 'disabled' : null " style="float:right"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 20%;">Operator Name</th>
+      <th style="width: 20%;">Purchase Date</th>
+      <th style="width: 20%;">Purchase Cost</th>
+      <th style="width: 20%;">Purchase Amount</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-stock>
+    <tr [pSelectableRow]="stock">
+      <td>{{ stock.operatorName}}</td>
+      <td>{{ stock.created_at}}</td>
+      <td>{{ stock.purchaseCost }}</td>
+      <td>{{ stock.purchaseAmount }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="4" class="text-center">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<div class="clearfix"></div>

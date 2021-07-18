@@ -1,0 +1,133 @@
+<div class="ui-g-12 ui-md-1">
+</div>
+<div class="ui-g-10 ui-md-10 ui-fluid search-panel">
+  <p-panel header="Create Operator / Biller System Wallet">
+    <form [formGroup]="fg">
+      <div class="ui-g-12 ui-md-5">
+        <div class="ui-g-5 ui-md-5 mandatory">
+          <label for="serviceType">Category Name</label>
+        </div>
+        <div class="ui-g-7 ui-md-7">
+          <select class='form-control' id="serviceType" formControlName="serviceType"
+            (change)="onChangeCategory($event)">
+            <option class='option' value="" selected>Select Category</option>
+            <option class='option' *ngFor='let operator of walletCategories' [value]="stringify(operator)">
+              {{operator.categoryId===0? operator.name : operator.categoryName }}</option>
+          </select>
+        </div>
+
+        <div class="row col-md-12 col-sm-12 mandatory_text">
+          <app-error [fromGroup]="fg" controlName="serviceType" alias="Category Name"></app-error>
+        </div>
+      </div>
+      <div class="ui-g-12 ui-md-1"></div>
+      <div class="ui-g-12 ui-md-5">
+        <div class="ui-g-5 ui-md-5 mandatory">
+          <label for="purchaseCost">Purchase Cost</label>
+        </div>
+        <div class="ui-g-7 ui-md-7">
+          <input type="number" class="form-control" id="purchaseCost" placeholder="Enter Amount"
+            formControlName="purchaseCost">
+        </div>
+        <div class="row col-md-12 col-sm-12 mandatory_text">
+          <app-error [fromGroup]="fg" controlName="purchaseCost" alias="Purchase Cost"></app-error>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-12" style="padding:0">
+        <div class="ui-g-12 ui-md-5">
+          <div class="ui-g-5 ui-md-5 mandatory">
+            <label for="operatorId">Operator / Biller Name</label>
+          </div>
+          <div class="ui-g-7 ui-md-7">
+            <select class='form-control' id="operatorId" formControlName="operatorId"
+              (change)="onChangeOperator($event)">
+              <option class='option' value="" selected>Select Operator</option>
+              <option class='option' *ngFor='let operator of walletOperators' [value]="stringify(operator)">
+                {{operator.operatorName}}</option>
+              <!-- <option *ngIf="serviceType !='' && servicetypeid !=3" class='option' value="-1" selected>Others</option> -->
+            </select>
+          </div>
+          <div class="row col-md-12 col-sm-12 mandatory_text">
+            <app-error [fromGroup]="fg" controlName="operatorId" alias="Operator / Biller Name"></app-error>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-1"></div>
+        <div class="ui-g-12 ui-md-5">
+          <div class="ui-g-5 ui-md-5 mandatory">
+            <label for="purchaseAmount">Purchase Amount</label>
+          </div>
+          <div class="ui-g-7 ui-md-7">
+            <input type="number" class="form-control" id="purchaseAmount" placeholder="Enter Amount"
+              formControlName="purchaseAmount">
+          </div>
+          <div class="row col-md-12 col-sm-12 mandatory_text">
+            <app-error [fromGroup]="fg" controlName="purchaseAmount" alias="Purchase Amount"></app-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-12" style="padding:0">
+        <!-- <div class="ui-g-12 ui-md-5">
+          <div class="ui-g-5 ui-md-5 mandatory">
+            <label for="operatorId">Operator Code</label>
+          </div>
+          <div class="ui-g-7 ui-md-7">
+            <input type="number" class="form-control" id="operatorCode" placeholder="Operator Code"
+              formControlName="operatorCode" (change)="checkOperatorCode()"
+              [attr.disabled]="operatorId=='-1'? null: 'disabled'" [required]="operatorId=='-1'? true : false">
+          </div>
+          <div class="row col-md-12 col-sm-12 mandatory_text">
+            <app-error [fromGroup]="fg" controlName="operatorCode" alias="Operator Code"></app-error>
+          </div>
+        </div> -->
+        <div class="ui-g-12 ui-md-1"></div>
+        <div class="ui-g-12 ui-md-5" *ngIf="operatorId=='-1'">
+          <div class="ui-g-5 ui-md-5 mandatory">
+            <label for="purchaseAmount">Operator Name</label>
+          </div>
+          <div class="ui-g-7 ui-md-7">
+            <input type="text" class="form-control" id="operatorName" placeholder="Operator Name"
+              formControlName="operatorName" required>
+          </div>
+          <div class="row col-md-12 col-sm-12 mandatory_text">
+            <app-error [fromGroup]="fg" controlName="operatorName" alias="Operator Name"></app-error>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-12" style="padding:0">
+        <Span class="alert-label">Configure Alerts on low balance threshold</Span>
+        <!-- <button type="submit" class="btn btn-primary save-btn add-btn" (click)="addAlerts()">Add</button> -->
+      </div>
+      <div class="ui-g-12 ui-md-12" style="margin-top: 15px;" formGroupName="stockAlerts">
+        <li *ngFor="let alert of stockAlerts.controls; index as i;" class="list-group-item">
+
+          <div class="alert-data" [formGroupName]="i">
+            <div class="ui-g-3 ui-md-3">
+              <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+              <input type="text" class="form-control" id="mobileNo" placeholder="Mobile Number"
+                formControlName="mobileNo">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+              <input type="text" class="form-control" id="emailId" placeholder="Email Address"
+                formControlName="emailId">
+            </div>
+            <div class="ui-g-3 ui-md-3">
+              <input type="number" class="form-control" id="thresholdAmount" placeholder="Threshold Amount"
+                formControlName="thresholdAmount">
+            </div>
+          </div>
+        </li>
+      </div>
+      <div class="ui-g-12 ui-md-12" style="text-align: center">
+        <button type="submit" class="btn btn-primary save-btn search-btn" (click)="createWalletStock()"
+          [disabled]="fg.invalid">Save</button>
+      </div>
+    </form>
+  </p-panel>
+</div>
+<div class="ui-g-12 ui-md-1">
+</div>

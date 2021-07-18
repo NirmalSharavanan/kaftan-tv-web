@@ -1,0 +1,6 @@
+<form [formGroup]="fg">
+  <p-listbox [options]="celebrities" formControlName="selectedCelebritiesAry" multiple="multiple" checkbox="checkbox" filter="filter"
+    optionLabel="name" (onChange)="onValueChange()">
+    <p-header>Celebrity Type</p-header>
+  </p-listbox>
+</form>

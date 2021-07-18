@@ -1,0 +1,12 @@
+<button class="btn btn-clear play-btn PPV-content banner_play" (click)="playVideo()" *ngIf="!showPlayer">
+  <div>
+    <img class="playBtn_img" src="assets/kaftan/img/play-button.png">
+  </div>
+</button>
+<ss-banner [bannerImageUrl]="category._links.awsBannerUrl.href" *ngIf="!showPlayer">
+</ss-banner>
+<ss-play-home [playerInfo]="channelInfo" *ngIf="showPlayer && isAuthenticated">
+</ss-play-home>
+<div *ngIf="!isAuthenticated && playLiveVideo" class="loginWrapper">
+  <ss-invalid-user (stopPlay)="cancel()" [isAuthenticated]="isAuthenticated"></ss-invalid-user>
+</div>

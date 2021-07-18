@@ -1,0 +1,59 @@
+<div class="signin-container">
+  <div class="container">
+    <div class="row">
+      <div class="signin-panel">
+        <h2>My Profile</h2>
+        <div *ngIf="fg.errors?.updateProfileSuccess" class="alert alert-success">
+          {{fg.errors.updateProfileSuccess}}
+        </div>
+        <div class="alert alert-danger" *ngIf="fg.invalid && fg.touched && fg.errors?.updateProfileFailed">
+          {{fg.errors.updateProfileFailed}}
+        </div>
+        <form class="form" [formGroup]="fg" (ngSubmit)="onSubmit()">
+          <fieldset>
+            <div class="form-group mandatory">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="name" alias="Name"></app-error>
+              </div>
+            </div>
+            <div class="form-group mandatory">
+              <label for="mobileNo">Mobile No.</label>
+              <input type="number" *ngIf="!showdialCode" formControlName="mobileNo" id="mobileNo" class="form-control"
+                placeholder="mobile no. with country code" maxlength="15"
+                (input)="onMobileNumChange($event.target.value)">
+
+              <international-phone-number *ngIf="showdialCode" formControlName="mobileNo" id="mobileNo"
+                placeholder="+91 9999999999" [maxlength]="20" [defaultCountry]="'ng'" name="mobileNo">
+              </international-phone-number>
+
+              <div class="form-text error-text" *ngIf="showdialCode && !mobileNo.valid" style="margin-bottom:13px">
+                Mobile
+                number
+                is required and should be
+                valid</div>
+
+              <div class="form-text error-text">
+                <app-error [fromGroup]="fg" controlName="mobileNo" alias="Mobile number"></app-error>
+              </div>
+            </div>
+            <div class="form-group mandatory">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" placeholder="eg. xx@xxxx.com" formControlName="email"
+                [attr.disabled]='true'>
+            </div>
+            <div class="form-group">
+              <button type="submit" [disabled]="loading || fg.invalid"
+                class="btn btn-primary btn-block btn-lg">Update</button>
+              <br />
+              <div class="text-center">
+                <img *ngIf="loading" src="assets/kaftan/img/loader.svg" />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

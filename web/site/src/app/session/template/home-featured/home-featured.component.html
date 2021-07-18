@@ -1,0 +1,199 @@
+<ul class="nav nav-tabs" *ngIf="featuredCategories && featuredCategories.length > 0">
+    <li *ngFor="let featured of featuredCategories" (click)="navigateTab(featured.id)" [class.active]="this.selectedFeatured.id===featured.id">
+        <a data-toggle="tab" href="#">{{featured.name}}</a></li>
+</ul>
+<div *ngIf="featuredCategories && featuredCategories.length > 0" class="tab-content">
+    <div in-viewport (inViewportAction)="initData($event)" [inViewportOptions]="{partial: false}">
+        <div *ngIf="contentList && contentList.length > 0">
+            <!-- Section: Magazine v.2 -->
+<section class="magazine-section my-5">
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div style="background: #212121;border-radius: 4px;max-height:710px" class="col-lg-2 col-md-12">
+        <h4 style="text-align:center;padding:4px;border-bottom:0.2px solid rgba(122,122,122,0.5);margin:15px auto;font-size: 1.2em;">Related News</h4>
+        <!-- Small news -->
+        <div class=" single-news mb-4 single_content">
+  
+          <!-- Grid row -->
+          <div class="row" *ngFor="let content of contentList">
+            <!-- Grid column -->
+            <div class="col-md-12">
+  
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1 mb-4 zoomImg">
+                <img  (mouseenter)="playvideo(content.id)" *ngIf="content._links.awsThumbnailUrl && showId != content.id" [routerLink]="[content._links.UIHref.href]"  class="img-fluid" [src]="content._links.awsThumbnailUrl?.href" alt="{{content.title}}">
+                <img  (mouseenter)="playvideo(content.id)" *ngIf="!content._links.awsThumbnailUrl && showId != content.id"  [routerLink]="[content._links.UIHref.href]"  class="img-fluid" src="https://t4.ftcdn.net/jpg/00/38/13/73/360_F_38137330_gUbR3ZXBc5J5g4pRkaC8TYZQA62OZhx5.jpg" alt="{{content.title}}">
+                <video [routerLink]="[content._links.UIHref.href]" *ngIf="showId == content.id" class="content" style="max-height:140px" (mouseleave)="videomoved()" loop onmouseover="this.play()" onmouseout="this.pause();" >
+                  <source src="{{VideoUrl}}#t=0,20">
+                </video>
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+                <p style="white-space:normal;overflow: auto;font-family: 'Segoe UI' !important;text-transform: capitalize;font-weight: 500 !important;text-transform: capitalize;font-size: 0.85em;" class="font-weight-bold dark-grey-text content_title">{{content.title}}</p>
+              </div>
+  
+            </div>
+            <!-- Grid column -->
+  
+          </div>
+          <!-- Grid row -->
+  
+        </div>
+        <!-- Small news -->
+      </div>
+      <div class="col-lg-6 col-md-12">
+  
+        <!-- Featured news -->
+        <div class="single-news mb-lg-0 mb-4">
+  
+          <!-- Image -->
+          <div class="view overlay rounded z-depth-1-half mb-4">
+            <img [routerLink]="[contentList[3]._links.UIHref.href]" [queryParams]="{title: contentList[3].title}" style="width:100%;" class="img-fluid" [src]="contentList[3]._links.awsThumbnailUrl?.href" alt="Sample image">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+  
+          <!-- Data -->
+          <div class="news-data d-flex justify-content-between">
+            <a href="#!" class="deep-orange-text">
+              <h6 class="font-weight-bold"><i class="fab fa-youtube"></i> {{contentList[3].content_type}}</h6>
+            </a>
+            <p class="font-weight-bold dark-grey-text"><i class="fas fa-clock-o pr-2"></i>{{contentList[3].year}}</p>
+          </div>
+  
+          <!-- Excerpt -->
+          <h3 class="font-weight-bold dark-grey-text mb-3"><a>{{contentList[3].title}}</a></h3>
+          <p class="dark-grey-text mb-lg-0 mb-md-5 mb-4">{{contentList[3].description}}</p>
+          
+          <p style="margin-top: 12px;color: #48a3ba;"><i class="fas fa-eye"></i> 17.32K / <i class="far fa-comments"></i> 2</p>
+        </div>
+        <!-- Featured news -->
+  
+      </div>
+      <!-- Grid column -->
+  
+      <!-- Grid column -->
+      <div style="max-height:690px" class="col-lg-4 col-md-12 single_content" >
+  
+        <!-- Small news -->
+        <div class=" single-news mb-4" *ngFor="let content of contentList">
+  
+          <!-- Grid row -->
+          <div class="row">
+  
+            <!-- Grid column -->
+            <div class="col-md-4">
+  
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1 mb-4">
+                <img *ngIf="content._links.awsThumbnailUrl" [routerLink]="[content._links.UIHref.href]"  class="img-fluid" [src]="content._links.awsThumbnailUrl?.href" alt="{{content.title}}">
+                <img *ngIf="!content._links.awsThumbnailUrl" [routerLink]="[content._links.UIHref.href]"  class="img-fluid" src="https://t4.ftcdn.net/jpg/00/38/13/73/360_F_38137330_gUbR3ZXBc5J5g4pRkaC8TYZQA62OZhx5.jpg" alt="{{content.title}}">
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+  
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-8">
+  
+              <!-- Excerpt -->
+              <p class="font-weight-bold dark-grey-text content_title">{{content.title}}</p>
+              <div style="max-height: 80px;overflow: hidden;text-overflow: ellipsis;" class="d-flex justify-content-between">
+                <div class="col-11 pl-0 mb-3">
+                  <a [routerLink]="[content._links.UIHref.href]" [queryParams]="{title: content.title}" href="#!" style="font-size: 0.9em;" class="dark-grey-text">{{content.description}}</a>
+                </div>
+                <a><i class="fas fa-angle-double-right"></i></a>
+              </div>
+  
+            </div>
+            <!-- Grid column -->
+  
+          </div>
+          <!-- Grid row -->
+  
+        </div>
+        <!-- Small news -->
+  
+      </div>
+      <!--Grid column-->
+  
+    </div>
+    <!-- Grid row -->
+  
+  </section>
+  <!-- Section: Magazine v.2 -->
+            <!-- <ul class="row">
+                <li class="thumbnails_container boxmodel" *ngFor="let content of contentList">
+                    <ss-content-thumbnail [content]="content" [asVerticalList]="true"></ss-content-thumbnail>
+                </li>
+            </ul> -->
+        </div>
+    </div>
+    <div *ngIf="!isLoaded">
+        <ul class="row">
+            <li class="thumbnails_container" *ngFor="let img of loading_imgs">
+                <div class="vertical-thumb-slide">
+                    <img src="assets/kaftan/img/thumbnailloader.jpg" alt="loading.." class="vertical-tile-img vertical_loading_img" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="arrow_col" *ngIf="assignedcontentList && assignedcontentList.length > 12">
+        <a class="link" [routerLink]="[selectedFeatured._links.UIHref.href]">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Channels -->
+<div *ngIf="channels && channels.length > 0" class="tab-content" in-viewport (inViewportAction)="initData($event)"
+    [inViewportOptions]="{partial: false}">
+    <div *ngIf="!isLoaded">
+        <ul class="row">
+            <li class="thumbnails_container" *ngFor="let img of loading_imgs">
+                <div class="vertical-thumb-slide">
+                    <img src="assets/kaftan/img/thumbnailloader.jpg" alt="loading.." class="vertical-tile-img vertical_loading_img" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ul class="row">
+        <li class="thumbnails_container boxmodel" *ngFor="let channel of channels">
+            <ss-channel-thumbnail [channel]="channel" [asVerticalList]="true"></ss-channel-thumbnail>
+        </li>
+    </ul>
+    <div class="arrow_col" *ngIf="totalchannelList && totalchannelList.length > 12">
+        <a class="link" [routerLink]="['/session/category/channels']">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Radio -->
+<div *ngIf="radios && radios.length > 0" class="tab-content" in-viewport (inViewportAction)="initData($event)"
+    [inViewportOptions]="{partial: false}">
+    <div *ngIf="!isLoaded">
+        <ul class="row">
+            <li class="thumbnails_container" *ngFor="let img of loading_imgs">
+                <div class="vertical-thumb-slide">
+                    <img src="assets/kaftan/img/thumbnailloader.jpg" alt="loading.." class="vertical-tile-img vertical_loading_img" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ul class="row">
+        <li class="thumbnails_container" *ngFor="let radio of radios">
+            <ss-channel-thumbnail [channel]="radio" [asVerticalList]="true"></ss-channel-thumbnail>
+        </li>
+    </ul>
+    <div class="arrow_col" *ngIf="totalradioList && totalradioList.length > 12">
+        <a class="link" [routerLink]="['/session/category/radio']">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>

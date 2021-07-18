@@ -1,0 +1,394 @@
+<div class="app" #root="$implicit" dir="ltr" [ngClass]="[themeSidebarSkinColor, themeHeaderSkinColor]" [class.app-dark]="dark" [class.boxed]="boxed" [class.collapsed-sidebar]="collapseSidebar" [class.compact-sidebarr]="compactSidebar" [class.customizer-in]="customizerIn">
+<md-sidenav-container class="silk-container">
+   <md-sidenav #sidenav [mode]="sidenavMode" [opened]="sidenavOpen" class="sidebar-area">
+   <div class="sidebar-panel silk-sidenav">
+      <div class="sidebar-container">
+         <div class="logo-container ">
+            <div class="logo-w logo-i d-flex justify-content-between">
+               <div class="align-self-center">
+                  <div class="logo-sign inline-block d-flex"><img class="align-self-center logo-img" src="assets/kaftan/img/logo.png"></div>
+               </div>
+            </div>
+         </div>
+         <!--<div class="user-info-w">-->
+            <!--<div class="silk-user-thumb d-flex">-->
+               <!--<img class="img-responsive img-circle align-self-center" src="assets/img/user-10.jpg" width="107" height="107" alt="user list image">-->
+               <!--<div class="align-self-center pr-3 pl-3 silk-user-i">-->
+                  <!--<span class="silk-user-name"><strong>Lisa Jenner</strong></span>-->
+                  <!--<p class="mb-0"><small><i class="fa fa-circle text-success"></i> Online</small></p>-->
+               <!--</div>-->
+            <!--</div>-->
+            <!-- <div class="sidebar-search">
+               <form action="#" method="get">
+                  <div class="input-group">
+                     <input type="text" name="q" class="form-control" placeholder="Search..">
+                     <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                     </button>
+                  </div>
+               </form>
+            </div> -->
+         <!--</div>-->
+         <div class="sidenav-scrollbar-container">
+               <md-nav-list menuToggleDirective class="navigation">
+                  <md-list-item menuToggleLink *ngFor="let menuitem of menuItems.getAll()">
+                     <a menuToggle class="silk-relative" md-ripple (click)="navigate(menuitem.name, menuitem.state)" *ngIf="menuitem.type === 'link'">
+                     <md-icon>{{ menuitem.icon }}</md-icon>
+                     <span>{{ menuitem.name }}</span>
+                     </a>
+                     <a menuToggle class="silk-relative" md-ripple (click)="navigateToKaftanPay(menuitem.name, menuitem.state)" *ngIf="menuitem.type === 'paylink'">
+                        <md-icon>{{ menuitem.icon }}</md-icon>
+                        <span>{{ menuitem.name }}</span>
+                        </a>
+                     <a menuToggle class="silk-relative" md-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'">
+                        <md-icon>{{ menuitem.icon }}</md-icon>
+                        <span>{{ menuitem.name}}</span>
+                        <i class="fa menu-caret fa-angle-left"></i>
+                     </a>
+                     <md-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'">
+                        <md-list-item *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+                              <a [class]="childitem.name.length > 25 ? 'silk-relative child-menu' : 'silk-relative'" (click)="navigate(childitem.name, childitem.state)" md-ripple>{{ childitem.name  }}</a>
+                        </md-list-item>
+                     </md-nav-list>
+                  </md-list-item>
+                  <md-divider></md-divider>
+                  <!-- <md-list-item>
+                     <a (click)="addMenuItem()">
+                        <md-icon>add</md-icon>
+                        <span>Add</span>
+                     </a>
+                  </md-list-item> -->
+               </md-nav-list>
+         </div>
+      </div>
+   </div>
+   </md-sidenav>
+
+   <!--<md-sidenav #end align="end" class="chat-panel" mode="over" opened="false">-->
+      <!--<div class="scroll">-->
+         <!--<md-toolbar class="bg-primary">-->
+            <!--<h3>Notifications</h3>-->
+         <!--</md-toolbar>-->
+         <!--<div class="pt-4 pb-3 pr-3 pl-3">-->
+            <!--<div class="alert alert-success alert-dismissible fade show mb-2" role="alert">-->
+               <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+               <!--<span aria-hidden="true">&times;</span>-->
+               <!--</button>-->
+               <!--<strong>Holy guacamole!</strong> You should check.-->
+            <!--</div>-->
+            <!--<div class="alert bg-primary alert-dismissible fade show mb-2" role="alert">-->
+               <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+               <!--<span aria-hidden="true">&times;</span>-->
+               <!--</button>-->
+               <!--<strong>Heads Up!</strong> some of those fields below.-->
+            <!--</div>-->
+            <!--<div class="alert alert-danger alert-dismissible fade show mb-2" role="alert">-->
+               <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+               <!--<span aria-hidden="true">&times;</span>-->
+               <!--</button>-->
+               <!--<strong>Deleted 3 Files</strong> You should check.-->
+            <!--</div>-->
+            <!--<div class="alert bg-primary alert-dismissible fade show mb-2" role="alert">-->
+               <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+               <!--<span aria-hidden="true">&times;</span>-->
+               <!--</button>-->
+               <!--<strong>Holy guacamole!</strong> those fields below.-->
+            <!--</div>-->
+            <!--<div class="alert alert-warning alert-dismissible fade show mb-2" role="alert">-->
+               <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+               <!--<span aria-hidden="true">&times;</span>-->
+               <!--</button>-->
+               <!--<strong>Update Plan</strong> maxime animi excepturi.-->
+            <!--</div>-->
+         <!--</div>-->
+      <!--</div>-->
+   <!--</md-sidenav>-->
+   <!---->
+   <div class="silk-base-container" #scrollContainer>
+      <div class="silk-header-toolbar">
+         <div class="d-flex justify-content-between">
+            <div class="header-left d-flex">
+               <div class="silk-ham-icon align-self-center">
+                  <a charset="cursor" (click)="sidenav.toggle()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                  </a>
+               </div>
+               <div class="d-flex page-info-wrap justify-content-between">
+                  <!-- <a class="navbar-brand align-self-center" href="#">{{header}}</a> -->
+                  <span class="navbar-brand align-self-center"> {{header}}</span>
+               </div>
+            </div>
+            <div class="silk-main-menu">
+               <ul class="main-nav">
+                  <!--<li class="nav-item dropdown">-->
+                     <!--<a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                     <!--<i class="fa fa-envelope-o"></i><span class="badge badge-success">4</span>-->
+                     <!--</a>-->
+                     <!--<div class="dropdown-menu dropdown-menu-md dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">-->
+                        <!--<div class="dropdown-head bg-success">-->
+                           <!--<small class="dropdown-header"><strong>You have 2 new messages</strong></small>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-body">-->
+                           <!--<a class="dropdown-item d-flex" href="javascript:void(0)">-->
+                              <!--<div class="align-self-center">-->
+                                 <!--<img src="assets/img/user-1.jpg" class="img-circle" width="40" height="40" alt="">-->
+                              <!--</div>-->
+                              <!--<div class="ml-2 mr-2"> <span class="align-self-center d-block">Your new theme is awesome! </span>-->
+                                 <!--<small><i class="fa fa-clock-o"></i> 12 min ago</small>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item d-flex" href="javascript:void(0)">-->
+                              <!--<div class="align-self-center">-->
+                                 <!--<img src="assets/img/user-2.jpg" class="img-circle" width="40" height="40" alt="">-->
+                              <!--</div>-->
+                              <!--<div class="ml-2 mr-2"> <span class="align-self-center d-block">Thanks for your support. </span>-->
+                                 <!--<small><i class="fa fa-clock-o"></i> 23 min ago</small>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item d-flex" href="javascript:void(0)">-->
+                              <!--<div class="align-self-center">-->
+                                 <!--<img src="assets/img/user-3.jpg" class="img-circle" width="40" height="40" alt="">-->
+                              <!--</div>-->
+                              <!--<div class="ml-2 mr-2"> <span class="align-self-center d-block">I need help in theme! </span>-->
+                                 <!--<small><i class="fa fa-clock-o"></i> 27 min ago</small>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item d-flex" href="javascript:void(0)">-->
+                              <!--<div class="align-self-center">-->
+                                 <!--<img src="assets/img/user-4.jpg" class="img-circle" width="40" height="40" alt="">-->
+                              <!--</div>-->
+                              <!--<div class="ml-2 mr-2"> <span class="align-self-center d-block">Stunning design </span>-->
+                                 <!--<small><i class="fa fa-clock-o"></i> 28 min ago</small>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item d-flex" href="javascript:void(0)">-->
+                              <!--<div class="align-self-center">-->
+                                 <!--<img src="assets/img/user-5.jpg" class="img-circle" width="40" height="40" alt="">-->
+                              <!--</div>-->
+                              <!--<div class="ml-2 mr-2"> <span class="align-self-center d-block">Good tempalte </span>-->
+                                 <!--<small><i class="fa fa-clock-o"></i> 31 min ago</small>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-foot bg-success">-->
+                           <!--<a href="javascript:void(0)"><small><strong>View all</strong></small></a>-->
+                        <!--</div>-->
+                     <!--</div>-->
+                  <!--</li>-->
+                  <!--<li class="nav-item dropdown">-->
+                     <!--<a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                     <!--<i class="fa fa-bell-o"></i><span class="badge badge-warning">2</span>-->
+                     <!--</a>-->
+                     <!--<div class="dropdown-menu dropdown-menu-md dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">-->
+                        <!--<div class="dropdown-head bg-warning">-->
+                           <!--<small class="dropdown-header"><strong>You have 2 new notifications</strong></small>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-body">-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                           <!--<i class="fa fa-users text-success width-30"></i> 5 new members joined today-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                           <!--<i class="fa fa-envelope-o text-success width-30"></i> you updated your email-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                           <!--<i class="fa fa-shopping-cart text-success width-30"></i> 15 new product added-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                           <!--<i class="fa fa-exclamation text-danger width-30"></i> 2 order cancelled-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                           <!--<i class="fa fa-users text-success width-30"></i> 27 new followers-->
+                           <!--</a>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-foot bg-warning" ng-reflect-class-base="dropdown-head">-->
+                           <!--<a href="javascript:void(0)"><small><strong>View all</strong></small></a>-->
+                        <!--</div>-->
+                     <!--</div>-->
+                  <!--</li>-->
+                  <!--<li class="nav-item dropdown">-->
+                     <!--<a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                     <!--<i class="fa fa-flag-o"></i><span class="badge badge-danger">6</span>-->
+                     <!--</a>-->
+                     <!--<div class="dropdown-menu dropdown-menu-md dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">-->
+                        <!--<div class="dropdown-head bg-danger">-->
+                           <!--<small class="dropdown-header"><strong>Your tasks list</strong></small>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-body">-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                              <!--<span class="d-block mb-1"> Project A</span>-->
+                              <!--<div class="progress">-->
+                                 <!--<div class="progress-bar bg-success" role="progressbar" style="width: 25%; height: 5px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                              <!--<span class="d-block mb-1"> Project B</span>-->
+                              <!--<div class="progress">-->
+                                 <!--<div class="progress-bar bg-primary" role="progressbar" style="width: 50%; height: 5px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                              <!--<span class="d-block mb-1"> Project C</span>-->
+                              <!--<div class="progress">-->
+                                 <!--<div class="progress-bar bg-danger" role="progressbar" style="width: 60%; height: 5px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                              <!--<span class="d-block mb-1"> Project D</span>-->
+                              <!--<div class="progress">-->
+                                 <!--<div class="progress-bar bg-warning" role="progressbar" style="width: 75%; height: 5px;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                           <!--<a class="dropdown-item" href="javascript:void(0)">-->
+                              <!--<span class="d-block mb-1"> Project E</span>-->
+                              <!--<div class="progress">-->
+                                 <!--<div class="progress-bar bg-danger" role="progressbar" style="width: 90%; height: 5px;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>-->
+                              <!--</div>-->
+                           <!--</a>-->
+                        <!--</div>-->
+                        <!--<div class="dropdown-foot bg-danger">-->
+                           <!--<a href="javascript:void(0)"><small><strong>View all</strong></small></a>-->
+                        <!--</div>-->
+                     <!--</div>-->
+                  <!--</li>-->
+                  <li class="nav-item">
+                     <a href="javascript:void(0)" class="nav-link" (click)="toggleFullscreen()">
+                     <i class="fa fa-arrows-alt" *ngIf="!isFullscreen"></i>
+                     <i class="fa fa-desktop" *ngIf="isFullscreen"></i>
+                     </a>
+                  </li>
+                  <!--<li class="nav-item">-->
+                     <!--<a href="javascript:void(0)" class="nav-link" (click)="end.toggle()">-->
+                        <!--<div class="more-links">-->
+                           <!--<i class="fa fa-info"></i>-->
+                        <!--</div>-->
+                     <!--</a>-->
+                  <!--</li>-->
+                  <li class="nav-item">
+                        <a class="nav-link" href="/session/logout">Logout</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="inner-container">
+         <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+      </div>
+   </div>
+</md-sidenav-container>
+<!-- Demo Purposes Only -->
+<!-- <div class="silk-customizer">
+   <button class="customizer-toggle bg-primary" (click)="customizerFunction()">
+   <i class="fa fa-cogs fa-lg"></i>
+   </button>
+   <div class="settings-panel">
+      <md-card-content class="theme-options">
+         <div class="form-check">
+            <span class="mb-2 d-block"><strong>Config Layout and Design</strong></span>
+         </div>
+         <div class="form-check">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="dark" [align]="end">
+            Dark Theme
+            </label>
+         </div>
+         <div class="form-check boxed-layout-md">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="boxed" [align]="end">
+            Boxed
+            </label>
+         </div>
+         <div class="form-check">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="collapseSidebar" (change)="compactSidebar = false" [align]="end">
+            Minimize Sidebar
+            </label>
+         </div>
+         <div class="form-check">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" (change)="root.dir = (root.dir == 'rtl' ? 'ltr' : 'rtl')" [align]="end">
+            RTL Support
+            </label>
+         </div>
+         <div class="form-check theme-color color-header">
+            <span class="mb-2 d-block"><strong>Header Color</strong></span>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="headerSkinColorFunction('header-default')"><i class=" text-success fa fa-circle fa-lg def" aria-hidden="true"></i>
+               Default</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="headerSkinColorFunction('header-green')"><i class=" text-success fa fa-circle fa-lg" aria-hidden="true"></i>
+               Green</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="headerSkinColorFunction('header-yellow')"><i class="text-warning fa fa-circle fa-lg" aria-hidden="true"></i>
+               Yellow</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="headerSkinColorFunction('header-red')"><i class="text-danger fa fa-circle fa-lg" aria-hidden="true"></i>
+               Red</a>
+            </div>
+         </div>
+         <div class="form-check theme-color color-side">
+            <span class="mb-2 d-block"><strong>Sidebar Color</strong></span>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="sidebarSkinColorFunction('sidebar-default')"><i class="def text-success fa fa-circle fa-lg" aria-hidden="true"></i>
+               Default</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="sidebarSkinColorFunction('sidebar-green')"><i class=" text-success fa fa-circle fa-lg" aria-hidden="true"></i>
+               Green</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="sidebarSkinColorFunction('sidebar-yellow')"><i class="text-warning fa fa-circle fa-lg" aria-hidden="true"></i>
+               Yellow</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="sidebarSkinColorFunction('sidebar-red')"><i class="text-danger fa fa-circle fa-lg" aria-hidden="true"></i>
+               Red</a>
+            </div>
+            <div class="mb-1">
+               <a href="javascript:void(0)" (click)="sidebarSkinColorFunction('sidebar-blue')"><i class="text-primary fa fa-circle fa-lg" aria-hidden="true"></i>
+               Blue</a>
+            </div>
+         </div>
+      </md-card-content>
+   </div>
+</div> -->
+<!-- /Demo Purposes Only -->
+</div>
+<!-- <md-menu class="user-menu" x-position="before" y-position="below" #menu="mdMenu">
+   <button md-menu-item>
+      <md-icon>account_circle</md-icon>
+      <span>Profile</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>settings</md-icon>
+      <span>Settings</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>help</md-icon>
+      <span>Help</span>
+   </button>
+   <md-divider></md-divider>
+   <button [routerLink]="['/login']" md-menu-item>
+      <md-icon>exit_to_app</md-icon>
+      <span>Logout</span>
+   </button>
+</md-menu> -->
+<!-- <md-menu class="apps-menu" x-position="after" y-position="below" #appsmenu="mdMenu">
+   <button md-menu-item>
+      <md-icon>storage</md-icon>
+      <span>Total App Memory</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>memory</md-icon>
+      <span>Total Memory Used</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>mail</md-icon>
+      <span>12 Unread Mail</span>
+   </button>
+   <button md-menu-item>
+      <md-icon>feedback</md-icon>
+      <span>2 Feedback</span>
+   </button>
+</md-menu>
+ -->

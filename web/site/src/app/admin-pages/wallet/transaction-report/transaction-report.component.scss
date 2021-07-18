@@ -1,0 +1,51 @@
+.search-btn{
+    margin-top: 33px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.search-panel{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+label{
+    margin-top: 5px;
+}
+
+.checkboxes label {
+    display: inline-block;
+    padding-right: 15px;
+    white-space: nowrap;
+  }
+  .checkboxes input {
+    vertical-align: middle;
+  }
+  .checkboxes label span {
+    vertical-align: middle;
+    text-transform: capitalize !important;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  #myDIV {
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #f6f7f9;
+    margin-top: 10px;
+    display: none;
+    margin-bottom: 10px;
+  }
+  .customer_details
+  {
+    border: 1px solid #2399e5;
+    color: #FFFFFF;
+    background: #2399e5;
+    cursor: pointer;
+    // padding: .10em 1em .25em 1em;
+    border-radius: 3px;
+  }
+
+  .customer_details-row
+{
+  display: inline-block !important;
+}

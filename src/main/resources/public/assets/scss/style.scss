@@ -1,0 +1,239 @@
+@import "material.variables";
+@import "mixins/bi-app/bi-app-ltr";
+// Core Variables and Mixins
+@import "bootstrap";
+@import "app.variables";
+@import "mixins";
+// Core Styles
+@import "core";
+@import "material";
+@import "components";
+
+@import "utilities/utilities";
+
+body .mat-sidenav-content{
+  background: #f6f7f9;
+}
+
+.back-link{
+  font-size: 15px;
+  cursor: pointer;
+  margin: 10px 0px 10px 0px;
+}
+.header-btn{
+  text-align: right;
+  margin: 10px 0px 10px 0px;
+}
+
+.footer-btn{
+  text-align: center;
+  margin: 10px 0px 10px 0px;
+}
+
+.save-btn{
+  width: 100px;
+}
+
+.btn-primary.disabled, .tour-step-navigation .disabled.btn.btn-sm, .tour-step-navigation .btn-group-sm > .disabled.btn, .btn-primary:disabled, .tour-step-navigation .btn.btn-sm:disabled, .tour-step-navigation .btn-group-sm > .btn:disabled {
+  background-color: #d4d3d6;
+  border-color: #9c9fad;
+  color: #444444;
+}
+
+.ui-widget-header{
+  color: #000;
+  background: #ebebeb;
+  border: none;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ui-datalist .ui-datalist-header{
+  text-align: left;
+}
+
+.ui-widget-content{
+  border: none;
+}
+
+.ui-state-highlight {
+  border-color: #e0dfde;
+  background: #e0dfde;
+  color: #000;
+}
+
+.ui-paginator {
+  margin: 0;
+  text-align: right !important;
+  padding: .125em;
+  padding-right: 20px;
+}
+
+.ui-paginator .ui-paginator-page.ui-state-active{
+  background: $green;
+  color: #ffffff;
+  border-color: $green;
+}
+
+.list-items{
+  padding: 0px 10px;
+}
+
+.list-tile{
+  font-size: 15px;
+}
+
+.list-description{
+  font-size: 14px;
+  text-align: justify;
+}
+
+.edit-btn{
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.edit-btn a{
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #28a745;
+  padding:6px 10px;
+  color: #fff !important;
+}
+
+.edit-btn a:hover{
+  border-radius: 5px;
+  background-color: #30d459;
+  padding:6px 10px;
+  color: #fff !important;
+}
+
+.delete-btn{
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.delete-btn a{
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #f54c47;
+  padding:6px 10px;
+  color: #fff !important;
+}
+
+.delete-btn a:hover{
+  border-radius: 5px;
+  background-color: #f54c47;
+  padding:6px 10px;
+  color: #fff !important;
+}
+
+.list-radio{
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+.list-radio .ui-radiobutton-label, .list-radio .ui-chkbox-label {
+  margin-bottom: 0px;
+}
+
+.back-link{
+  margin: 10px;
+}
+.form-container{
+  margin: 10px;
+}
+
+.page-title{
+  margin: 20px 0px;
+  font-size: 16px;
+}
+.mandatory > label::after {
+  content: '* ';
+  color: #F00;
+  font-weight: bold;
+  padding-left: 2px;
+}
+.mandatory_text
+{
+    padding-top:5px;
+    color:red;
+}
+.addcontent_panel
+{
+  border-width: 4px 1px 1px;
+  border-style: solid;
+  border-color: #00bdff rgb(236, 236, 236) rgb(223, 223, 223);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 3px 3px;
+  margin-bottom: 20px;
+  padding: 15px 10px 10px;
+  margin-top: 20px;
+  background-color: #fff;
+}
+.content_dialog_msg{
+  text-align:center;
+  padding-top: 20px;
+}
+.addcontent_thumnail_banner .ui-md-3{
+  width: 100% !important;
+}
+.static_page{
+  .ql-editor {
+    min-height: 200px !important;
+  }
+}
+.note-editable{
+  height: auto !important;
+  min-height: 250px !important;
+}
+.note-modal-footer{
+  padding: 0px 10px 50px !important;
+}
+
+.ui-timepicker{
+    text-align: center;
+}
+
+.no_records
+{
+    text-align: center;
+    margin-top: -5% !important;
+}
+
+.note-editable{
+  height: auto !important;
+  min-height: 350px !important;
+}
+.note-modal-footer{
+  height: 65px;
+}
+@media only screen and (max-width: 767px)
+{
+    .no_records {
+        margin-top: 20px !important;
+    }
+}
+.highcharts-credits {
+  display: none !important;
+}
+
+.ui-card-body {
+  padding: 2px !important;
+}
+
+md-sidenav .sidebar-panel .navigation .open > .mat-list-item-content > .sub-menu{
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+body md-sidenav .sidebar-panel .navigation md-icon:not(.caret) {
+  margin-right: 0.70rem;
+}
+
+.subscriber .ui-table-caption{
+  background: #fff !important;
+
+}

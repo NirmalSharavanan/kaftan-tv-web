@@ -1,0 +1,32 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/blogs/blog']">
+  <i class="fa fa-chevron-left"></i> Blogs</a>
+
+<div class="form-container">
+  <div class="ui-g-12 ui-md-2">
+  </div>
+  <div class="ui-g-12 ui-md-8">
+    <p-panel header="{{blogId!=null?'Edit Blog':'Add Blog'}}">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Title" formControlName="title">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="title" alias="Title"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="content">Content</label>
+          <div [ngxSummernote]="config" class="summernote" formControlName="content"></div>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="content" alias="Content"></app-error>
+          </div>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-2">
+  </div>
+</div>

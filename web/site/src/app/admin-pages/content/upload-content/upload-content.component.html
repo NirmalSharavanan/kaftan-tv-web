@@ -1,0 +1,7 @@
+<app-aws-content-upload *ngIf="startUpload" 
+(uploadComplete)="uploadVideoCompleted($event)" 
+[fileObject]="video"
+[awsConfig]="awsConfig" 
+[key]="awsOriginalKey" 
+>
+</app-aws-content-upload>

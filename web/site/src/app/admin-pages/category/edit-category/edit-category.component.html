@@ -1,0 +1,210 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/meta-data/', categoryName]">
+  <i class="fa fa-chevron-left"></i> {{categoryTypeName}}</a>
+<ul class="nav nav-tabs content_tab">
+  <li class="nav-item">
+    <a class="nav-link active" (click)="mode=1" [class.active]="mode==1">{{categoryTypeName}}</a>
+  </li>
+  <li class="nav-item" *ngIf="categoryId != null && categoryType!=6 && categoryType!=7 && categoryType!=8">
+    <a class="nav-link active" (click)="mode=2" [class.active]="mode==2">Map Content</a>
+  </li>
+  <li class="nav-item" *ngIf="categoryId != null && categoryType!=6 && categoryType!=7 && categoryType!=8">
+    <a class="nav-link active" (click)="mode=3" [class.active]="mode==3">Order Content</a>
+  </li>
+</ul>
+<div>
+  <div *ngIf="mode == 1">
+    <div class="form-container">
+      <div class="ui-g-12 ui-md-3">
+      </div>
+      <div class="ui-g-12 ui-md-6">
+        <p-panel header="{{categoryId != null ? 'Edit ' + categoryTypeName : 'Add ' + categoryTypeName}}">
+          <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+
+            <label *ngIf="categoryType==4" class="featured">Note:
+              <ul class="list list-icons list-primary mt-xl mb-xlg">
+                <li><i class="fa fa-check"></i>If you give only featured name and save, featured name will not be
+                  display
+                  on any page in user end.</li>
+                <li><i class="fa fa-check"></i>If you give featured name and then choose top category, it will be
+                  display in selected category.</li>
+                <li><i class="fa fa-check"></i>If you give featured name and then choose home category then click
+                  "Show in
+                  Home" it will be display in selected category in home page.</li>
+                <li><i class="fa fa-check"></i>If you give featured name and choose top category, home category then
+                  click "Show in
+                  Home" checkbox, it will display in selected category and home page as well.</li>
+                <!-- <li><i class="fa fa-check"></i>If you give featured name and click "Show in Home" checkbox, it will be
+                  display in home page</li> -->
+              </ul>
+            </label>
+
+            <label *ngIf="categoryType==8" class="featured">Note:
+              <ul class="list list-icons list-primary mt-xl mb-xlg">
+                <li><i class="fa fa-check"></i>If you give category name and choose banner image, it will be
+                  displayed as parent category with side banner on home page.</li>
+                <li><i class="fa fa-check"></i>If you choose banner image and then click "show blog only" with link, it
+                  will be
+                  displayed as blog image in home page.</li>
+                <li><i class="fa fa-check"></i>Category (or) Blog will display in home page only if "Show in Home" got
+                  selected.</li>
+              </ul>
+            </label>
+
+            <div class="form-group mandatory">
+              <label for="categoryName">{{categoryTypeName}} Name</label>
+              <input type="text" class="form-control" id="categoryName" placeholder="{{categoryTypeName}} Name"
+                formControlName="categoryName" [required]="showImageOnly ? false : true" [attr.disabled]="showImageOnly ? 'disabled' : null ">
+              <div class="mandatory_text">
+                <app-error [fromGroup]="fg" controlName="categoryName" alias="{{categoryTypeName}} Name"></app-error>
+              </div>
+            </div>
+            <div *ngIf="categoryType==4">
+              <div class="form-group">
+                <label for="parent_category_id">Top Category</label>
+                <select class="form-control" id="parent_category_id" formControlName="parent_category_id">
+                  <option class='option' value="" selected>Select Top Category</option>
+                  <option class='option' *ngFor='let category of categories' [value]="category.id">{{category.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="home_category_id">Home Category</label>
+                <select class="form-control" id="home_category_id" formControlName="home_category_id">
+                  <option class='option' value="" selected>Select Home Category</option>
+                  <option class='option' *ngFor='let category of homeCategories' [value]="category.id">{{category.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="categoryType==5">
+              <div class="form-group mandatory">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" required placeholder="Price" formControlName="price">
+                <div class="mandatory_text">
+                  <app-error [fromGroup]="fg" controlName="price" alias="Price"></app-error>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="premium_price">Premium Price</label>
+                <input type="number" class="form-control" id="premium_price" placeholder="Premium Price"
+                  formControlName="premium_price">
+              </div>
+            </div>
+
+            <p *ngIf="categoryType===8" style="margin-bottom: 10px;">(Left banner image size: <span style="color: #00bdff !important;
+            font-weight: bold !important;">200
+                x 530</span>
+              pixels, Blog image size <span style="color: #00bdff !important;
+            font-weight: bold !important;">1200
+                x 350</span> pixels)</p>
+
+            <div style="margin-bottom: 10px;">
+              <span *ngIf="categoryType!=4 && categoryType!=5 && categoryType!=8">Banner image size
+                <span style="color: #00bdff !important;
+              font-weight: bold !important;"> 1170 x 430 </span>pixels</span>
+              <span *ngIf="categoryType===6 || categoryType===7">, Thumbnail image size
+                <span style="color: #00bdff !important;
+                font-weight: bold !important;"> 341 x 192
+                </span>pixels</span>
+            </div>
+
+            <ss-file-upload *ngIf="categoryType!=4 && categoryType!=5" [(content)]="bannerImage" label="Banner Image"
+              [contentUrl]="bannerImageUrl"></ss-file-upload>
+
+            <div *ngIf="categoryType===8">
+              <div class="form-group mandatory">
+                <div class="form-group list-radio">
+                  <label>
+                    <input type="checkbox" id="showImageOnly" formControlName="showImageOnly"> Show Blog
+                    Only
+                  </label>
+                </div>
+                <label for="link">Link</label>
+                <input type="text" class="form-control" id="link" placeholder="Link" formControlName="link" [required]="showImageOnly ? true : false"
+                  [attr.disabled]="showImageOnly ? null : 'disabled' ">
+                <div class="mandatory_text">
+                  <app-error [fromGroup]="fg" controlName="link" alias="Link"></app-error>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="categoryType===1" class="form-group list-radio">
+              <label>
+                <input type="checkbox" id="showInMenu" formControlName="showInMenu"> Show in header menu
+              </label>
+            </div>
+            <div *ngIf="categoryType===1 || categoryType===8" class="form-group list-radio">
+              <label>
+                <input type="checkbox" id="showChannels" formControlName="showChannels"> Show Channels
+              </label>
+            </div>
+            <div *ngIf="categoryType===1 || categoryType===8" class="form-group list-radio">
+              <label>
+                <input type="checkbox" id="showRadio" formControlName="showRadio"> Show Radio
+              </label>
+            </div>
+
+            <div *ngIf="categoryType===1">
+              <div class="form-group list-radio">
+                <label>
+                  <input type="checkbox" id="showMyPlayList" formControlName="showMyPlayList"> Show My PlayList
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Mobile App :
+                  <label style="color:darkgray"> (Select this if it was Radio & Music On Demand, otherwise leave this
+                    if
+                    it was Live TV & Video On Demand)</label>
+                </label>
+                <label class="list-radio">
+                  <input type="checkbox" id="showInMusic" formControlName="showInMusic"> Show in Music
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="categoryType==2 && showCelebrityTypes">
+              <ss-celebrity-type-selection [selectedCelebrities]="selectedCelbebrites" (onChange)="onChange($event)"></ss-celebrity-type-selection>
+            </div>
+
+            <div *ngIf="categoryType===6 || categoryType===7">
+              <ss-file-upload [(content)]="thumbnailImage" label="Thumbnail Image" [contentUrl]="thumbnailImageUrl"></ss-file-upload>
+              <div class="form-group mandatory">
+                <label for="liveUrl">Live Url</label>
+                <input type="text" class="form-control" id="liveUrl" required placeholder="Live Url" formControlName="liveUrl">
+                <div class="mandatory_text">
+                  <app-error [fromGroup]="fg" controlName="liveUrl" alias="Live Url"></app-error>
+                </div>
+              </div>
+
+            </div>
+            <div *ngIf="categoryType===4 || categoryType===8">
+              <div class="form-group list-radio">
+                <label>
+                  <input type="checkbox" id="showInHome" formControlName="showInHome"> Show in Home
+                </label>
+              </div>
+            </div>
+            <div *ngIf="categoryType===6 || categoryType===7">
+              <div class="form-group list-radio">
+                <label>
+                  <input type="checkbox" id="showActive" formControlName="showActive"> Is Active
+                </label>
+              </div>
+            </div>
+            <div class="footer-btn">
+              <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+            </div>
+          </form>
+        </p-panel>
+      </div>
+      <div class="ui-g-12 ui-md-3">
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mode == 2">
+    <ss-map-content [categoryId]="categoryId" [contentType]="contentType"></ss-map-content>
+  </div>
+  <div *ngIf="mode == 3">
+    <ss-order-content [categoryId]="categoryId"></ss-order-content>
+  </div>
+</div>
+<!-- </form> -->

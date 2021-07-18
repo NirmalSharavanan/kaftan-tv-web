@@ -1,0 +1,22 @@
+<div class="search_container">
+<form [formGroup]="fg">
+  <input type="text" formControlName="searchInput" [class]="inputClass" placeholder="Search" id="search" />
+  <i class="fa fa-times search-close" (click)="reset()" [hidden]="inputClass=='search'"></i>
+</form>
+
+
+<div tabindex="-1" *ngIf="display" class="panel" [class.search-panel]="display">
+
+  <div class="row search_panel">
+    <div class="col-md-6">
+      <div class="feature-title">Showing results for {{query}}...</div>
+    </div>
+    <div class="col-md-6 text-right close-search">
+      <a class="close-right" (click)="reset()">
+        <i class="fa fa-times close_icon"></i>Close</a>
+    </div>
+  </div>
+
+  <ng-content></ng-content>
+</div>
+</div>

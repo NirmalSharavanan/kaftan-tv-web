@@ -1,0 +1,53 @@
+<a class="navbar-link back-link" [routerLink]="['/admin/subscription/subscriptionplan']">
+  <i class="fa fa-chevron-left"></i> Subscription Plan</a>
+
+<div class="form-container">
+  <div class="ui-g-12 ui-md-2">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="{{subscriptionId!=null?'Edit Subscription Plan':'Add Subscription Plan'}}">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="paymentPlan">Payment Plan</label>
+          <select class="form-control" id="paymentPlan" formControlName="paymentPlan"
+            [attr.disabled]="subscriptionId == null ? null : 'disabled'" (change)="onSelectFeatures($event);">
+            <option value="" selected>Select Payment Plan</option>
+            <option value="Flex">Flex</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Yearly">Yearly</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+          </select>
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="paymentPlan" alias="Payment Plan"></app-error>
+          </div>
+        </div>
+        <div class="form-group">
+          <p-listbox [options]="featureList" formControlName="selectedfeatures" multiple="multiple" checkbox="checkbox"
+            filter="filter" optionLabel="name" (onChange)="onValueChange()" [style]="{'width' : 'auto'}">
+            <p-header> Select Features</p-header>
+          </p-listbox>
+        </div>
+        <div class="form-group mandatory">
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" id="amount" placeholder="Amount" formControlName="amount">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="amount" alias="Amount"></app-error>
+          </div>
+        </div>
+        <div class="form-group list-radio">
+          <label>
+            <input type="checkbox" id="is_Active" formControlName="is_Active"> Is Active
+          </label>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid"> {{subscriptionId!=null? 'Update' : 'Create'}}</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-2">
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div style="display:inline-block">
+  <a class="link" [routerLink]="['/admin/user-management/sign-up-users']">
+    <p-card [style]="{width: '320px',height:'auto',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">how_to_reg</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{totalSignedupUsers}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Signed Up Users</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div style="display:inline-block">
+  <div style="display:inline-block">
+    <a class="link" [routerLink]="['/admin/content/audio']">
+      <p-card [style]="{width: '320px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+        <div class="row">
+          <div class="col-md-5 icon-col">
+            <md-icon class="mdIcon">music_video</md-icon>
+          </div>
+          <div class="col-md-7 text-center">
+            <span>
+              <h3 class="count">
+                {{totalAudioContent}}
+              </h3>
+            </span>
+            <label style="font-size: 15px">Audio Contents</label>
+          </div>
+        </div>
+      </p-card>
+    </a>
+  </div>
+</div>
+
+<div style="display:inline-block">
+  <div style="display:inline-block">
+    <a class="link" [routerLink]="['/admin/content/video']">
+      <p-card [style]="{width: '320px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+        <div class="row">
+          <div class="col-md-5 icon-col">
+            <md-icon class="mdIcon">video_library</md-icon>
+          </div>
+          <div class="col-md-7 text-center">
+            <span>
+              <h3 class="count">
+                {{totalVideoContent}}
+              </h3>
+            </span>
+            <label style="font-size: 15px">Video Contents</label>
+          </div>
+        </div>
+      </p-card>
+    </a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div style="display:inline-block;">
+  <a class="link" [routerLink]="['/admin/meta-data/Radio']">
+    <p-card [style]="{width: '320px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">radio</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{totalRadioList}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Radios</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div style="display:inline-block;">
+  <a class="link" [routerLink]="['/admin/meta-data/Channel']">
+    <p-card [style]="{width: '320px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">live_tv</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{totalChannels}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Channels</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div style="display:inline-block;">
+  <a class="link" [routerLink]="['/admin/blogs/blog']">
+    <p-card [style]="{width: '320px',display:'inline-block',margin:'0px 10px 20px 10px'}">
+      <div class="row">
+        <div class="col-md-5 icon-col">
+          <md-icon class="mdIcon">library_books</md-icon>
+        </div>
+        <div class="col-md-7 text-center">
+          <span>
+            <h3 class="count">
+              {{blogs}}
+            </h3>
+          </span>
+          <label style="font-size: 15px">Blogs</label>
+        </div>
+      </div>
+    </p-card>
+  </a>
+</div>
+
+<div class="row" matchHeight="card" style="padding-left: 10px; padding-top: 20px;">
+  <div class="col-xl-12 col-lg-12">
+    <div class="card" style="padding: 20px;border:0px;">
+      <div class="card-body">
+        <div id="chartContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>

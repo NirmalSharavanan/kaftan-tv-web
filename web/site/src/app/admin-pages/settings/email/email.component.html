@@ -1,0 +1,61 @@
+<div class="form-container">
+  <div class="ui-g-12 ui-md-3">
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-panel header="Email SMTP Settings">
+      <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+        <div class="form-group mandatory">
+          <label for="smtp_host">Host</label>
+          <input type="text" class="form-control" id="smtp_host" placeholder="SMTP Host" formControlName="smtp_host">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="smtp_host" alias="SMTP Host"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="smtp_port">Port</label>
+          <input type="number" class="form-control" id="smtp_port" placeholder="SMTP Port" formControlName="smtp_port">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="smtp_port" alias="SMTP Port"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="smtp_from_email">User Name</label>
+          <input type="text" class="form-control" id="smtp_from_email" placeholder="SMTP User Name"
+            formControlName="smtp_from_email">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="smtp_from_email" alias="SMTP User Name"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="smtp_password">Password</label>
+          <input type="text" class="form-control" id="smtp_password" placeholder="SMTP Password"
+            formControlName="smtp_password">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="smtp_password" alias="SMTP Password"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+          <label for="smtp_subject_prefix">Subject Prefix</label>
+          <input type="text" class="form-control" id="smtp_subject_prefix" placeholder="Subject Prefix"
+            formControlName="smtp_subject_prefix">
+          <div class="mandatory_text">
+            <app-error [fromGroup]="fg" controlName="smtp_subject_prefix" alias="Subject Prefix"></app-error>
+          </div>
+        </div>
+        <div class="form-group mandatory">
+            <div for="smtp_email_header_image" class="form-group image_size">
+                Email header image
+                   ( <span> 600 x 160</span> pixels )
+            </div>
+          <ss-file-upload [(content)]="emailHeaderImage" label="Upload Email Header" [contentUrl]="emailHeaderImageUrl">
+          </ss-file-upload>
+        </div>
+        <div class="footer-btn">
+          <button type="submit" class="btn btn-primary save-btn" [disabled]="fg.invalid">Submit</button>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+  <div class="ui-g-12 ui-md-3">
+  </div>
+</div>

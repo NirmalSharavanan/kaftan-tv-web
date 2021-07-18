@@ -1,0 +1,30 @@
+
+<div id="banner" class="carousel carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div *ngFor="let homeBanner of homeBannerList; let firstItem = first" [ngClass]="{active: firstItem}" class="carousel-item">
+      <a href="{{homeBanner.redirectUrl}}">
+        <img class="d-block w-100 home-banner" [src]="homeBanner._links.awsBannerUrl.href" alt="homeBanner.text">
+        <div class="banner-content">
+          <img src="assets/kaftan/img/play-button.png" class="playBtn" />
+          <div class="banner-textArea">
+            <h2 class="banner-title">{{homeBanner.text}}</h2>
+            <h5 class="banner-description">
+              {{homeBanner.description}}
+            </h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#banner" role="button" data-slide="prev">
+    <svg class="nc-icon prev glyph" width="13px" height="22px" viewBox="0 0 13 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g transform="translate(-18.000000, -1194.000000)" fill="#FFFFFF"> <g transform="translate(-272.000000, 1079.600000)"> <path d="M302.606602,117 L300.606602,115 L290,125.606602 L300.606602,136.213203 L302.606602,134.213203 L294,125.606602 L302.606602,117 Z"></path> </g> </g> </g> </svg>
+    <!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+    <!--<span class="sr-only">Previous</span>-->
+  </a>
+  <a class="carousel-control-next" href="#banner" role="button" data-slide="next">
+    <svg class="nc-icon next glyph" width="13px" height="21px" viewBox="0 0 13 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g transform="translate(-995.000000, -278.000000)" fill="#FFFFFF"> <g transform="translate(16.000000, 278.000000)"> <path d="M990.994764,1.90471882 L989.091578,0.00153221536 L978.998407,10.0947033 L989.498407,20.5947033 L991.401593,18.6915167 L982.80478,10.0947033 L990.994764,1.90471882 Z" transform="translate(985.200000, 10.298118) scale(-1, 1) translate(-985.200000, -10.298118) "></path> </g> </g> </g> </svg>
+    <!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+    <!--<span class="sr-only">Next</span>-->
+  </a>
+</div>
+

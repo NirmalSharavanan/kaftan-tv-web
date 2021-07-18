@@ -1,0 +1,5 @@
+<div *ngIf="categories">
+        <div class="genre-list">
+            <a *ngFor="let category of categories" [routerLink]="[category._links.UIHref.href]" class="genre-item">{{category.name}}</a>
+        </div>
+</div>

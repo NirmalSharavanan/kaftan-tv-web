@@ -1,0 +1,37 @@
+.btn:focus {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+.banner_play
+{
+    position: absolute !important;
+    z-index: 1 !important;
+    left: 45% !important;
+    top: 16% !important;
+    min-height: 270px !important;
+}
+@media only screen and (max-width: 360px){
+   .banner_play {
+    left: 45% !important;
+    top: 20% !important;
+    min-height:0px !important;
+}
+}
+@media only screen and (max-width: 600px){
+    .banner_play {
+    top: 17% !important;
+    min-height:0px !important;
+}
+}
+@media only screen and (max-width: 768px){
+    .banner_play {
+    top: 20% !important;
+    min-height:0px !important;
+}
+}
+@media only screen and (max-width: 1024px){
+    .banner_play {
+    top: 20% !important;
+    min-height:0px !important;
+}
+}
