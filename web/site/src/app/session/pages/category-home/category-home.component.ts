@@ -5,6 +5,7 @@ import { Category } from 'app/models/Category';
 import { CategoryType } from './../../../services/category.service';
 import { AuthenticationService } from './../../../services/authentication.service';
 import { UserService } from './../../../services/user.service';
+import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
 
 @Component({
   selector: 'ss-category-home',
@@ -15,6 +16,7 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
 
   category_id: string;
   category: Category;
+  channelsList: Category[];
   parentCategory: string;
   private sub: any;
   categories: Category[];
@@ -58,13 +60,18 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
     }
   };
 
-  constructor(private route: ActivatedRoute, private service: CategoryService, private authService: AuthenticationService,
+  constructor(private realSessionStorageService: RealSessionStorageService, private route: ActivatedRoute, private service: CategoryService, private authService: AuthenticationService,
               private userService: UserService) { }
 
   ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {
-      this.category_id = params['id'];
+      this.channelsList = JSON.parse(this.realSessionStorageService.getSession("channels"))
+        this.channelsList.map(item => {
+          if(item[params['id']]) {
+            this.category_id = item.id
+          }
+        })
       if (this.category_id === "radio") {
         this.getSubscriptionInfo();
         this.getRadios();
@@ -75,7 +82,7 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
       else {
         this.radios = null;
         this.channels = null;
-
+        
         this.service.getCategory(this.category_id, true)
           .subscribe((response: Category) => {
             if (response != null) {

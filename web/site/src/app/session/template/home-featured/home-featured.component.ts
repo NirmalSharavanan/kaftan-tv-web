@@ -5,6 +5,7 @@ import { CategoryService } from 'app/services/category.service';
 import { CategoryType } from './../../../services/category.service';
 import { ContentService } from 'app/services/content.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
 
 @Component({
   selector: 'ss-home-featured',
@@ -30,7 +31,7 @@ export class HomeFeaturedComponent implements OnInit {
   VideoUrl : string;
   showId : string = '';
 
-  constructor(private service: CategoryService, private contentService: ContentService, private spinner: NgxSpinnerService) { }
+  constructor(private realSessionStorageService: RealSessionStorageService, private service: CategoryService, private contentService: ContentService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getFeaturedCategories();
@@ -86,7 +87,26 @@ export class HomeFeaturedComponent implements OnInit {
         this.spinner.hide();
         if (outcome) {
           this.assignedcontentList = outcome;
-          this.contentList = outcome.slice(0, 15);
+          this.contentList = outcome.slice(0, 15).map(item => {
+            item._links.UIHref.href= item._links.UIHref.href.replace(item.id, item.title.replace(/ /g, "_"))
+            return item
+          })
+          let contentList = JSON.parse(this.realSessionStorageService.getSession("contentList"));
+          if(contentList) {
+            let tempContentList =  [...contentList];
+            this.contentList.map(item => {
+              if(!contentList.some(el => el.id === item.id)) {
+                tempContentList.push(item)
+              }
+            })
+            contentList = [...tempContentList];
+          }
+          else {
+            contentList = this.contentList;
+          }
+        
+          
+          this.realSessionStorageService.setSession("contentList", JSON.stringify(contentList));
           console.log('the values of contents ', this.contentList);
         }
         this.isLoaded = true;
@@ -110,7 +130,26 @@ export class HomeFeaturedComponent implements OnInit {
         if (outcome) {
           let response = outcome.filter(outcome => outcome.showActive === true);
           this.totalchannelList = response;
-          this.channels = response.slice(0, 15);
+          this.channels = response.slice(0, 15).map(item => {
+            let data = item.name.split(" ");
+            item._links.UIHref.href= item._links.UIHref.href.replace(item.id, data[data.length-1])
+            item[data[data.length-1]] = item.name
+            return item
+          })
+          let channels = JSON.parse(this.realSessionStorageService.getSession("channels"));
+          if(channels) {
+            let tempChannels =  [...channels];
+            this.contentList.map(item => {
+              if(!channels.some(el => el.id === item.id)) {
+                tempChannels.push(item)
+              }
+            })
+            channels = [...tempChannels];
+          }
+          else {
+            channels = this.channels;
+          }
+          this.realSessionStorageService.setSession("channels", JSON.stringify(channels));
         }
         this.isLoaded = true;
       });

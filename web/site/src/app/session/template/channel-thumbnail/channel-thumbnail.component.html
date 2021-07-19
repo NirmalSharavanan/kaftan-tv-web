@@ -2,7 +2,7 @@
 
 <ng-template #forHorizontalList>
   <div class="thumb-slide">
-    <a [routerLink]="[channel._links.UIHref.href]" [queryParams]="{title: channel.name}">
+    <a [routerLink]="[channel._links.UIHref.href]">
     <div class="over_container">
       <img class="tile_img" [src]="channel._links.awsThumbnailUrl?.href" alt="" />
         <div class="tile_details">
@@ -22,7 +22,7 @@
 
 <ng-template #forVerticalList>
   <div class="vertical-thumb-slide"> 
-    <a [routerLink]="[channel._links.UIHref.href]" [queryParams]="{title: channel.name}">
+    <a [routerLink]="[channel._links.UIHref.href]">
       <div class="over_container">
         <img class="vertical-tile-img" [src]="channel._links.awsThumbnailUrl?.href" alt="" />
       <div class="tile_details">

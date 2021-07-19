@@ -44,6 +44,7 @@ import { CategoryService } from './services/category.service';
 import { ChartModule } from  'angular-highcharts';
 import { BlogService } from './services/blog.service';
 import { WalletService } from './services/wallet.service';
+import { RealSessionStorageService } from './common/service/real-session-storage.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	suppressScrollX: true
@@ -89,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MessageService,
 		ServiceStatusService,
 		SessionStorageService,
+		RealSessionStorageService,
 		BlogService,
 		WalletService,
 		UserRolesService,

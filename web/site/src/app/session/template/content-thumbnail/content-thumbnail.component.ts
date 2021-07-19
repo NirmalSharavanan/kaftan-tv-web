@@ -33,6 +33,7 @@ export class ContentThumbnailComponent implements OnInit {
   ngOnInit() {
     this.price = 0;
     this.callCount = 0;
+    this.content._links.UIHref.href= this.content._links.UIHref.href.replace(this.content.id, this.content.title.replace(/ /g, "_"));
 
     if (this.content.payperviewCategoryId) {
       this.contentService.getPrice(this.content)
@@ -91,7 +92,7 @@ export class ContentThumbnailComponent implements OnInit {
       this.categoryService.getCategoriesByIds(this.categoryIds)
         .subscribe((outcome: Category[]) => {
           if (outcome) {
-            this.categories = outcome.filter(outcome => outcome.category_type === 3);
+            this.categories = outcome.filter(outcome => outcome.category_type === 3)
           }
         });
     }

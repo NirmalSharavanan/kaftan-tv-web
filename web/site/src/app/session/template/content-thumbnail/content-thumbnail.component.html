@@ -6,7 +6,7 @@
                 Premium
             </div>
     <div [class]="content.content_type ==='audio' ? 'thumb-slide audio' : 'thumb-slide'">
-        <a [routerLink]="[content._links.UIHref.href]"  [queryParams]="{title: content.title}">
+        <a [routerLink]="[content._links.UIHref.href]">
         <div class="over_container">
             <img [class]="content.content_type ==='audio' ? 'tile_img audio_img' : 'tile_img'" [src]="content._links.awsThumbnailUrl?.href"
                 alt="" />
