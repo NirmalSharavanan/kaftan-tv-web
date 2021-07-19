@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
 
             const role = jwtToken.roles.filter(x => x === GlobalConstants.ADMIN_USER || x === GlobalConstants.ROLE_SUPER_USER)
             if (role && role.length > 0) {
-                // this.router.navigate(['/admin']);
+                this.router.navigate(['/admin']);
                 this.isAdmin = true;
             }
             else {
