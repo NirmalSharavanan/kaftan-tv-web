@@ -5,7 +5,8 @@ import { CategoryService } from 'app/services/category.service';
 import { CategoryType } from './../../../services/category.service';
 import { ContentService } from 'app/services/content.service';
 import { NgxSpinnerService } from "ngx-spinner";
-import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
+import { Router } from '@angular/router';
+import { NavigateWithUrl } from 'app/services/navigate-with-url.service';
 
 @Component({
   selector: 'ss-home-featured',
@@ -31,7 +32,12 @@ export class HomeFeaturedComponent implements OnInit {
   VideoUrl : string;
   showId : string = '';
 
-  constructor(private realSessionStorageService: RealSessionStorageService, private service: CategoryService, private contentService: ContentService, private spinner: NgxSpinnerService) { }
+  constructor(
+    private router: Router,
+    private navigateWithUrl: NavigateWithUrl,
+    private service: CategoryService,
+    private contentService: ContentService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.getFeaturedCategories();
@@ -76,7 +82,16 @@ export class HomeFeaturedComponent implements OnInit {
         }
       });
   }
-
+  navigateToCategories(data:Category)  {
+    console.log(data);
+    this.navigateWithUrl.setNavigateData({ name:data.name, id: data.id })
+    this.router.navigate([data._links.UIHref.href.replace(data.id, data.name)]);
+  }
+  navigateToCategoriesContent(data:Content)  {
+    console.log(data);
+    this.navigateWithUrl.setNavigateData({ name:data.title, id: data.id })
+    this.router.navigate([data._links.UIHref.href.replace(data.id, data.title)]);
+  }
   private getContents() {
     this.isLoaded = false;
     this.assignedcontentList = [];
@@ -91,22 +106,6 @@ export class HomeFeaturedComponent implements OnInit {
             item._links.UIHref.href= item._links.UIHref.href.replace(item.id, item.title.replace(/ /g, "_"))
             return item
           })
-          let contentList = JSON.parse(this.realSessionStorageService.getSession("contentList"));
-          if(contentList) {
-            let tempContentList =  [...contentList];
-            this.contentList.map(item => {
-              if(!contentList.some(el => el.id === item.id)) {
-                tempContentList.push(item)
-              }
-            })
-            contentList = [...tempContentList];
-          }
-          else {
-            contentList = this.contentList;
-          }
-        
-          
-          this.realSessionStorageService.setSession("contentList", JSON.stringify(contentList));
           console.log('the values of contents ', this.contentList);
         }
         this.isLoaded = true;
@@ -136,20 +135,6 @@ export class HomeFeaturedComponent implements OnInit {
             item[data[data.length-1]] = item.name
             return item
           })
-          let channels = JSON.parse(this.realSessionStorageService.getSession("channels"));
-          if(channels) {
-            let tempChannels =  [...channels];
-            this.contentList.map(item => {
-              if(!channels.some(el => el.id === item.id)) {
-                tempChannels.push(item)
-              }
-            })
-            channels = [...tempChannels];
-          }
-          else {
-            channels = this.channels;
-          }
-          this.realSessionStorageService.setSession("channels", JSON.stringify(channels));
         }
         this.isLoaded = true;
       });

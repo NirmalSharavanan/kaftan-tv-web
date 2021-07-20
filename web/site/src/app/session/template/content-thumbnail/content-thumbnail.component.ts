@@ -1,10 +1,11 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from './../../../services/content.service';
 import { Category } from 'app/models/Category';
 import { CategoryService } from './../../../services/category.service';
 import { AuthenticationService } from './../../../services/authentication.service';
 import { Content } from './../../../models/content';
 import { Component, OnInit, Input } from '@angular/core';
+import { NavigateWithUrl } from 'app/services/navigate-with-url.service';
 
 
 @Component({
@@ -26,14 +27,17 @@ export class ContentThumbnailComponent implements OnInit {
   showYear: boolean = false;
   staticdata = 'This is a demo of using JW Player settings in VideoPro theme, for more details of this feature please check our document.';
 
-  constructor(private authenticationService: AuthenticationService,
+  constructor(
+    private navigateWithUrl: NavigateWithUrl,
+    private authenticationService: AuthenticationService,
     private contentService: ContentService, private categoryService: CategoryService,
-    private route: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.price = 0;
     this.callCount = 0;
-    this.content._links.UIHref.href= this.content._links.UIHref.href.replace(this.content.id, this.content.title.replace(/ /g, "_"));
+    this.content._links.UIHref.href = this.content._links.UIHref.href.replace(this.content.id, this.content.title.replace(/ /g, "_"));
 
     if (this.content.payperviewCategoryId) {
       this.contentService.getPrice(this.content)
@@ -52,7 +56,13 @@ export class ContentThumbnailComponent implements OnInit {
     // console.log('thumb nail call');
     // console.log(this.callCount);
   }
-
+  navigateToCategories(data: Content) {
+    console.log(data);
+    this.navigateWithUrl.setNavigateData({ name: data.title, id: data.id })
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([data._links.UIHref.href.replace(data.id, data.title)]);
+  }
   play() {
 
     let redirectUrl: string;
@@ -68,7 +78,7 @@ export class ContentThumbnailComponent implements OnInit {
       redirectUrl = '/session/content/play/' + this.content.id;
     }
 
-    this.route.navigate([redirectUrl]);
+    this.router.navigate([redirectUrl]);
 
     return false;
   }

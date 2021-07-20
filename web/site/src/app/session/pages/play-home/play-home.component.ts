@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Rx';
 import { Location } from '@angular/common';
 import { Video } from '../../../ss-core/model/video';
 import { ContentWatchHistory } from './../../../models/contentWatchHistory';
-import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
+import { NavigateWithUrl } from 'app/services/navigate-with-url.service';
 
 @Component({
   selector: 'ss-play-home',
@@ -26,7 +26,6 @@ export class PlayHomeComponent implements OnInit {
   private sub: any;
   previousPage: String;
   content: Content;
-  contentList: Content[];
   backgroundUrl: any;
   has_access_to_preminum: boolean;
   premium_message: string;
@@ -38,7 +37,7 @@ export class PlayHomeComponent implements OnInit {
   @Input() playerInfo: VideoPlayWrapper;
 
   constructor(
-    private realSessionStorageService: RealSessionStorageService,
+    private navigateWithUrl: NavigateWithUrl,
     private sessionStorageService: SessionStorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -65,13 +64,7 @@ export class PlayHomeComponent implements OnInit {
     if (this.playerInfo) {
       this.videoPlayWrapper = this.playerInfo;
     } else {
-      this.contentList = JSON.parse(this.realSessionStorageService.getSession("contentList"))
-      let title = this.activatedRoute.snapshot.paramMap.get('id').replace(/_/g, " ")
-      this.contentList.map(item => {
-        if(item.title === title) {
-          this.contentId = item.id
-        }
-      })
+      this.contentId = this.navigateWithUrl.getNavigateData().id;
       if (this.contentId) {
         this.loadContent();
       }

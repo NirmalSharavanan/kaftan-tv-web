@@ -5,7 +5,7 @@ import { Category } from 'app/models/Category';
 import { CategoryType } from './../../../services/category.service';
 import { AuthenticationService } from './../../../services/authentication.service';
 import { UserService } from './../../../services/user.service';
-import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
+import { NavigateWithUrl } from 'app/services/navigate-with-url.service';
 
 @Component({
   selector: 'ss-category-home',
@@ -60,47 +60,40 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
     }
   };
 
-  constructor(private realSessionStorageService: RealSessionStorageService, private route: ActivatedRoute, private service: CategoryService, private authService: AuthenticationService,
-              private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private service: CategoryService, private authService: AuthenticationService,
+    private userService: UserService, private navigateUrl: NavigateWithUrl) { }
 
   ngOnInit() {
 
-    this.sub = this.route.params.subscribe(params => {
-      this.channelsList = JSON.parse(this.realSessionStorageService.getSession("channels"))
-        this.channelsList.map(item => {
-          if(item[params['id']]) {
-            this.category_id = item.id
-          }
-        })
-      if (this.category_id === "radio") {
-        this.getSubscriptionInfo();
-        this.getRadios();
-      }
-      else if (this.category_id === "channels") {
-        this.getChannels();
-      }
-      else {
-        this.radios = null;
-        this.channels = null;
-        
-        this.service.getCategory(this.category_id, true)
-          .subscribe((response: Category) => {
-            if (response != null) {
-              this.category = response;
-              this.parentCategory = response.name;
-              if (response.showChannels) {
-                this.getChannels();
-              }
-              if (response.showRadio) {
-                this.getSubscriptionInfo();
-                this.getRadios();
-              }
-              this.getFeaturedCategories();
-              this.checkIsUserAuthenticated();
+    this.category_id = this.navigateUrl.getNavigateData().id;
+    if (this.category_id === "radio") {
+      this.getSubscriptionInfo();
+      this.getRadios();
+    }
+    else if (this.category_id === "channels") {
+      this.getChannels();
+    }
+    else {
+      this.radios = null;
+      this.channels = null;
+
+      this.service.getCategory(this.category_id, true)
+        .subscribe((response: Category) => {
+          if (response != null) {
+            this.category = response;
+            this.parentCategory = response.name;
+            if (response.showChannels) {
+              this.getChannels();
             }
-          });
-      }
-    });
+            if (response.showRadio) {
+              this.getSubscriptionInfo();
+              this.getRadios();
+            }
+            this.getFeaturedCategories();
+            this.checkIsUserAuthenticated();
+          }
+        });
+    }
   }
 
   checkIsUserAuthenticated() {
@@ -137,8 +130,8 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
   getSubscriptionInfo() {
     this.userService.getPremiumUser()
       .subscribe((userSubscription: any) => {
-        if(userSubscription && userSubscription.length > 0) {
-          if(userSubscription[0].subscriptionInfo.features.includes("Audio On Demand")) {
+        if (userSubscription && userSubscription.length > 0) {
+          if (userSubscription[0].subscriptionInfo.features.includes("Audio On Demand")) {
             this.isSubscribed = true;
           } else {
             this.isSubscribed = false;
@@ -149,16 +142,16 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
 
   getRadios() {
     this.loading = true;
-    if(this.isSubscribed) {
+    if (this.isSubscribed) {
       this.service.getAllCategories(CategoryType.Radio, true)
-      .subscribe((outcome: Category[]) => {
-        if (outcome) {
-          let response = outcome.filter(outcome => outcome.showActive === true);
-          this.radios = response;
-        }
-        this.loading = false;
-      });
-    } 
+        .subscribe((outcome: Category[]) => {
+          if (outcome) {
+            let response = outcome.filter(outcome => outcome.showActive === true);
+            this.radios = response;
+          }
+          this.loading = false;
+        });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -172,8 +165,5 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
 
 }

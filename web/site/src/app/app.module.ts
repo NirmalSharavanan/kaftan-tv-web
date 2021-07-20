@@ -45,6 +45,7 @@ import { ChartModule } from  'angular-highcharts';
 import { BlogService } from './services/blog.service';
 import { WalletService } from './services/wallet.service';
 import { RealSessionStorageService } from './common/service/real-session-storage.service';
+import { NavigateWithUrl } from './services/navigate-with-url.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	suppressScrollX: true
@@ -78,6 +79,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	],
 	bootstrap: [AppComponent],
 	providers: [
+		NavigateWithUrl,
 		MenuItems,
 		PageTitleService,
 		AdminAuthGuard,

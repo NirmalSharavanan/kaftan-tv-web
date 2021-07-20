@@ -49,7 +49,7 @@
   
           <!-- Image -->
           <div class="view overlay rounded z-depth-1-half mb-4">
-            <img [routerLink]="[contentList[3]._links.UIHref.href]" style="width:100%;" class="img-fluid" [src]="contentList[3]._links.awsThumbnailUrl?.href" alt="Sample image">
+            <img (click)="navigateToCategoriesContent(contentList[3])" style="width:100%;" class="img-fluid" [src]="contentList[3]._links.awsThumbnailUrl?.href" alt="Sample image">
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -88,8 +88,8 @@
   
               <!--Image-->
               <div class="view overlay rounded z-depth-1 mb-4">
-                <img *ngIf="content._links.awsThumbnailUrl" [routerLink]="[content._links.UIHref.href]"  class="img-fluid" [src]="content._links.awsThumbnailUrl?.href" alt="{{content.title}}">
-                <img *ngIf="!content._links.awsThumbnailUrl" [routerLink]="[content._links.UIHref.href]"  class="img-fluid" src="https://t4.ftcdn.net/jpg/00/38/13/73/360_F_38137330_gUbR3ZXBc5J5g4pRkaC8TYZQA62OZhx5.jpg" alt="{{content.title}}">
+                <img *ngIf="content._links.awsThumbnailUrl" (click)="navigateToCategoriesContent(content)"  class="img-fluid" [src]="content._links.awsThumbnailUrl?.href" alt="{{content.title}}">
+                <img *ngIf="!content._links.awsThumbnailUrl" (click)="navigateToCategoriesContent(content)"  class="img-fluid" src="https://t4.ftcdn.net/jpg/00/38/13/73/360_F_38137330_gUbR3ZXBc5J5g4pRkaC8TYZQA62OZhx5.jpg" alt="{{content.title}}">
                 <a>
                   <div class="mask rgba-white-slight"></div>
                 </a>
@@ -105,7 +105,7 @@
               <p class="font-weight-bold dark-grey-text content_title">{{content.title}}</p>
               <div style="max-height: 80px;overflow: hidden;text-overflow: ellipsis;" class="d-flex justify-content-between">
                 <div class="col-11 pl-0 mb-3">
-                  <a [routerLink]="[content._links.UIHref.href]" href="#!" style="font-size: 0.9em;" class="dark-grey-text">{{content.description}}</a>
+                  <a (click)="navigateToCategoriesContent(content)" style="font-size: 0.9em;" class="dark-grey-text">{{content.description}}</a>
                 </div>
                 <a><i class="fas fa-angle-double-right"></i></a>
               </div>
@@ -144,7 +144,7 @@
         </ul>
     </div>
     <div class="arrow_col" *ngIf="assignedcontentList && assignedcontentList.length > 12">
-        <a class="link" [routerLink]="[selectedFeatured._links.UIHref.href]">
+        <a class="link" (click)="navigateToCategories(selectedFeatured)">
             <i class="fa fa-angle-right"></i>
         </a>
     </div>
