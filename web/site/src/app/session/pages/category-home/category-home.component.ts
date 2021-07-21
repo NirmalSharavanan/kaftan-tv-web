@@ -65,7 +65,7 @@ export class CategoryHomeComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
-    this.category_id = this.navigateUrl.getNavigateData().id;
+    this.category_id = this.navigateUrl.getNavigateData(this.route.snapshot.paramMap.get('id')).id;
     if (this.category_id === "radio") {
       this.getSubscriptionInfo();
       this.getRadios();

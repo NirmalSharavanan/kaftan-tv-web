@@ -64,7 +64,7 @@ export class PlayHomeComponent implements OnInit {
     if (this.playerInfo) {
       this.videoPlayWrapper = this.playerInfo;
     } else {
-      this.contentId = this.navigateWithUrl.getNavigateData().id;
+      this.contentId = this.navigateWithUrl.getNavigateData(this.activatedRoute.snapshot.paramMap.get('id')).id;
       if (this.contentId) {
         this.loadContent();
       }

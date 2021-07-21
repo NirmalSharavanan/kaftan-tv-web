@@ -84,13 +84,15 @@ export class HomeFeaturedComponent implements OnInit {
   }
   navigateToCategories(data:Category)  {
     console.log(data);
-    this.navigateWithUrl.setNavigateData({ name:data.name, id: data.id })
-    this.router.navigate([data._links.UIHref.href.replace(data.id, data.name)]);
+    let redirecturl = data._links.UIHref.href.replace(data.id, data.name);
+    this.navigateWithUrl.setNavigateData({url: data.name.replace(/ /g, "_"),name:data.name, id: data.id })
+    this.router.navigate([redirecturl]);
   }
   navigateToCategoriesContent(data:Content)  {
     console.log(data);
-    this.navigateWithUrl.setNavigateData({ name:data.title, id: data.id })
-    this.router.navigate([data._links.UIHref.href.replace(data.id, data.title)]);
+    let redirecturl = data._links.UIHref.href.replace(data.id, data.title);
+    this.navigateWithUrl.setNavigateData({ url: data.title.replace(/ /g, "_"),name:data.title, id: data.id })
+    this.router.navigate([redirecturl]);
   }
   private getContents() {
     this.isLoaded = false;
@@ -130,9 +132,7 @@ export class HomeFeaturedComponent implements OnInit {
           let response = outcome.filter(outcome => outcome.showActive === true);
           this.totalchannelList = response;
           this.channels = response.slice(0, 15).map(item => {
-            let data = item.name.split(" ");
-            item._links.UIHref.href= item._links.UIHref.href.replace(item.id, data[data.length-1])
-            item[data[data.length-1]] = item.name
+            item._links.UIHref.href= item._links.UIHref.href.replace(item.id, item.name.replace(/ /g, "_"))
             return item
           })
         }

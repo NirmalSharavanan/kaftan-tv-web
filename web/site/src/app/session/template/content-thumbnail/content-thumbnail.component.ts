@@ -58,10 +58,11 @@ export class ContentThumbnailComponent implements OnInit {
   }
   navigateToCategories(data: Content) {
     console.log(data);
-    this.navigateWithUrl.setNavigateData({ name: data.title, id: data.id })
+    let redirecturl = data._links.UIHref.href.replace(data.id, data.title);
+    this.navigateWithUrl.setNavigateData({url: data.title.replace(/ /g, "_"), name: data.title, id: data.id })
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([data._links.UIHref.href.replace(data.id, data.title)]);
+    this.router.navigate([redirecturl]);
   }
   play() {
 

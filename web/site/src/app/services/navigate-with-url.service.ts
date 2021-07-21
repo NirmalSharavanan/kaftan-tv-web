@@ -8,27 +8,27 @@ import { RestAPI } from '../helper/api.constants';
 import { HttpService } from '../helper/httpService';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../models/user';
-import { RealSessionStorageService } from 'app/common/service/real-session-storage.service';
+import { SessionStorageService } from 'app/common/service/session-storage.service';
 
 
 @Injectable()
 export class NavigateWithUrl {
-    private navigateData: any;
+    private navigateData: any = {};
 
     constructor(
-        private sessionStorageService: RealSessionStorageService,
+        private sessionStorageService: SessionStorageService,
       ) { }
 
     setNavigateData(data) {
-        this.navigateData = data;
+        this.navigateData[data.url] = data;
         this.sessionStorageService.setSession("navigateData", JSON.stringify(this.navigateData));
     }
 
-    getNavigateData() {
-        if(!this.navigateData) {
+    getNavigateData(name:string) {
+        if(!this.navigateData[name]) {
             this.navigateData = JSON.parse(this.sessionStorageService.getSession("navigateData"));
         }
-        return this.navigateData;
+        return this.navigateData[name];
     }
 
 }

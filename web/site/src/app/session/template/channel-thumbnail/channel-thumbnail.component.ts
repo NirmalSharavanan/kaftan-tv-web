@@ -20,8 +20,9 @@ export class ChannelThumbnailComponent implements OnInit {
   }
   navigateToCategories(channelData: Category) {
     console.log(channelData);
-    this.navigateWithUrl.setNavigateData({ name:channelData.name, id: channelData.id })
-    this.router.navigate([channelData._links.UIHref.href.replace(channelData.id, channelData.name)]);
+    let redirectUrl = channelData._links.UIHref.href.replace(channelData.id, channelData.name);
+    this.navigateWithUrl.setNavigateData({url: channelData.name.replace(/ /g, "_"), name:channelData.name, id: channelData.id })
+    this.router.navigate([redirectUrl]);
   }
 
 }

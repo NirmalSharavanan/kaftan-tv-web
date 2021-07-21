@@ -22,7 +22,7 @@ export class ContentHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.contentId = this.navigateWithUrl.getNavigateData().id;
+    this.contentId = this.navigateWithUrl.getNavigateData(this.route.snapshot.paramMap.get('id')).id;
     this.loadContent();
   }
 
